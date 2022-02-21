@@ -22,28 +22,40 @@ const SerBoxContainer = styled(Box)(({ theme }) => ({
     padding: '5px',
     borderRadius: '10px'
 }))
-const TodoForm = ({addTodo}) => {
+
+const TodoForm = ({addTodo, todoEdit, updateTodo}) => {
     const [text, setText] = useState('');
     const [buttonDisable, setButtonDisable] = useState(true)
 
     const handleInputChange = (event)=>{
         setText(event.target.value);
-        if(text.trim().length>=10){
+    }
+    useEffect(()=>{
+        if(text.trim().length>0){
             setButtonDisable(false)
         }else{
             setButtonDisable(true)
         }
-    }
+    },[text])
+    useEffect(()=>{
+        if(todoEdit.edit){
+            setText(todoEdit.todo.text)
+        }
+    }, [todoEdit])
+
     const handleFormSubmit = (event) => {
         event.preventDefault();
         const newTodo = {
             text
         }
-        addTodo(newTodo);
-        
+        if(todoEdit.edit){
+            updateTodo(newTodo);
+            todoEdit.edit=false;
+        }else{
+            addTodo(newTodo);
+        }
         setButtonDisable(true);
         setText('');
-
         
     }
 
@@ -56,7 +68,7 @@ const TodoForm = ({addTodo}) => {
                             <AddCircleIcon />
                         </Button>
                         <SearchBox 
-                            placeholder='Write your task here' 
+                            placeholder='Add task' 
                             onChange={handleInputChange} 
                             value={text} 
                         />

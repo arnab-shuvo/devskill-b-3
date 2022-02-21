@@ -3,30 +3,22 @@ import { IconButton, Paper, Stack, Typography } from '@mui/material';
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 import Checkbox from '@mui/material/Checkbox';
-const TodoList = ({ todo, completeTodo }) => {
+const TodoList = ({ todo, completeTodo, editTodo, deleteTodo }) => {
     return (
         <Paper elevation={6} sx={{ p: '10px', m: '10px', borderRadius: '20px' }}>
             {
-                todo.complete
-                    ?<Stack direction='row' alignItems='center'>
+                <Stack direction='row' justifyContent='space-between'>
                     <Stack direction='row' alignItems='center'>
                         <Checkbox checked={todo.complete} onChange={() => completeTodo(todo)} />
-                        <Typography variant='subtitle1' sx={{ fontWeight: '500' }}><del>{todo.text}</del></Typography>
+                        <Typography variant='subtitle1' sx={{ fontWeight: '500' }}>
+                            {todo.complete? <del>{todo.text}</del> : <>{todo.text}</>}
+                        </Typography>
                     </Stack>
-                    <Stack>
-
+                    <Stack direction='row' alignItems='center'>
+                        {!todo.complete && <IconButton sx={{ color: '#42a5f5' }} onClick={() => editTodo(todo)}><EditIcon></EditIcon></IconButton>}
+                        <IconButton sx={{ color: 'red' }} onClick={() => deleteTodo(todo)}><DeleteIcon /></IconButton>
                     </Stack>
-                </Stack> 
-                    
-                    : <Stack direction='row' alignItems='center'>
-                        <Stack direction='row' alignItems='center'>
-                            <Checkbox checked={todo.complete} onChange={() => completeTodo(todo)} />
-                            <Typography variant='subtitle1' sx={{ fontWeight: '500' }}>{todo.text}</Typography>
-                        </Stack>
-                        <Stack>
-
-                        </Stack>
-                    </Stack>
+                </Stack>
             }
         </Paper>
     );
