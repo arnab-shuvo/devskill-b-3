@@ -9,7 +9,11 @@ const TodoList = ({ todo, completeTodo, editTodo, deleteTodo }) => {
             {
                 <Stack direction='row' justifyContent='space-between'>
                     <Stack direction='row' alignItems='center'>
-                        <Checkbox checked={todo.complete} onChange={() => completeTodo(todo)} />
+                        {
+                            todo.complete
+                            ?<Checkbox checked={todo.complete}/>
+                            :<Checkbox checked={todo.complete} onChange={() => completeTodo(todo)} />
+                        }
                         <Typography variant='subtitle1' sx={{ fontWeight: '500' }}>
                             {todo.complete? <del>{todo.text}</del> : <>{todo.text}</>}
                         </Typography>
