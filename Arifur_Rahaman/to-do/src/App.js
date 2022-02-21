@@ -1,24 +1,36 @@
-import logo from './logo.svg';
 import './App.css';
+import Stack from '@mui/material/Stack';
+import { TodoPaper } from './StyledComponents/StyledComponents';
+import { useState } from 'react';
+import RemainingTodo from './Components/RemainingTodo';
+import CompletedTodo from './Components/CompletedTodo';
+import TodoForm from './Components/TodoForm';
+import uuid from 'react-uuid'
 
 function App() {
+  const [todos, setTodos] = useState([
+    {id: '1', text: "Sample todo one", complete: false},
+    {id: '2', text: "Sample todo two", complete: true}
+  ])
+  const addTodo=(newTodo)=>{
+    newTodo.id = uuid()
+    newTodo.complete=false
+    setTodos([newTodo, ...todos])
+}
+
+const completeTodo = (newCompletedtodo)=>{
+  newCompletedtodo.complete = true;
+  setTodos(todos.map(todo=>todo.id===newCompletedtodo.id? {...todo, ...newCompletedtodo}: todo))
+}
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Stack sx={{ height: '100vh' }} alignItems='center' justifyContent='center'>
+      <TodoPaper elevation={12} sx={{p: '10px 0'}}>
+        <TodoForm addTodo={addTodo}/>
+        <RemainingTodo todos={todos} completeTodo={completeTodo}></RemainingTodo>
+        <CompletedTodo todos={todos}></CompletedTodo>
+      </TodoPaper>
+    </Stack>
   );
 }
 
