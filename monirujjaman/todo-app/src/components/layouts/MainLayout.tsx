@@ -149,12 +149,24 @@ type TaskProps = {
 const TaskAddEdit = ({ Mode, Task, AddTask, EditTask, Index }: TaskProps) => {
 const [task, setTask] = useState<TaskType | null>(Task); 
 const [index] = useState(Index);
+const [error, setError] = useState(false);
+const [helperText, setHelperText] = useState('');
+const setTaskValue = (e : React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+  if(e.target.value.length) {
+    setError(false);
+    setHelperText('');
+  } else {
+    setError(true);
+    setHelperText('Title can not be empty');
+  }
+  setTask({Title: e.target.value});
+}
   if (Mode === "add") {
     return (
       <Box component={"form"} noValidate autoComplete="off">
         <Stack direction={"column"} spacing={8}>
           <TextField
-            error
+            error={error}
             id="outlined-error-helper-text"
             label="Title"
             defaultValue=''
@@ -162,14 +174,15 @@ const [index] = useState(Index);
               minWidth: "350px",
             }}
             value={task?.Title}
-            onChange={(e) => setTask({Title: e.target.value})}
+            onChange={(e) => setTaskValue(e)}
+            helperText={helperText}
           />
           <div style={{ minWidth: "350px" }}>
             <Button
               variant="contained"
               sx={{ width: "100px", float: "right" }}
               endIcon={<SaveIcon />}
-              onClick={() => AddTask(task)}>
+              onClick={() => error? setError(true) : AddTask(task)}>
               Save
             </Button>
           </div>
@@ -181,7 +194,7 @@ const [index] = useState(Index);
       <Box component={"form"} noValidate autoComplete="off">
         <Stack direction={"column"} spacing={8}>
           <TextField
-            error
+            error={error}
             id="outlined-error-helper-text"
             label="Title"
             defaultValue={task?.Title}
@@ -189,13 +202,14 @@ const [index] = useState(Index);
               minWidth: "350px",
             }}
             value={task?.Title}
-            onChange={(e) => setTask({Title: e.target.value})}
+            onChange={(e) => setTaskValue(e)}
+            helperText={helperText}
           />
           <div style={{ minWidth: "350px" }}>
             <Button
               variant="contained"
               sx={{ width: "100px", float: "right" }}
-              onClick={() => EditTask(task, index)}
+              onClick={() => error? setError(true) : EditTask(task, index)}
               endIcon={<SaveIcon />}
             >
               Save
