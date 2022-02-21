@@ -1,0 +1,121 @@
+.product_details {
+  text-align: left;
+}
+.menu {
+  height: 45px;
+}
+.edit_option .dropdown-toggle::after {
+  display: none;
+}
+.edit_option .btn {
+  padding: 0px;
+  border: none;
+}
+.edit_option .btn-primary {
+  color: transparent;
+  background: transparent;
+}
+.edit_option .btn-primary:hover {
+  color: transparent;
+  background: transparent;
+}
+.edit_option .btn-primary:not(:disabled):not(.disabled).active,
+.edit_option .btn-primary:not(:disabled):not(.disabled):active,
+.edit_option .show > .btn-primary.dropdown-toggle {
+  color: transparent;
+  background: transparent;
+}
+.edit_option .btn-primary.focus,
+.edit_option .btn-primary:focus {
+  box-shadow: none;
+  outline: none;
+  color: transparent;
+  background: transparent;
+}
+
+.App {
+  text-align: center;
+}
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.spinner-box {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #fff;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+
+/* ALTERNATING ORBITS */
+
+.circle-border {
+  width: 150px;
+  height: 150px;
+  padding: 3px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  background: rgb(63, 249, 220);
+  background: linear-gradient(
+    0deg,
+    rgba(63, 249, 220, 0.1) 33%,
+    rgba(63, 249, 220, 1) 100%
+  );
+  animation: spin 0.8s linear 0s infinite;
+}
+
+.circle-core {
+  width: 100%;
+  height: 100%;
+  background-color: #fff;
+  border-radius: 50%;
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0);
+  }
+  to {
+    transform: rotate(359deg);
+  }
+}
