@@ -40,8 +40,8 @@ const MainLayout = () => {
       setPage('view');
   }
 
-  const UpdateTask = (task: TaskType | null, index: number) => {
-    if(task !== null) {
+  const UpdateTask = (task: TaskType | null, index: number | null) => {
+    if(task !== null && index !== null) {
         const updatedTasks = [...Tasks]
         updatedTasks[index] = task;
         setTasks(updatedTasks);
@@ -52,7 +52,10 @@ const MainLayout = () => {
   const EditTask = (task: TaskType, index: number) => {
     setTask({Mode: 'edit', 
     Task: task, 
-    AddTask: AddTask});
+    AddTask: AddTask,
+    Index: index,
+    EditTask: UpdateTask});
+
     setPage('edit');
   }
 
@@ -102,11 +105,15 @@ const MainLayout = () => {
                   EditTask={(task: TaskType, index: number) => EditTask(task, index)}
                 />
               ) : page === "add" ? (
-                <TaskAddEdit Task={null} Mode={Task.Mode} 
-                AddTask={(task: TaskType | null) => AddTask(task)}/>
+                <TaskAddEdit Task={null} Mode={'add'} 
+                AddTask={(task: TaskType | null) => AddTask(task)} 
+                Index={1}
+                EditTask={(task: TaskType | null, index: number | null) => UpdateTask(task, index)}/>
               ) : (
-                <TaskAddEdit Mode={Task.Mode} Task={Task.Task} 
-                AddTask={(task: TaskType | null) => AddTask(null)}/>
+                <TaskAddEdit Mode={'edit'} Task={Task.Task} 
+                AddTask={(task: TaskType | null) => AddTask(task)} 
+                Index={Task.Index}
+                EditTask={(task: TaskType | null, index: number | null) => UpdateTask(task, index)}/>
               )}
             </Grid>
 
@@ -134,11 +141,14 @@ const MainLayout = () => {
 type TaskProps = {
   Mode: "add" | "edit",
   Task: null | TaskType,
+  Index: number | null,
   AddTask: (task: TaskType | null) => void;
+  EditTask: (task: TaskType | null, index: number | null ) => void;
 };
 
-const TaskAddEdit = ({ Mode, Task, AddTask }: TaskProps) => {
+const TaskAddEdit = ({ Mode, Task, AddTask, EditTask, Index }: TaskProps) => {
 const [task, setTask] = useState<TaskType | null>(Task); 
+const [index] = useState(Index);
   if (Mode === "add") {
     return (
       <Box component={"form"} noValidate autoComplete="off">
@@ -185,7 +195,7 @@ const [task, setTask] = useState<TaskType | null>(Task);
             <Button
               variant="contained"
               sx={{ width: "100px", float: "right" }}
-              onClick={() => AddTask(task)}
+              onClick={() => EditTask(task, index)}
               endIcon={<SaveIcon />}
             >
               Save
@@ -196,22 +206,6 @@ const [task, setTask] = useState<TaskType | null>(Task);
     );
   }
 };
-
-<Card sx={{ display: "flex" }}>
-  <Box minWidth="350px">
-    <CardContent sx={{ marginTop: "10px" }}>
-      <Typography>This is title</Typography>
-    </CardContent>
-  </Box>
-  <Box marginTop={2} marginRight={2}>
-    <IconButton aria-label="Edit" color="primary">
-      <EditIcon />
-    </IconButton>
-    <IconButton aria-label="Delete" sx={{ color: "#eb4034" }}>
-      <DeleteIcon />
-    </IconButton>
-  </Box>
-</Card>;
 
 type TaskViewProps = {
   Tasks: TaskType[],
