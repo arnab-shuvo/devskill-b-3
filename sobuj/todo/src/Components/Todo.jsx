@@ -90,9 +90,14 @@ const Todo = () =>{
 const [task, setTask]=useState("");
 const [error, setError]=useState(false);
 const [edit, setEdit]=useState(false);
+// const [editedTask, setEditedTask]=useState(false);
+ 
+
 const [taskList, setTaskList]=useState([]);
-const  [taskIndex, setTaskIndex]=useState("");
+
+const  [editedTaskIndex, setEditedTaskIndex]=useState("");
 const [prevTaskData, setPrevTaskData] = useState("");
+
 const addTask = () =>{
     if(task.length){ 
         const prevTask = [...taskList];
@@ -103,7 +108,6 @@ const addTask = () =>{
     }
 };
 const delTask = (index) =>{
-    //alert(index)
     const prevTask = [...taskList];
     prevTask.splice(index, 1);
     setTaskList(prevTask);
@@ -111,7 +115,7 @@ const delTask = (index) =>{
 const editTask = (index, task) =>{
     //alert(index)
     setEdit(true);
-    setTaskIndex(index);
+    setEditedTaskIndex(index);
     setPrevTaskData(task);
 }
 const editTaskAction = (taskIndex, task) =>{
@@ -168,19 +172,17 @@ const settaskName = (e) =>{
                                            Update Task Name
                                         </Typography>
                                         <TextField
-                                        onChange={(e)=>settaskName(e)}
+                                        onChange={(e)=>setPrevTaskData(e.target.value)}
                                         fullWidth
                                             error={error}
                                             id="outlined"
-                                            label="Task Name"
-                                            defaultValue={task}
-                                            
+                                            label="Task Name"                                          
                                             helperText={error? "Must fill the task field!":""}
                                             variant="outlined"
                                            
-                                            value={task}
+                                            value={prevTaskData}
                                         />
-                                        <Button sx={{ mt:5 }} onClick={()=>{editTaskAction(taskIndex, task)}} startIcon={<CreateIcon />}  variant="contained" color="secondary">
+                                        <Button sx={{ mt:5 }} onClick={()=>{editTaskAction(editedTaskIndex)}} startIcon={<CreateIcon />}  variant="contained" color="secondary">
                                         Update Task
                                         </Button>
                                     </>
@@ -222,7 +224,7 @@ const settaskName = (e) =>{
                                         size="small" 
                                         variant="contained"  color="warning"
                                         startIcon={<CreateIcon />}  
-                                        onClick={()=>{editTask(index, task)}}
+                                        onClick={()=>{editTask(index)}}
                                         >Edit</Button>
                                     </StyledTableCell>
                                     <StyledTableCell align="right">
