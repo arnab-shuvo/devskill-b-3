@@ -80,16 +80,11 @@ const Home = () => {
 const [selectedProduct, setSelectedProduct] = useState(null);
 const [showLoader, setShowLoader] = useState(true);
 
-const showDetail = (id) =>{
-    alert(id)  ;
-  // console.log('id');
-    fetch('https://fakestoreapi.com/products/${id}')
-    .then((res)=> res.json())
-    .then(json=>{
-        // console.log(json);
-        setSelectedProduct(json);
-
-    });
+const showDetail = (product) =>{
+  setSelectedProduct(product);
+}
+const backHome = () =>{
+    setSelectedProduct(null)
 }
 
 
@@ -101,7 +96,7 @@ const showDetail = (id) =>{
     
     {selectedProduct!==null?
       (
-        <ProductDetail selectedProduct={setSelectedProduct}  />
+        <ProductDetail selectedProduct={selectedProduct} backHome={backHome}  />
       ):(
         <Products  productList={productList} showDetail={showDetail} />
       )

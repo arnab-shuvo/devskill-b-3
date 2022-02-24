@@ -8,10 +8,11 @@ import TextInfoContent from '@mui-treasury/components/content/textInfo';
 import { useFourThreeCardMediaStyles } from '@mui-treasury/styles/cardMedia/fourThree';
 import { useN04TextInfoContentStyles } from '@mui-treasury/styles/textInfoContent/n04';
 import { useOverShadowStyles } from '@mui-treasury/styles/shadow/over';
-import { Grid, Typography } from '@mui/material';
+import { Button, Grid, Typography } from '@mui/material';
 
 import { styled } from '@mui/material/styles';
 import Paper from '@mui/material/Paper';
+import Box from '../../../todo/node_modules/@mui/system/Box';
 // import Grid from '@mui/material/Grid';
 
 const useStyles = makeStyles(() => ({
@@ -35,10 +36,35 @@ const Item = styled(Paper)(({ theme }) => ({
   }));
 
 
-const ProductDetail = ({setSelectedProduct})=>{
+const ProductDetail = ({selectedProduct, backHome})=>{
     return(
         <>
-            <h1>Product Name {setSelectedProduct.title}</h1>
+            <h1>Product detail {selectedProduct.title}</h1>
+            <Grid container item>
+              <Grid item sx={6}>
+                <Card>
+                  <CardMedia
+                    image={selectedProduct.image}
+                    style={{ height: 140 }}
+                  />
+                </Card>
+              </Grid>
+              <Grid item sx={6}>
+                <Typography variant="h3" gutterBottom component="div">
+                  {selectedProduct.title}
+                </Typography>
+                <Typography variant="subtitle2" gutterBottom component="div">
+                  {selectedProduct.description}
+                </Typography>
+              </Grid>
+
+             
+            </Grid>
+            <Button 
+              variant="contained" 
+              color="secondary" 
+              onClick={()=>{backHome(null)}}
+              >Back to Home</Button>
         </>
     )
 }

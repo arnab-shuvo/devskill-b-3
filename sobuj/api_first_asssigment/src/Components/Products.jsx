@@ -13,10 +13,6 @@ import { Grid, Typography } from '@mui/material';
 import Button from '@mui/material/Button';
 import { styled } from '@mui/material/styles';
 import Paper from '@mui/material/Paper';
-import { useState } from 'react';
-import { useEffect } from 'react';
-import ProductDetail from './ProductDetail';
-// import Grid from '@mui/material/Grid';
 
 const useStyles = makeStyles(() => ({
   root: {
@@ -53,12 +49,6 @@ export const Products = React.memo(function MusicCard({productList, showDetail})
   const shadowStyles = useOverShadowStyles({ inactive: true });
 
 
-
-
-const seeDetail=(id)=>{
-    alert("Product ID is-"+ id)
-}
-
   return (
         <>
 
@@ -93,7 +83,7 @@ const seeDetail=(id)=>{
                                             variant="contained" 
                                             color="secondary"
                                             sx={{ mt:2 }}
-                                            onClick={()=>{showDetail(product.id)}}
+                                            onClick={()=>{showDetail(product)}}
                                             >View Detail</Button>
                     
                                         </CardContent>
