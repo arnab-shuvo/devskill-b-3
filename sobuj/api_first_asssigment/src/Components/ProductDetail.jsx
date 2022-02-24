@@ -39,8 +39,9 @@ const Item = styled(Paper)(({ theme }) => ({
 const ProductDetail = ({selectedProduct, backHome})=>{
     return(
         <>
+            
+            <Grid container item sx={8} justifyContent="center">
             <h1>Product detail {selectedProduct.title}</h1>
-            <Grid container item>
               <Grid item sx={6}>
                 <Card>
                   <CardMedia
