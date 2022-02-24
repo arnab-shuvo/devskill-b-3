@@ -83,7 +83,7 @@ export const Products = React.memo(function MusicCard({productList, showDetail})
                                             variant="contained" 
                                             color="secondary"
                                             sx={{ mt:2 }}
-                                            onClick={()=>{showDetail(product)}}
+                                            onClick={()=>{showDetail(product.id)}}
                                             >View Detail</Button>
                     
                                         </CardContent>

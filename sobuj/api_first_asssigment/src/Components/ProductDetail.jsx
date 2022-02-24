@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from "react";
 import cx from 'clsx';
 import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
@@ -12,7 +12,6 @@ import { Button, Grid, Typography } from '@mui/material';
 
 import { styled } from '@mui/material/styles';
 import Paper from '@mui/material/Paper';
-import Box from '../../../todo/node_modules/@mui/system/Box';
 // import Grid from '@mui/material/Grid';
 
 const useStyles = makeStyles(() => ({
@@ -35,8 +34,20 @@ const Item = styled(Paper)(({ theme }) => ({
     color: theme.palette.text.secondary,
   }));
 
+  
 
-const ProductDetail = ({selectedProduct, backHome})=>{
+const ProductDetail = ({prodId, backHome})=>{
+
+  const [selectedProduct, setSelectedProduct]=useState(null);
+
+  useEffect(()=>{
+    fetch(`https://fakestoreapi.com/products/${prodId}`)
+    .then((res)=> res.json())
+    .then(json=>{
+      setSelectedProduct(json);
+    });
+}, []);
+
     return(
         <>
             
@@ -65,6 +76,7 @@ const ProductDetail = ({selectedProduct, backHome})=>{
               variant="contained" 
               color="secondary" 
               onClick={()=>{backHome(null)}}
+              style={{ height:"60px" }}
               >Back to Home</Button>
         </>
     )

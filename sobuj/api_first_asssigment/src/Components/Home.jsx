@@ -80,8 +80,8 @@ const Home = () => {
 const [selectedProduct, setSelectedProduct] = useState(null);
 const [showLoader, setShowLoader] = useState(true);
 
-const showDetail = (product) =>{
-  setSelectedProduct(product);
+const showDetail = (id) =>{
+  setSelectedProduct(id);
 }
 const backHome = () =>{
     setSelectedProduct(null)
