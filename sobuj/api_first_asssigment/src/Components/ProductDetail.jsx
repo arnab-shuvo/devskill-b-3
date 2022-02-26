@@ -9,10 +9,13 @@ import { useFourThreeCardMediaStyles } from '@mui-treasury/styles/cardMedia/four
 import { useN04TextInfoContentStyles } from '@mui-treasury/styles/textInfoContent/n04';
 import { useOverShadowStyles } from '@mui-treasury/styles/shadow/over';
 import { Button, Grid, Typography } from '@mui/material';
+import Box from '@mui/material/Box';
+
+import Rating from '@mui/material/Rating';
 
 import { styled } from '@mui/material/styles';
 import Paper from '@mui/material/Paper';
-// import Grid from '@mui/material/Grid';
+import Preloader from './Preloader';
 
 const useStyles = makeStyles(() => ({
   root: {
@@ -36,48 +39,79 @@ const Item = styled(Paper)(({ theme }) => ({
 
   
 
-const ProductDetail = ({prodId, backHome})=>{
+const ProductDetail = ({productID, backHome})=>{
 
   const [selectedProduct, setSelectedProduct]=useState(null);
+  const [value, setValue] = React.useState(2);
 
   useEffect(()=>{
-    fetch(`https://fakestoreapi.com/products/${prodId}`)
+    fetch(`https://fakestoreapi.com/products/${productID}`)
     .then((res)=> res.json())
     .then(json=>{
       setSelectedProduct(json);
     });
-}, []);
+}, [productID]);
 
     return(
         <>
-            
-            <Grid container item sx={8} justifyContent="center">
-            <h1>Product detail {selectedProduct.title}</h1>
-              <Grid item sx={6}>
-                <Card>
-                  <CardMedia
-                    image={selectedProduct.image}
-                    style={{ height: 140 }}
-                  />
-                </Card>
-              </Grid>
-              <Grid item sx={6}>
-                <Typography variant="h3" gutterBottom component="div">
-                  {selectedProduct.title}
-                </Typography>
-                <Typography variant="subtitle2" gutterBottom component="div">
-                  {selectedProduct.description}
-                </Typography>
-              </Grid>
+            {
+            selectedProduct !== null ? 
+            (
+              <> 
+            <Grid container sx={{ mt:20 }} item xs={8} justifyContent="center" >
+              
+                 <Grid item xs={6} justifyContent="center">
+                 {/* <Card>
+                    <CardMedia
+                      image={selectedProduct.image}
+                      
+                    />
+                  </Card>*/}
+                  <div className="product-image-wrapper" justifyContent="right">
+                    <img alt={selectedProduct.title} src={selectedProduct.image} style={{ width: 340, border:"1px solid #ccc", padding:"20px" }} />
+                  </div>
+                </Grid> 
 
+                <Grid item xs={6} >
+                  <Typography variant="h3" gutterBottom component="div">
+                    {selectedProduct.title}
+                  </Typography>
+                  <Typography variant="subtitle2" gutterBottom component="div">
+                    {selectedProduct.description}
+                  </Typography>
+
+                  <Typography sx={{ mt:10 }} variant="h4" gutterBottom component="div">
+                    $ {selectedProduct.price}
+                  </Typography>
+
+                  <Box
+                      sx={{
+                        '& > legend': { mt: selectedProduct.rating },
+                      }}
+                    >
+                      <Typography component="legend">Rating</Typography>
+                      <Rating
+                        name="simple-controlled"
+                        value={value}
+                        onChange={(event, newValue) => {
+                          setValue(newValue);
+                        }}
+                      />
+                    </Box>
+                  <Button 
+                    variant="contained" 
+                    color="secondary" 
+                    onClick={()=>{backHome(null)}}
+                    sx={{ height:60, mt:10 }}
+                    >Back to Home</Button>
+                </Grid>
+              </Grid>
              
-            </Grid>
-            <Button 
-              variant="contained" 
-              color="secondary" 
-              onClick={()=>{backHome(null)}}
-              style={{ height:"60px" }}
-              >Back to Home</Button>
+              </>
+             ):(
+              <Preloader />
+            )} 
+            
         </>
     )
 }

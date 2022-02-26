@@ -36,12 +36,7 @@ const Item = styled(Paper)(({ theme }) => ({
   }));
 
 
-
-
-
 export const Products = React.memo(function MusicCard({productList, showDetail}) {
-
-// const Products = ({productList}) =>{
 
   const styles = useStyles();
   const mediaStyles = useFourThreeCardMediaStyles();
@@ -51,7 +46,7 @@ export const Products = React.memo(function MusicCard({productList, showDetail})
 
   return (
         <>
-
+                
                 <Grid container sx={10} justifyContent="center">
                     <Item>
                         <Typography variant="h2" gutterBottom component="div">
