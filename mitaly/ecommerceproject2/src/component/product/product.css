@@ -1,0 +1,23 @@
+.p_1{
+    margin: 20px 0px;
+}
+.p_2{
+    margin: 20px 0px;
+}
+.p_1 button{
+    background: rgba(220, 220, 220, 0.2);
+    border-radius: 100px;
+    justify-content: center;
+    align-items: center;
+    padding: 10px 20px; 
+    margin: 6px;
+}
+.p_1 button:hover{
+    background-color: #3D00B7;
+    color: white;
+    cursor: pointer; 
+}
+.p_1 button.active{
+    background-color: #3D00B7;
+    color: white;
+}

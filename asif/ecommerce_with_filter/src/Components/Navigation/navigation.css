@@ -1,0 +1,10 @@
+.navigation {
+  width: 100%;
+  background-color: blanchedalmond;
+  padding: 1em 0 1em 1em;
+  border-radius: 0.2em;
+}
+
+.logo {
+  font-size: 2rem;
+}
