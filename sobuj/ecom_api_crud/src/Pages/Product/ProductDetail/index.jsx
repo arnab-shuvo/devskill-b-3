@@ -1,13 +1,5 @@
 import React, { useState, useEffect } from "react";
-import cx from 'clsx';
 import { makeStyles } from '@material-ui/core/styles';
-import Card from '@material-ui/core/Card';
-import CardMedia from '@material-ui/core/CardMedia';
-import CardContent from '@material-ui/core/CardContent';
-import TextInfoContent from '@mui-treasury/components/content/textInfo';
-import { useFourThreeCardMediaStyles } from '@mui-treasury/styles/cardMedia/fourThree';
-import { useN04TextInfoContentStyles } from '@mui-treasury/styles/textInfoContent/n04';
-import { useOverShadowStyles } from '@mui-treasury/styles/shadow/over';
 import { Button, Grid, Typography } from '@mui/material';
 import Box from '@mui/material/Box';
 
@@ -15,7 +7,7 @@ import Rating from '@mui/material/Rating';
 
 import { styled } from '@mui/material/styles';
 import Paper from '@mui/material/Paper';
-import Preloader from './Preloader';
+import Preloader from '../../../Components/Preloader';
 
 const useStyles = makeStyles(() => ({
   root: {
@@ -38,7 +30,6 @@ const Item = styled(Paper)(({ theme }) => ({
   }));
 
   
-
 const ProductDetail = ({productID, backHome})=>{
   
   const [selectedProduct, setSelectedProduct]=useState(null);
@@ -61,12 +52,6 @@ const ProductDetail = ({productID, backHome})=>{
             <Grid container sx={{ mt:20 }} item xs={8} justifyContent="center" >
               
                  <Grid item xs={6} justifyContent="center">
-                 {/* <Card>
-                    <CardMedia
-                      image={selectedProduct.image}
-                      
-                    />
-                  </Card>*/}
                   <div className="product-image-wrapper" justifyContent="right">
                     <img alt={selectedProduct.title} src={selectedProduct.image} style={{ width: 340, border:"1px solid #ccc", padding:"20px" }} />
                   </div>
