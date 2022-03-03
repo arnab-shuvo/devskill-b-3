@@ -8,6 +8,7 @@ import Products from "../Product/index";
 import ProductDetail from "../Product/ProductDetail/";
 import CreateProduct from "../Product/Create/index"
 import Preloader from "../../Components/Preloader";
+import UpdateProduct from "../Product/ProductUpdate";
 
 const styles ={
     wraperContainer:{
@@ -66,25 +67,35 @@ const Home = () => {
   // Product Detaili
 const [selectedProduct, setSelectedProduct] = useState(null);
 const [showLoader, setShowLoader] = useState(true);
-
+const [selectUpdate, setSelectUpdate] = useState(null);
 const showDetail = (id) =>{
   setSelectedProduct(id);
 }
+//Delete Product
 const delProd=(id)=>{
   alert ("This product will be removed!");
-  // fetch(`https://fakestoreapi.com/products/${id}`,{
-  //           method:"DELETE"
-  //       })
-  //           .then(res=>res.json())
-  //           .then(json=>console.log(json))
+  fetch(`https://fakestoreapi.com/products/${id}`,{
+            method:"DELETE"
+        })
+            .then(res=>res.json())
+            .then(json=>console.log(json))
 }
 
-const updateProd=()=>{
-  alert ("This product will be Updated!");
-}
+//Update Procut
+const [open, setOpen] = React.useState(false);
+const handleOpen = () => setOpen(true);
+const handleClose = () => setOpen(false);
+
+
 
 const backHome = () =>{
     setSelectedProduct(null)
+}
+
+const updateProduct = (product) =>{
+  //alert("Update Product-"+ id)
+  setSelectUpdate(product);
+  setOpen(true);
 }
 
 
@@ -97,12 +108,15 @@ const backHome = () =>{
       productList?
       (
         <>
-          <CreateProduct />
+          {selectUpdate!==null ?
+              <UpdateProduct product={selectUpdate} openModal={open} handleClose={handleClose}  /> : <CreateProduct />
+          }
+          
           {selectedProduct!==null?
               (
                 <ProductDetail productID={selectedProduct} backHome={backHome}  />
               ):(
-                <Products  productList={productList} showDetail={showDetail} updateProd={updateProd} delProd={delProd}  />
+                <Products  productList={productList} showDetail={showDetail} updateProd={updateProduct} delProd={delProd}  />
               )
           }
         </>

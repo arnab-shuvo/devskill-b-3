@@ -153,6 +153,9 @@ export default function CreateProduct() {
                                         <Button sx={{ mt:5 }} onClick={()=>{addProduct()}} variant="contained" color="secondary">
                                             Add Product
                                         </Button>
+                                        <Button sx={{ mt:5, ml:10 }} onClick={()=>{handleClose()}} >
+                                            Close
+                                        </Button>
                                     </>
                               
 

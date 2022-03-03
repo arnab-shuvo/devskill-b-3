@@ -79,7 +79,7 @@ export const ProductBlock = React.memo(function MusicCard({product, showDetail, 
                 variant="contained" 
                 color="info"
                 sx={{ mt:2 }}
-                onClick={()=>{updateProd(id)}}
+                onClick={()=>{updateProd(product)}}
                 startIcon={<BuildIcon />}
                 
                 > </Button>
