@@ -13,6 +13,7 @@ import { Avatar, Link, Stack, Step } from "@mui/material";
 // import BackGroundImage from '../images/img2.jpg'
 import Products from "./Products";
 import ProductDetail from "./ProductDetail";
+import Preloader from "./Preloader";
 
 
 
@@ -63,8 +64,6 @@ const styles ={
   }));
 
 
-
-
 const Home = () => {
 
   const [productList, setProductList] = useState([]);
@@ -81,15 +80,10 @@ const [selectedProduct, setSelectedProduct] = useState(null);
 const [showLoader, setShowLoader] = useState(true);
 
 const showDetail = (id) =>{
-    alert(id)  ;
-  // console.log('id');
-    fetch('https://fakestoreapi.com/products/${id}')
-    .then((res)=> res.json())
-    .then(json=>{
-        // console.log(json);
-        setSelectedProduct(json);
-
-    });
+  setSelectedProduct(id);
+}
+const backHome = () =>{
+    setSelectedProduct(null)
 }
 
 
@@ -98,16 +92,25 @@ const showDetail = (id) =>{
     <Grid container 
     style={styles.wraperContainer} 
     sx={{ flexGrow: 1 }} justifyContent="center">
-    
-    {selectedProduct!==null?
+    {
+      productList?
       (
-        <ProductDetail selectedProduct={setSelectedProduct}  />
+        <>
+          {selectedProduct!==null?
+              (
+                <ProductDetail productID={selectedProduct} backHome={backHome}  />
+              ):(
+                <Products  productList={productList} showDetail={showDetail} />
+              )
+          }
+        </>
       ):(
-        <Products  productList={productList} showDetail={showDetail} />
+        <>
+          <Preloader />
+        </>
       )
     }
-      
-
+   
     </Grid>
     )
 

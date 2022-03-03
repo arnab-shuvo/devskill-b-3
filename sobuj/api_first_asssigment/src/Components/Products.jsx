@@ -13,10 +13,6 @@ import { Grid, Typography } from '@mui/material';
 import Button from '@mui/material/Button';
 import { styled } from '@mui/material/styles';
 import Paper from '@mui/material/Paper';
-import { useState } from 'react';
-import { useEffect } from 'react';
-import ProductDetail from './ProductDetail';
-// import Grid from '@mui/material/Grid';
 
 const useStyles = makeStyles(() => ({
   root: {
@@ -40,24 +36,13 @@ const Item = styled(Paper)(({ theme }) => ({
   }));
 
 
-
-
-
 export const Products = React.memo(function MusicCard({productList, showDetail}) {
-
-// const Products = ({productList}) =>{
 
   const styles = useStyles();
   const mediaStyles = useFourThreeCardMediaStyles();
   const textCardContentStyles = useN04TextInfoContentStyles();
   const shadowStyles = useOverShadowStyles({ inactive: true });
 
-
-
-
-const seeDetail=(id)=>{
-    alert("Product ID is-"+ id)
-}
 
   return (
         <>
@@ -70,22 +55,23 @@ const seeDetail=(id)=>{
                         
                         <Grid container item>
                             {productList.map((product)=>{
+                                const {id, title, category, image, rating, price, description} = product;
                                 return(
                                     // <li>{product.title}</li>
                                     <Card className={cx(styles.root, shadowStyles.root)}>
                                         <CardMedia
                                             className={cx(styles.media, mediaStyles.root)}
-                                            image={product.image}
+                                            image={image}
                                         />
                                         <CardContent>
                                             <TextInfoContent
                                             classes={textCardContentStyles}
-                                            overline={product.category}
-                                            heading={"$"+ product.price}
+                                            overline={category}
+                                            heading={"$"+ price}
 
                                             body={
-                                                // 'an amazing product'
-                                                product.title
+                                                description.substr(0, 20)+"..."
+                                                
                                             }
                                             />
                                             
@@ -93,7 +79,7 @@ const seeDetail=(id)=>{
                                             variant="contained" 
                                             color="secondary"
                                             sx={{ mt:2 }}
-                                            onClick={()=>{showDetail(product.id)}}
+                                            onClick={()=>{showDetail(id)}}
                                             >View Detail</Button>
                     
                                         </CardContent>

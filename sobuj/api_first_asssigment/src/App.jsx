@@ -1,5 +1,5 @@
 import './App.css';
-// import './css/style.css';
+import './css/style.css';
 import Preloader from  './Components/Preloader';
 import { useEffect, useState } from 'react';
 import Home from './Components/Home';
@@ -24,9 +24,6 @@ function App() {
       :
       (<Home />)
       }
-      
-      
-      
       
       
       

@@ -1,0 +1,55 @@
+.back-button {
+  padding: 1em 2em;
+  background-color: rgb(47, 47, 255);
+  color: whitesmoke;
+  font-weight: bold;
+  font-size: 1rem;
+  border-radius: 0.5em;
+  border: none;
+  cursor: pointer;
+}
+
+.product-description-container {
+  border-radius: 0.5em;
+  padding: 1em;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 2em;
+}
+
+@media screen and (min-width: 700px) {
+  .product-description-container {
+    flex-direction: row;
+  }
+}
+
+.product-description-image {
+  width: 20em;
+  margin: auto;
+}
+.product-description-image > img {
+  width: 100%;
+  border-radius: 0.5em;
+}
+
+.right {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 1em;
+}
+.action {
+  display: flex;
+  justify-content: space-evenly;
+}
+.action > button {
+  padding: 1em 2em;
+  background-color: blueviolet;
+  border-radius: 0.5em;
+  border: none;
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 0.75rem;
+  color: whitesmoke;
+}
