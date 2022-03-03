@@ -1,0 +1,28 @@
+.home-page-header {
+  display: flex;
+  justify-content: space-between;
+  padding: 1em 0;
+}
+
+.filter-container {
+  flex-basis: 60%;
+  display: flex;
+  justify-content: space-evenly;
+  gap: 2em;
+}
+
+.category-filter,
+.sort-filter {
+  flex-basis: 50%;
+  max-width: 7em;
+}
+
+.product {
+  padding: 0.5em;
+  transition: 1000ms;
+  cursor: pointer;
+}
+
+.product:hover {
+  transform: translateY(-1em) scale(105%);
+}

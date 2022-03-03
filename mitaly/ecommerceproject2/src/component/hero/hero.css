@@ -1,0 +1,68 @@
+.hero{
+    position: relative;
+    height: 440px;
+    margin: 120px;
+}
+.hero h2,button,p {
+    padding: 20px 0px;
+}
+.hero_1{
+    margin: 15px;
+}
+.hero_1 button{
+    background-color: #3D00B7;
+    color: white;
+    padding: 20px 40px;
+    justify-content: center;
+    align-items: center;
+    border-radius: 60px;
+}
+.hero_2{
+    margin: 15px;
+}
+.hero_2 button{
+
+}
+.splash1{
+position: absolute;
+width: 400px;
+height: 440px;
+left: 830px;
+top: 0px;
+background: url('./../../assets/images/3.png');
+border-radius: 24px;
+}
+.splash2{
+    position: absolute;
+    width: 356px;
+    height: 391.6px;
+    left: 910px;
+    top: 24.2px; 
+    background: url('./../../assets/images/2.png');
+    border-radius: 21.36px;
+    z-index: -1;
+}
+.splash3{
+    position: absolute;
+    width: 310px;
+    height: 341px;
+    left: 987px;
+    top: 49.5px;
+    background: url('./../../assets/images/1.png');
+    border-radius: 18.6px;
+    z-index: -2;
+}
+.txt{
+    position: absolute;
+    bottom: 24px;
+    left: 26px;
+    right: 26px;
+    background-color: transparent;
+    text-align: center;
+    color: white;
+}
+.txt_s{
+    background-color: transparent;
+    text-align: center;
+    color: white;
+}

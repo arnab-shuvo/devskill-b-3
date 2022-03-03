@@ -1,0 +1,9 @@
+.dailyDeals{
+    padding: 100px;
+    transition: 2s;
+}
+.dailyDeals h2{
+    border-bottom: 2px solid black;
+    padding: 7px;
+    transition-duration: 3s;
+}
