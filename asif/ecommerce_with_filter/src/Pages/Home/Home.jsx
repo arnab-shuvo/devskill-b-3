@@ -1,13 +1,12 @@
 import { Grid } from "@material-ui/core";
-import React, { useEffect, useState } from "react";
+import React from "react";
 import useMethods from "../../utils/api";
 import "./home.css";
 import Product from "../../Components/Product/Product";
 import CategoryFilter from "../../Components/Filters/CategoryFilter";
 import Order from "../../Components/Filters/Order";
-const Home = ({ onClickProduct, onPageChange }) => {
-  const [products, setProducts] = useState([]);
-  const { get_products, get_product_by_category, sort_product } = useMethods();
+const Home = ({ onClickProduct, onPageChange, products, setProducts }) => {
+  const { get_product_by_category, sort_product } = useMethods();
 
   const onSort = async (type, value) => {
     switch (type) {
@@ -22,16 +21,6 @@ const Home = ({ onClickProduct, onPageChange }) => {
     }
   };
 
-  useEffect(() => {
-    const work = async () => {
-      try {
-        return setProducts(await get_products());
-      } catch (error) {
-        return alert(error.message);
-      }
-    };
-    work();
-  }, []);
   return (
     <div className="home-page">
       <div className="home-page-header">
@@ -49,9 +38,10 @@ const Home = ({ onClickProduct, onPageChange }) => {
         <div>Loading...</div>
       ) : (
         <Grid container spacing={3}>
-          {products.map((product) => (
+          {products.map((product, index) => (
             <Grid item xs={12} sm={6} md={4} lg={3}>
               <Product
+                index={index}
                 product={product}
                 onPageChange={onPageChange}
                 onClickProduct={onClickProduct}

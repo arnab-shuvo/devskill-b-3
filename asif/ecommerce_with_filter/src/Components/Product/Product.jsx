@@ -1,12 +1,12 @@
 import { Card, CardContent, CardMedia } from "@material-ui/core";
 import React from "react";
 import "./product.css";
-const Product = ({ product, onClickProduct, onPageChange }) => {
+const Product = ({ product, onClickProduct, onPageChange, index }) => {
   return (
     <Card
       className="product"
       onClick={() => {
-        onClickProduct(product);
+        onClickProduct({ data: product, index });
         onPageChange("product-description");
       }}
     >

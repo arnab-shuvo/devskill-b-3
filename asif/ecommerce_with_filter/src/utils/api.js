@@ -32,7 +32,50 @@ const useMethods = () => {
     }
   };
 
-  return { get_products, sort_product, get_product_by_category };
+  const create_product = async (data) => {
+    try {
+      const response = await axios.post("https://fakestoreapi.com/products", {
+        ...data,
+      });
+      return response.data;
+    } catch (error) {
+      return alert(error.message);
+    }
+  };
+
+  const update_product = async (id, data) => {
+    try {
+      const response = await axios.put(
+        `https://fakestoreapi.com/products/${id}`,
+        {
+          ...data,
+        }
+      );
+      return response.data;
+    } catch (error) {
+      return alert(error.message);
+    }
+  };
+
+  const delete_product = async (id) => {
+    try {
+      const response = await axios.delete(
+        `https://fakestoreapi.com/products/${id}`
+      );
+      return response.data.id;
+    } catch (error) {
+      return alert(error.message);
+    }
+  };
+
+  return {
+    create_product,
+    get_products,
+    sort_product,
+    get_product_by_category,
+    update_product,
+    delete_product,
+  };
 };
 
 export default useMethods;
