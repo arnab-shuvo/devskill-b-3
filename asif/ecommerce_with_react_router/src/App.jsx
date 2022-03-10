@@ -44,6 +44,7 @@ const App = () => {
             path="/update-product/:id/:index"
             element={<UpdateProduct setProducts={setProducts} />}
           />
+          <Route path="*" element={<h1>404 page not found!</h1>} />
         </Routes>
       </div>
       <Footer />
