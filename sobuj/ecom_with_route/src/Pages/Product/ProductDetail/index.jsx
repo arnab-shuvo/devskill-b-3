@@ -56,10 +56,9 @@ const ProductDetail = ()=>{
             <Navbar />
 
             <Grid container sx={{ mt:20 }} item xs={8} justifyContent="center" >
-              
                  <Grid item xs={6} justifyContent="center">
                   <div className="product-image-wrapper" justifyContent="right">
-                    <img alt={selectedProduct.title} src={selectedProduct.image} style={{ width: 340, border:"1px solid #ccc", padding:"20px" }} />
+                    <img alt={selectedProduct.title} src={selectedProduct.image} style={{ width: 550, border:"1px solid #ccc", padding:"20px" }} />
                   </div>
                 </Grid> 
 

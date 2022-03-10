@@ -31,8 +31,6 @@ const Products = ({productList, showDetail, delProd, updateProd}) =>{
             </Grid>
         </>
     
-    
-    
   );
                     }; 
 export default Products;

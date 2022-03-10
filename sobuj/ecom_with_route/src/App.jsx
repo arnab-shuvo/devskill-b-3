@@ -31,16 +31,7 @@ function App() {
           <Route path='/' element={<Home />}  />
           <Route path='/product-detail/:id' element={<ProductDetail />}  />
       </Routes>
-      {showLoader===true? 
-        (<Preloader  />)  
-      :
-        (
-          <>
-            <Home/>
-          </>        
-
-        )
-      }
+    
       
     </>
   );
