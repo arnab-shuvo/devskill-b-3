@@ -9,6 +9,14 @@ import ProductDetail from "../Product/ProductDetail/";
 import CreateProduct from "../Product/Create/index"
 import Preloader from "../../Components/Preloader";
 import UpdateProduct from "../Product/ProductUpdate";
+import Recommend from "../../Components/Recommend";
+import Testimonials from "../../Components/Testimonials";
+import Footer from "../../Components/Footer";
+import ScrollToTop from "../../Components/ScrollToTop";
+import Navbar from "../../Components/Navbar";
+import Hero from "../../Components/Hero";
+import Services from "../../Components/Services";
+import { useNavigate } from "react-router-dom"; 
 
 const styles ={
     wraperContainer:{
@@ -102,7 +110,14 @@ const updateProduct = (product) =>{
 
 
     return (
-
+      <>
+    
+    <ScrollToTop/>
+    <Navbar />
+    <Hero />
+    <Services />
+ 
+    
     <Grid container 
     style={styles.wraperContainer} 
     sx={{ flexGrow: 1 }} justifyContent="center">
@@ -116,7 +131,7 @@ const updateProduct = (product) =>{
           
           {selectedProduct!==null?
               (
-                <ProductDetail productID={selectedProduct} backHome={backHome}  />
+                <ProductDetail />
               ):(
                 <Products  productList={productList} showDetail={showDetail} updateProd={updateProduct} delProd={delProd}  />
               )
@@ -130,6 +145,12 @@ const updateProduct = (product) =>{
     }
    
     </Grid>
+      
+    <Recommend />
+    <Testimonials />
+    <Footer />
+      </>
+    
     )
 
 }
