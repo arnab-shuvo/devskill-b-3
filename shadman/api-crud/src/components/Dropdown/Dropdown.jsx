@@ -32,8 +32,8 @@ const Dropdown = ({ setProductList }) => {
         setProductList(getResult)
     };
 
-    const handleSort = () => {
-        if (value === 10) {
+    const handleSort = (boolean) => {
+        if (boolean===true) {
             fetch('https://fakestoreapi.com/products?sort=asc')
                 .then(res => res.json())
                 .then(json => setProductList(json))
@@ -103,8 +103,8 @@ const Dropdown = ({ setProductList }) => {
                                     label="Categories"
                                     onChange={handleChange}
                                 >
-                                    <MenuItem value={10} onClick={handleSort}>Ascending</MenuItem>
-                                    <MenuItem value={20} onClick={handleSort}>Descending</MenuItem>
+                                    <MenuItem value={10} onClick={()=>handleSort(true)}>Ascending</MenuItem>
+                                    <MenuItem value={20} onClick={()=>handleSort(false)}>Descending</MenuItem>
 
 
                                 </Select>
