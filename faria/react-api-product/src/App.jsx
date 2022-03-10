@@ -2,63 +2,45 @@ import logo from "./logo.svg";
 import "./App.css";
 import { useEffect, useState } from "react";
 import React from "react";
-import CustomLoader from "./CustomLoader";
-import ProductListComp from "./productListComp";
-import ProductDetailsPage from "./productDetailsComp";
-
+import CustomLoader from "./components/CustomLoader";
+import ProductListComp from "./components/productListComp";
+import ProductDetailsPage from "./components/productDetailsComp";
+import FilterProduct from "./components/filter-product";
+import ProductPageHeader from "./pages/Navigation/header";
 function App() {
   const [showProducts, setShowProducts] = useState([]);
-
-
-  // return (
-  //   <div>
-      
-  //   </div>
-  // );
   const [selectedProduct, setSelectedProduct] = useState(null);
   const [showLoader, setShowLoader] = useState(false);
-  // const [showElements, setShowElements] = useState(true);
-  // const [showProducts, setShowProducts] = useState([
-  //   {
-  //     name: "Wiper",
-  //     description: "lorem ipsum doler wiper",
-  //     price: "12",
-  //     category: "Product Category wiper",
-  //   },
-  //   {
-  //     name: "Tissue",
-  //     description: "lorem ipsum doler tissue",
-  //     price: "23",
-  //     category: "Product Category tissue",
-  //   },
-  //   {
-  //     name: "bucket",
-  //     description: "lorem ipsum doler bucket",
-  //     price: "33",
-  //     category: "Product Category bucket",
-  //   },
-  // ]);
+  const [showCategory, setShowCategory] = useState(false);
 
-  // const name="testing";
-  const viewElement = (showProduct) => {
-    // console.log(showProduct);
-    // console.log(selectedProduct);
-    // setShowElements(false);
-    // alert("working");
+  const filterProduct = (result) => {
+    console.log("this is filter product");
+    console.log(result);
+    setShowProducts(result);
+  };
+
+  const viewElement = (id) => {
     setShowLoader(true);
     setTimeout(() => {
-      setSelectedProduct(showProduct);
+      setSelectedProduct(id);
       setShowLoader(false);
     }, 500);
   };
- useEffect(() => {
+
+  useEffect(() => {
     fetch("https://fakestoreapi.com/products")
       .then((res) => res.json())
-      .then((json) => {setShowProducts(json);});
+      .then((json) => {
+        setShowProducts(json);
+      });
   }, []);
+
+
   return (
     <>
+    <ProductPageHeader />
       {showLoader && <CustomLoader />}
+      <FilterProduct setProducts={filterProduct} />
       {selectedProduct === null ? (
         <ProductListComp
           showProducts={showProducts}
@@ -66,7 +48,7 @@ function App() {
         />
       ) : (
         <ProductDetailsPage
-          selectedProduct={selectedProduct}
+          productId={selectedProduct.id}
           showProductDetails={viewElement}
         />
       )}

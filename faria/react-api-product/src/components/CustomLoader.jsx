@@ -1,8 +1,8 @@
 import React, { Component } from "react";
-import logo from "./logo.svg";
-import "./App.css";
-import ProductListComp from "./productListComp";
-import ProductDetailsPage from "./productDetailsComp";
+// import logo from "./logo.svg";
+// import "./src/App.css";
+// import ProductListComp from "./components/productListComp";
+// import ProductDetailsPage from "./components/productDetailsComp";
 
 const CustomLoader = ({ showProductDetails, selectedProduct }) => {
   return (
