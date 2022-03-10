@@ -16,7 +16,6 @@ import ScrollToTop from "../../Components/ScrollToTop";
 import Navbar from "../../Components/Navbar";
 import Hero from "../../Components/Hero";
 import Services from "../../Components/Services";
-import { useNavigate } from "react-router-dom"; 
 
 const styles ={
     wraperContainer:{
@@ -72,13 +71,9 @@ const Home = () => {
       });
   }, []);
 
-  // Product Detaili
-const [selectedProduct, setSelectedProduct] = useState(null);
 const [showLoader, setShowLoader] = useState(true);
 const [selectUpdate, setSelectUpdate] = useState(null);
-const showDetail = (id) =>{
-  setSelectedProduct(id);
-}
+ 
 //Delete Product
 const delProd=(id)=>{
   //alert ("This product will be removed!");
@@ -95,13 +90,7 @@ const delProd=(id)=>{
 const [open, setOpen] = React.useState(false);
 const handleOpen = () => setOpen(true);
 const handleClose = () => setOpen(false);
-
-
-
-const backHome = () =>{
-    setSelectedProduct(null)
-}
-
+ 
 const updateProduct = (product) =>{
   //alert("Update Product-"+ id)
   setSelectUpdate(product);
@@ -129,13 +118,9 @@ const updateProduct = (product) =>{
               <UpdateProduct product={selectUpdate} openModal={open} handleClose={handleClose}  /> : <CreateProduct />
           }
           
-          {selectedProduct!==null?
-              (
-                <ProductDetail />
-              ):(
-                <Products  productList={productList} showDetail={showDetail} updateProd={updateProduct} delProd={delProd}  />
-              )
-          }
+         <Products  productList={productList} updateProd={updateProduct} delProd={delProd}  />
+              
+          
         </>
       ):(
         <>
