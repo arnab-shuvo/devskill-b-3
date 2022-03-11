@@ -76,7 +76,6 @@ const [selectUpdate, setSelectUpdate] = useState(null);
  
 //Delete Product
 const delProd=(id)=>{
-  //alert ("This product will be removed!");
   fetch(`https://fakestoreapi.com/products/${id}`,{
             method:"DELETE"
         })
