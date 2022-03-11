@@ -9,10 +9,15 @@ import Hero from './Components/Hero';
 import Services from './Components/Services';
 import Testimonials from './Components/Testimonials';
 import Footer from './Components/Footer';
-import {Routes, Route} from "react-router-dom";
+import {
+  //BrowserRouter as Router,
+  //BroserHistory,
+  Routes, Route, 
+} from "react-router-dom";
+
 import Products from './Pages/Product';
 import ProductDetail from './Pages/Product/ProductDetail';
-
+import Page404 from './Pages/404'
 function App() {
     const [showLoader, setShowLoader] = useState(true)
     useEffect(()=>{
@@ -28,8 +33,11 @@ function App() {
   return (
     <>   
       <Routes>
-          <Route path='/' element={<Home />}  />
+          <Route path='/' element={<Home />}  />  
           <Route path='/product-detail/:id' element={<ProductDetail />}  />
+          <Route path='/create' element={<ProductDetail />}  />
+          <Route path='*' element={<Page404 />} />
+
       </Routes>
     
       
