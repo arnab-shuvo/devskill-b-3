@@ -73,12 +73,14 @@ const showDetail = (id) =>{
 }
 //Delete Product
 const delProd=(id)=>{
-  alert ("This product will be removed!");
+  //alert ("This product will be removed!");
   fetch(`https://fakestoreapi.com/products/${id}`,{
             method:"DELETE"
         })
-            .then(res=>res.json())
-            .then(json=>console.log(json))
+      .then((res)=> res.json())
+      .then(json=>{
+          setProductList(json);
+      });
 }
 
 //Update Procut
