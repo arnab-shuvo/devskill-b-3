@@ -8,22 +8,25 @@ import Button from "@mui/material/Button";
 import Grid from "@mui/material/Grid";
 import Container from "@mui/material/Container";
 import CustomLoaderEcomm from "../Loader/customLoader";
-import { maxHeight } from "@mui/system";
+import { useNavigate } from "react-router-dom";
 
-const ProductList = ({ showProducts, showProductList, editProductList }) => {
+const ProductList = () => {
   const [products, setProducts] = useState(null);
+
+    const navigate = useNavigate();
+
+    const productDetails = (id) => {
+      navigate(`/product-details/${id}`);
+    };
+
   useEffect(() => {
     fetch(`https://fakestoreapi.com/products/`)
       .then((res) => res.json())
       .then((json) => {
         setProducts(json);
-        setProducts(showProducts);
-        // console.log(json);
       });
-  }, [showProducts]);
-  // const loadProduct = (showProducts) => {
-  //   setProducts(showProducts);
-  // };
+  }, []);
+
   return (
     <div className="container mt-5">
       <Typography
@@ -34,7 +37,6 @@ const ProductList = ({ showProducts, showProductList, editProductList }) => {
       >
         Product List
       </Typography>
-      {/* <h1 className="text-center">Product List</h1> */}
 
       {products ? (
         <div>
@@ -46,7 +48,7 @@ const ProductList = ({ showProducts, showProductList, editProductList }) => {
                 mx-auto
                 container
               >
-                {showProducts.map((showProduct) => (
+                {products.map((product) => (
                   <Grid m={2} md={3} item>
                     <Card sx={{ maxWidth: 300, height: "100%" }}>
                       <CardActionArea>
@@ -55,19 +57,19 @@ const ProductList = ({ showProducts, showProductList, editProductList }) => {
                           objectFit="contain"
                           component="img"
                           height="140"
-                          image={showProduct.image}
+                          image={product.image}
                           alt="green iguana"
                         />
                         <CardContent>
                           <Typography gutterBottom variant="h5" component="div">
-                            {showProduct.title}
+                            {product.title}
                           </Typography>
                           <Typography
                             sx={{ color: "info.main" }}
                             variant="subtitle1"
                           >
                             <p>
-                              <b>price:{showProduct.price}</b>
+                              <b>price:{product.price}</b>
                             </p>
                           </Typography>
                           <Typography
@@ -75,25 +77,16 @@ const ProductList = ({ showProducts, showProductList, editProductList }) => {
                             variant="body2"
                             color="text.secondary"
                           >
-                            {showProduct.category}
+                            {product.category}
                           </Typography>
 
                           <Button
                             mt={1}
-                            onClick={() => showProductList(showProduct)}
+                            onClick={() => productDetails(product.id)}
                             variant="outlined"
                           >
                             view
                           </Button>
-                          {/* <Button
-                            mt={1}
-                            ml={2}
-                            onClick={() => showProductList(showProduct)}
-                            variant="outlined"
-                            sx={{marginLeft: "10px",}}
-                          >
-                            Edit
-                          </Button> */}
                         </CardContent>
                       </CardActionArea>
                     </Card>

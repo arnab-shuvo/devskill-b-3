@@ -46,17 +46,10 @@ const Product = () => {
             showProductList={viewElement}
           />
         ) : (
-          <>
-            <ProductDetails
-              productId={selectedProduct.id}
-              showProductDetails={viewElement}
-            />
-
-            <EditProductPage
-              productId={selectedProduct.id}
-              editProductDetails={viewElement}
-            />
-          </>
+          <ProductDetails
+            productId={selectedProduct.id}
+            showProductDetails={viewElement}
+          />
         )}
       </div>
     </>
