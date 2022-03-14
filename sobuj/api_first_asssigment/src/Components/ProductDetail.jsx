@@ -40,7 +40,7 @@ const Item = styled(Paper)(({ theme }) => ({
   
 
 const ProductDetail = ({productID, backHome})=>{
-
+  
   const [selectedProduct, setSelectedProduct]=useState(null);
   const [value, setValue] = React.useState(2);
 

@@ -1,8 +1,6 @@
-import { Button, CardContent, Grid, Typography } from '@mui/material';
-import Card from '@mui/material/Card';
+import { Button, Card, CardContent, CardMedia, Grid, Typography } from '@mui/material';
 import React from 'react';
-import banner from '../images/banner.png';
-import image1 from '../images/f2.png';
+
 
 const styles = {
     promoLeft: {
@@ -53,96 +51,68 @@ const styles = {
     }
 }
 
+const products = [
+
+    {
+        id: 1,
+        title: 'Jacket',
+        price: 220,
+        image :'../images/f1.jpg'
+    },
+    {
+        id: 2,
+        title: 'Cloth',
+        price: 240,
+        image :'/images/f2.jpg'
+    },
+    {
+        id: 3,
+        title: 'Coat',
+        price: 260,
+        image :'/images/f3.jpg'
+    },
+]
+
 function Promo() {
   return (
-      <Grid container spacing={2} style={styles.marginHorizontal}>
-          <Grid item xs={12} sm={ 4 } md={4}>
-              <Card>
-                  <CardContent>
-                      <Grid container spacing={0}>
-                          <Grid item sm={6}>
-                              <Grid
-                                  container
-                                  direction="column"
-                                  justifyContent="center"
-                                  alignItems="center"
-                              >
-                                  <Grid item xs={12}>
-                                    <Typography variant='subtitle'>
-                                        Price $250
-                                    </Typography>
-                                  </Grid>
-                                  00
-                                  <Grid item xs={12}>
-                                    <Button variant='contained' style={styles.buttonColor}>
-                                        Shop Now
-                                    </Button>
-                                  </Grid>
-                              </Grid>
-                          </Grid>
-                          <Grid item sm={6}>
-                          <img
-                            src={image1}
-                                  alt='logo'
-                                  style={styles.img}
-                            /> 
-                          </Grid>
-                          
-                      </Grid>
-                </CardContent>
-              </Card>
-          </Grid> 
-          <Grid item xs={12} sm={ 4 } md={4}>
-              <div style={styles.promoDiv}>
-                  <div style={styles.promoCenter}>
-                      <Typography variant='body1'> Promo Code : 045 </Typography>
-                      <Typography variant='body2'> Collect your code </Typography>
-                  </div>
-                  <div style={styles.promoCenterBottom}>
-                      <img
-                          src={banner}
-                          style={styles.img}
-                          alt='banner'
-                      />
-                  </div>
-              </div>
-          </Grid> 
-          <Grid item xs={12} sm={ 4 } md={4}>
-              <Card>
-                  <CardContent>
-                      <Grid container spacing={0}>
-                      <Grid item sm={6}>
-                          <img
-                            src={image1}
-                                  alt='logo'
-                                  style={styles.img}
-                            /> 
-                          </Grid>
-                          <Grid item sm={6}>
-                              <Grid
-                                  container
-                                  direction="column"
-                                  justifyContent="center"
-                                  alignItems="center"
-                              >
-                                  <Grid item xs={12}>
-                                    <Typography variant='subtitle'>
-                                        Price $250
-                                    </Typography>
-                                  </Grid>
-                                  00
-                                  <Grid item xs={12}>
-                                    <Button variant='contained' style={styles.buttonColor}>
-                                        Shop Now
-                                    </Button>
-                                  </Grid>
-                              </Grid>
-                          </Grid>
-                      </Grid>
-                </CardContent>
-              </Card>
+      <>
+          <Grid container>
+              <Grid xs={12} sm={12} md={12}>
+                <Typography variant='h6'> Trending Items</Typography>
+              </Grid>
           </Grid>
-    </Grid>
+      <Grid container spacing={2} style={styles.marginHorizontal}>
+        {/* Mapping shoul Go here */}
+
+        {
+            products.map((product, index) =>
+            <Grid item xs={12} sm={4} md={4}>
+            <Card >
+                <CardContent>
+                    <CardMedia
+                        component='img'
+                        src={product.image}
+                        width='100%'
+                        height='auto'
+                    />
+                    <Typography variant="h5" color="text.secondary">
+                              {product.title}
+                    </Typography>
+                    <Typography variant="subtitle1" color="text.secondary">
+                              {product.price} 
+                    </Typography>
+                        <Button style={styles.buttonColor} variant='contained'> Shop Now </Button>
+                    </CardContent>
+                </Card>
+              </Grid> 
+            )          
+        }   
+
+        {/* mapping end    */}
+
+              
+          </Grid>
+        </>
   )
 }
 

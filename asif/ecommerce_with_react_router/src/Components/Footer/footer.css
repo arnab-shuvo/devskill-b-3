@@ -1,0 +1,9 @@
+.footer {
+  padding: 1em;
+  background-color: black;
+  color: whitesmoke;
+  border-radius: 0.5em;
+  text-align: center;
+  font-weight: bold;
+  font-size: 1.75rem;
+}

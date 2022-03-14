@@ -3,8 +3,35 @@
   background-color: blanchedalmond;
   padding: 1em 0 1em 1em;
   border-radius: 0.2em;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .logo {
   font-size: 2rem;
+  cursor: pointer;
+}
+
+.nav-link-container {
+  padding: 0 5em;
+  font-size: 1.3rem;
+}
+
+.nav-link-container > p {
+  cursor: pointer;
+}
+
+.nav-link-container > p::after {
+  content: "";
+  display: block;
+  background-color: brown;
+  width: 0;
+  height: 2px;
+  margin: auto;
+  transition: 800ms;
+}
+
+.nav-link-container > p:hover::after {
+  width: 100%;
 }

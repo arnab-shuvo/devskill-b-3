@@ -1,0 +1,49 @@
+.create-form-container {
+  text-align: center;
+}
+
+.create-form-container > form {
+  margin: auto;
+  width: 90%;
+  max-width: 500px;
+  box-shadow: 0.1em 0.1em 0.1em rgb(213, 213, 213);
+  border-radius: 1em;
+  background-color: rgb(230, 230, 230);
+  padding: 1em;
+}
+
+.create-form-container > form > div {
+  font-size: 1.2rem;
+  font-weight: bold;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 1.5em 0;
+}
+
+.create-form-container > form > div > input {
+  padding: 1em;
+  flex-basis: 50%;
+  border-radius: 0.5em;
+  border: 0.5px solid grey;
+}
+
+.create-form-container > form > div > input:focus {
+  outline: 1px solid blue;
+}
+
+.create-form-container > form > button {
+  padding: 1em 2em;
+  font-size: 1rem;
+  font-weight: bold;
+  border-radius: 1em;
+  border: none;
+  background-color: rgb(40, 199, 0);
+  color: antiquewhite;
+}
+
+.create-form-container > form > button:hover,
+.create-form-container > form > button:focus {
+  outline: 1px solid blue;
+  outline-offset: 0.2em;
+}

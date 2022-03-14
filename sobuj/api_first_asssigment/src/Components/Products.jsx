@@ -46,7 +46,7 @@ export const Products = React.memo(function MusicCard({productList, showDetail})
 
   return (
         <>
-                
+
                 <Grid container sx={10} justifyContent="center">
                     <Item>
                         <Typography variant="h2" gutterBottom component="div">
@@ -55,22 +55,23 @@ export const Products = React.memo(function MusicCard({productList, showDetail})
                         
                         <Grid container item>
                             {productList.map((product)=>{
+                                const {id, title, category, image, rating, price, description} = product;
                                 return(
                                     // <li>{product.title}</li>
                                     <Card className={cx(styles.root, shadowStyles.root)}>
                                         <CardMedia
                                             className={cx(styles.media, mediaStyles.root)}
-                                            image={product.image}
+                                            image={image}
                                         />
                                         <CardContent>
                                             <TextInfoContent
                                             classes={textCardContentStyles}
-                                            overline={product.category}
-                                            heading={"$"+ product.price}
+                                            overline={category}
+                                            heading={"$"+ price}
 
                                             body={
-                                                // 'an amazing product'
-                                                product.title
+                                                description.substr(0, 20)+"..."
+                                                
                                             }
                                             />
                                             
@@ -78,7 +79,7 @@ export const Products = React.memo(function MusicCard({productList, showDetail})
                                             variant="contained" 
                                             color="secondary"
                                             sx={{ mt:2 }}
-                                            onClick={()=>{showDetail(product.id)}}
+                                            onClick={()=>{showDetail(id)}}
                                             >View Detail</Button>
                     
                                         </CardContent>
