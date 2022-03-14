@@ -1,4 +1,7 @@
-// import FreeBlocks from '../../assets/images/freeBlocks.png';
+import facebookColor from '../../assets/images/facebookColor.png';
+import insta from '../../assets/images/insta.png';
+import LinkdinColor from '../../assets/images/LinkdinColor.png';
+import twiter from '../../assets/images/twiter.png';
 // import FreeReturns from '../../assets/images/freeReturns.png';
 // import FreeShipping from '../../assets/images/freeShipping.png';
 // import FreeSourcing from '../../assets/images/freeSourcing.png';
@@ -68,22 +71,27 @@ const Socials = [
     {
         id: 1,
         name: 'Fcebook',
-        image:'images/facebookColor.png'
+        image: facebookColor,
+        url :'https://www.facebook.com/'
     },
     {
         id: 2,
         name: 'Twitter',
-        image:'../../assets/images/twiter.png'
+        image: twiter,
+        url :'https://twitter.com/'
+        
     },
     {
         id: 3,
         name: 'Linkdin',
-        image:'../../assets/images/LinkdinColor.png'
+        image: LinkdinColor,
+        url :'https://www.linkedin.com'
     },
     {
         id: 4,
         name: 'Instagram',
-        image:'../../assets/images/insta.png'
+        image: insta,
+        url :'https://www.instagram.com/'
     }
 ]
 
@@ -96,5 +104,5 @@ Lorem ipsum dolor, sit amet consectetur adipisicing elit. Non ipsam neque minus,
 
 const Policys = ['Home', 'About Us', 'Privecy', 'Return', 'Products']
 
-export { Cards, Socials, Policys, Title, Features, Description, Shipping, AboutData }
+export { Cards, Socials, Policys, Title, Features, Description, Shipping, AboutData };
 

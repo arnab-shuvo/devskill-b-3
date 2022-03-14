@@ -15,11 +15,10 @@ function SingleProduct() {
     .then( (res)=> res.json())
     .then( (data)=> setSingleProduct(data))
     setLoader(false)
-  }, [])
+  }, [id])
   
   const backToProduct = () => {
-    let nepath = '/products'
-    navigate(nepath)
+    navigate('/products')
   }
   return (
     <>
@@ -35,10 +34,10 @@ function SingleProduct() {
                 height='auto'
               />
               <CardContent>
-                <Typography align='center' variant='h3' my={3}> { singleProduct.title } </Typography>
-                <Typography align='justify' variant='body1' my={ 3 }> { singleProduct.description } </Typography>
-                <Typography align='justify' variant='body1' my={ 2 }> Price: { singleProduct.price } </Typography>
-                <Typography align='justify' variant='body1' my={ 2 }> Category : { singleProduct.category } </Typography>
+                <Typography align='center' variant='h3' my={3}> { singleProduct?.title } </Typography>
+                <Typography align='justify' variant='body1' my={ 3 }> { singleProduct?.description } </Typography>
+                <Typography align='justify' variant='body1' my={ 2 }> Price: { singleProduct?.price } </Typography>
+                <Typography align='justify' variant='body1' my={ 2 }> Category : { singleProduct?.category } </Typography>
               </CardContent>
               <CardActions>
                 <Button variant='contained' onClick={backToProduct}>  Back to Product </Button>

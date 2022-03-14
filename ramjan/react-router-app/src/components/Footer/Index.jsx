@@ -5,6 +5,10 @@ const styles = {
   marginHorizontal: {
       marginTop: '20px',
       marginBottom: '20px'
+  },
+  img: {
+    width: '15px',
+    height: '15px'
   }
 }
 
@@ -22,8 +26,25 @@ function Footer() {
 
           <Grid item xs={12} sm={6} md={4} display='flex' flexDirection='column'>
             {
-              Socials.map((social, index) =>
-                <Typography key={index}> {social.name } </Typography> 
+          Socials.map((social, index) =>
+               <>
+              <Grid > 
+                <Grid item display='flex' flexDirection='row' alignItems='center'>
+                
+                <img
+                alt='socila logo'
+                style={styles.img}
+                src={social.image}
+              />
+                  <a href={ social.url} target='_blank' rel="noreferrer"> 
+                    <Typography key={index} ml='4px'> {social.name} </Typography> 
+                  </a>
+                </Grid>
+                  
+                </Grid>
+                
+              </>
+                
               ) 
             }
           </Grid>
@@ -40,8 +61,10 @@ function Footer() {
                   backgroundsize='cover'
                 />
               )
-            }
-          </Grid>
+        }
+        
+      </Grid>
+      
     </Grid>
   )
 }
