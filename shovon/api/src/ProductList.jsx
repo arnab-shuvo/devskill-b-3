@@ -21,7 +21,7 @@ import Box from "@mui/material/Box";
 import { ProductionQuantityLimitsTwoTone } from "@mui/icons-material";
 import ProductDetails from "./ProductDetails";
 
-function ProductList() {
+function ProductList({ detailsHandler }) {
   const [productList, setProductList] = useState([]);
   const [productDetail, setProductDetail] = useState();
 
@@ -33,19 +33,19 @@ function ProductList() {
       });
   }, []);
 
-  const getDetail = (id) => {
-    fetch(`https://fakestoreapi.com/products/${id}`)
-      .then((res) => res.json())
-      .then((json) => {
-        setProductDetail(json);
-      });
-  };
+  // const getDetail = (id) => {
+  //   fetch(`https://fakestoreapi.com/products/${id}`)
+  //     .then((res) => res.json())
+  //     .then((json) => {
+  //       setProductDetail(json);
+  //     });
+  // };
   return (
     <Grid container justifyContent={"center"}>
       <Grid item container md={10} spacing={2}>
         {productList.map((product) => {
           return (
-            <Grid md={3} item onClick={() => getDetail(product.id)}>
+            <Grid md={3} item onClick={() => detailsHandler(product.id)}>
               <Card sx={{ maxWidth: 300, height: "100%" }}>
                 <CardHeader
                   avatar={
@@ -81,58 +81,3 @@ function ProductList() {
   );
 }
 export default ProductList;
-
-// const ProductList = ({ getDetail }) => {
-//   const [productList, setProductList] = useState([]);
-
-//   useEffect(() => {
-//     fetch("https://fakestoreapi.com/products")
-//       .then((res) => res.json())
-//       .then((json) => {
-//         //console.log(json)
-//         setProductList(json);
-//       });
-//   }, []);
-
-//   return (
-//     <Grid container justifyContent={"center"}>
-//       <Grid item container md={10} spacing={2}>
-//         {productList.map((product) => {
-//           return (
-//             <Grid md={3} item onClick={() => getDetail(product.id)}>
-//               <Card sx={{ maxWidth: 345 }}>
-//                 <CardHeader
-//                   avatar={
-//                     <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe">
-//                       {product.title[0]}
-//                     </Avatar>
-//                   }
-//                   action={
-//                     <IconButton aria-label="settings">
-//                       <MoreVertIcon />
-//                     </IconButton>
-//                   }
-//                   title={product.title}
-//                   subheader={product.category}
-//                 />
-//                 <CardMedia
-//                   component="img"
-//                   height="194"
-//                   image={product.image}
-//                   alt="Paella dish"
-//                 />
-//                 <CardContent>
-//                   <Typography variant="body2" color="text.secondary">
-//                     {product.description}
-//                   </Typography>
-//                 </CardContent>
-//               </Card>
-//             </Grid>
-//           );
-//         })}
-//       </Grid>
-//     </Grid>
-//   );
-// };
-
-// export default ProductList;

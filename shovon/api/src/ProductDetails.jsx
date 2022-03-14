@@ -53,7 +53,7 @@ function ProductDetails({ productId }) {
           </Grid>
         </Box>
       ) : (
-        "Loading..."
+        "Loading....."
       )}
     </div>
   );
