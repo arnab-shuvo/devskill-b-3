@@ -10,12 +10,12 @@ import Container from "@mui/material/Container";
 import CustomLoaderEcomm from "../Loader/customLoader";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { setProducts } from "../../store/action/productAction";
+import { setProductr } from "../../store/action/productAction";
 
 const ProductList = () => {
   const [products, setProducts] = useState(null);
-  const { product } = useSelector((store) => store.product);
-  console.log(product, "=store products");
+  const { productr } = useSelector((store) => store.productr);
+  console.log(productr, "=store products");
   const dispatch = useDispatch();
 
   const navigate = useNavigate();
@@ -29,7 +29,8 @@ const ProductList = () => {
       .then((res) => res.json())
       .then((json) => {
         setProducts(json);
-        dispatch(setProducts(json));
+        dispatch(setProductr(json));
+        console.log(productr, "=store products");
       });
   }, []);
 

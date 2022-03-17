@@ -1,6 +1,6 @@
 const ActionType = {
-    getProductList: 'get-prduct-list',
-    setProductList: 'set-prduct-list',
+    getProductList: 'get-product-list',
+    setProductList: 'set-product-list',
 }
 
 export default ActionType;
