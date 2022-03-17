@@ -1,5 +1,5 @@
 import axios from "axios";
-import {ProductType} from "../utilities/ProductType";
+import { ProductType } from "../utilities/ProductType";
 
 const getAllProducts = "https://fakestoreapi.com/products";
 const getProductById = "https://fakestoreapi.com/products/";
@@ -20,7 +20,9 @@ export const GetProductAsync = async (
   productId: string | undefined
 ): Promise<ProductType> => {
   try {
-    const { data } = await axios.get<ProductType>(`${getProductById}${productId}`);
+    const { data } = await axios.get<ProductType>(
+      `${getProductById}${productId}`
+    );
     return data;
   } catch (error) {
     throw new Error((error as Error).message);
@@ -35,19 +37,18 @@ export const DeleteProductAsync = async (productId: string | undefined) => {
   }
 };
 
-
-export const UpdateProduct = async (product: ProductType | null) => {
+export const UpdateProductAsync = async (product: ProductType | null) => {
   try {
     await axios.put(`${updateProduct}${product?.id}`, product);
   } catch (error) {
     throw new Error((error as Error).message);
   }
-}
+};
 
-export const CreateProduct = async (product: ProductType | null) => {
+export const CreateProductAsync = async (product: ProductType | null) => {
   try {
     await axios.post(addNewProduct, product);
   } catch (error) {
     throw new Error((error as Error).message);
   }
-}
+};

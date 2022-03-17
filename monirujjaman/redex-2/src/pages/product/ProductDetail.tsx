@@ -11,11 +11,9 @@ import {
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import Loader from "../../Loader";
-import {
-  DeleteProductAsync,
-  GetProductAsync,
-} from "../../services/ProductService";
-import {ProductType} from "../../utilities/ProductType";
+import { DeleteProductAsync } from "../../services/ProductService";
+import { useProductDispatch } from "../../store";
+import { ProductType } from "../../utilities/ProductType";
 
 type IParams = {
   productId: string;
@@ -25,9 +23,10 @@ const ProductDetail: React.FC = () => {
   const { productId } = useParams<IParams>();
   const [product, setProduct] = useState<ProductType | null>(null);
   const naviagte = useNavigate();
-
+  const { products } = useProductDispatch();
   useEffect(() => {
-    GetProductAsync(productId).then((x) => setProduct(x));
+    var data = products.find((x) => x.id === Number(productId));
+    setProduct(data as ProductType);
   }, []);
 
   return (
