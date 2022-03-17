@@ -119,11 +119,7 @@ const EditProductPage = (editProductDetails, showProductDetails,  productId) => 
             />
             <button
               sx={{
-                mx: 1,
-                color: "black",
-                display: "block",
-                border: "2px black solid",
-                width: 300,
+
               }}
               variant="outlined"
               component="label"
