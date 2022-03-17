@@ -1,10 +1,10 @@
-import React, { useState, useEffect } from 'react';
-import EditProductPage from '../product-functions/editProduct';
+import React, { useState, useEffect } from "react";
+import EditProductPage from "../product-functions/editProduct";
 import ProductDetails from "./productDetails";
 import ProductList from "./productList";
 import Grid from "@mui/material/Grid";
 import Container from "@mui/material/Container";
-import FilterProduct from '../product-functions/filter-product';
+import FilterProduct from "../product-functions/filter-product";
 
 const Product = () => {
   const [showCreateProduct, setShowCreateProduct] = useState(false);
@@ -13,10 +13,9 @@ const Product = () => {
   const [showLoader, setShowLoader] = useState(false);
   const [showCategory, setShowCategory] = useState(false);
 
-
   const filterProduct = (result) => {
-    console.log("this is filter product");
-    console.log(result);
+    // console.log("this is filter product");
+    // console.log(result);
     setShowProducts(result);
   };
 
@@ -39,23 +38,26 @@ const Product = () => {
   return (
     <>
       <div>
-      <FilterProduct setProducts={filterProduct} />
+        <FilterProduct setProducts={filterProduct} />
 
         {selectedProduct === null ? (
           <ProductList
             showProducts={showProducts}
             showProductList={viewElement}
           />
-        ) : (<>
-        <ProductDetails
-            productId={selectedProduct.id}
-            showProductDetails={viewElement}
-          />
-          <EditProductPage editProductList={viewElement}/>
-        </>
-          
+        ) : (
+          <>
+            <ProductDetails
+              productId={selectedProduct.id}
+              showProductDetails={viewElement}
+            />
+
+            <EditProductPage
+              productId={selectedProduct.id}
+              editProductDetails={viewElement}
+            />
+          </>
         )}
-       
       </div>
     </>
   );
