@@ -1,24 +1,19 @@
 import { Button, Container, Grid, Typography } from '@mui/material';
 import { useDispatch, useSelector } from 'react-redux';
 import './App.css';
+import { DecreaseAction, IncreaseAction } from './store/action/counterAction/';
 
 
 function App() {
   const dispatch = useDispatch()
-  const {counter} = useSelector((store) => store)
-
-  console.log(counter)
+  const store = useSelector((store) => store.countStore)
+  const { counter } = store;
+  
   const increaseConter = (value) => {
-    dispatch({
-      type: 'increase',
-      payload : value,
-    })
+    dispatch(IncreaseAction(value))
 }
   const decraseConter = (value) => {
-    dispatch({
-      type: 'decrease',
-      payload : value,
-    })
+    dispatch(DecreaseAction(value))
 }
   
   return (

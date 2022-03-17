@@ -29,7 +29,7 @@ function App() {
           <Route path='/404' element={<NotFound />} />
           <Route path='*' element={ <Navigate to='/404'/>} />
         </Routes>
-        </Layout>
+      </Layout>
     </Container>
   );
 }
