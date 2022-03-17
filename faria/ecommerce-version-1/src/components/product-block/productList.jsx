@@ -18,7 +18,7 @@ const ProductList = ({ showProducts, showProductList, editProductList }) => {
       .then((json) => {
         setProducts(json);
         setProducts(showProducts);
-        console.log(json);
+        // console.log(json);
       });
   }, [showProducts]);
   // const loadProduct = (showProducts) => {
@@ -85,15 +85,15 @@ const ProductList = ({ showProducts, showProductList, editProductList }) => {
                           >
                             view
                           </Button>
-                          <Button
+                          {/* <Button
                             mt={1}
                             ml={2}
-                            onClick={() => editProductList()}
+                            onClick={() => showProductList(showProduct)}
                             variant="outlined"
                             sx={{marginLeft: "10px",}}
                           >
                             Edit
-                          </Button>
+                          </Button> */}
                         </CardContent>
                       </CardActionArea>
                     </Card>
