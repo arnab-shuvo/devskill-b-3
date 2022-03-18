@@ -1,0 +1,9 @@
+.product {
+  max-width: 17em;
+  margin: auto;
+}
+.card-content-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}

@@ -1,0 +1,79 @@
+.product h2{
+    font-family: 'Euclid Circular A';
+font-style: normal;
+font-weight: 600;
+font-size: 18px;
+line-height: 23px;
+letter-spacing: 0.02em;
+color: #1F2937;
+}
+.product h1{
+    font-weight: 700;
+font-size: 32px;
+line-height: 41px;
+/* identical to box height */
+
+letter-spacing: 0.02em;
+
+/* Grey/grey-800 */
+
+color: #1F2937;
+}
+.product h3{
+    font-weight: 400;
+font-size: 20px;
+line-height: 25px;
+letter-spacing: 0.02em;
+
+/* Grey/grey-700 */
+
+color: #374151;
+}
+.productA{
+    display: flex;
+    
+}
+.productAChild{
+    display: flex;
+}
+.imageA{
+    width: 146px;
+    height: 154px;
+    justify-content: center;
+    /*background: url('./../../assets/Images/product_1.png');*/
+}
+.imageB{
+    width: 476px;
+    height: 654px;
+    /*background: url('./../../assets/Images/product_2.png');*/
+
+}
+.imageyu{
+    width: 146px;
+    height: 154px;
+}
+.imagevu{
+    width: 476px;
+    height: 654px;
+}
+.productB button{
+    width: 48px;
+    height: 48px;
+    margin: 0px 8px;
+    border: 1px solid #9CA3AF;
+    box-sizing: border-box;
+    border-radius: 50%;
+    background: #FFFFFF;
+}
+.productB ul{
+    display: flex;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+.addToBasket button{
+    background: #1F2937;
+    border-radius: 3px;
+    width: 462px;
+    height: 64px;  
+}

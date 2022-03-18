@@ -1,5 +1,5 @@
 import { Container } from '@mui/material';
-import { Route, Routes } from 'react-router-dom';
+import { Navigate, Route, Routes } from 'react-router-dom';
 import './App.css';
 import Layout from './components/Layout/Index';
 import NotFound from './pages/404/Index';
@@ -26,9 +26,10 @@ function App() {
           <Route path='/products/:id' element={<SingleProduct />} />
           <Route path='/products/:id/edit' element={<EditProduct />} />
           <Route path='/add' element={<AddProduct />} />
-          <Route path='*' element={ <NotFound />} />
+          <Route path='/404' element={<NotFound />} />
+          <Route path='*' element={ <Navigate to='/404'/>} />
         </Routes>
-        </Layout>
+      </Layout>
     </Container>
   );
 }

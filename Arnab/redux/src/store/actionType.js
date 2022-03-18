@@ -3,5 +3,6 @@ const ActionType = {
   loaderOff: "loaderOff",
   increase: "increase",
   decrease: "decrease",
+  setAllProducts: "setAllProducts",
 };
 export default ActionType;

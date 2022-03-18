@@ -51,6 +51,7 @@ function Products() {
     }, []);
 
 
+
     const getProductId = (id) => {
         setShowProduct(false)
         fetch(`https://fakestoreapi.com/products/${id}`)
@@ -112,6 +113,7 @@ function Products() {
         .then( (res)=> res.json() )
         .then( (data)=> setProducts(data) )   
     }
+	
     const handleCategoryChange = (e) => {
         const newCategory = e.target.value;
         setcategory(newCategory)
@@ -135,6 +137,7 @@ function Products() {
         })
 
     }
+	
     console.log(inputProduct)
 
     const sybmitProduct = (e) => {
@@ -158,6 +161,7 @@ function Products() {
             .then(res=>res.json())
             .then(json=>console.log(json))
     }
+	
    return (
        <>   
            <Grid container spacing={2}>
@@ -176,6 +180,7 @@ function Products() {
                        fullWidth
                        value={order}
                        onChange={changeOrder}
+					   
                    >
                         {
                            ascDes.map((option) => 
@@ -226,10 +231,10 @@ function Products() {
                            </Grid>
                            <Grid item sx={ 12} sm={12} md={12} lg={12}>
                             <TextField
-                                    fullWidth
+                                   fullWidth
                                    label='Price'
                                    name='price'
-                                    helperText='Please add price'
+                                   helperText='Please add price'
                                    required
                                    onChange={handelingInputsEvent }
                                 />
