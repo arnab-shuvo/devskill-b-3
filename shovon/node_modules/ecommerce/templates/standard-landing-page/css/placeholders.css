@@ -1,0 +1,464 @@
+/* Drop Shadow for Material-like feel */
+.button, .hero {
+  box-shadow: 0 2px 5px 0 rgba(0,0,0,0.16),0 2px 10px 0 rgba(0,0,0,0.12);
+}
+
+.button:hover {
+  box-shadow: 0 5px 11px 0 rgba(0,0,0,0.18),0 4px 15px 0 rgba(0,0,0,0.15);
+}
+
+/* Buttons and Basic Controls */
+
+.button {
+  transition: all .3s ease-out;
+}
+
+a {
+  color: #FFF;
+}
+
+a:hover {
+  color: #e35c38;
+}
+
+.button {
+  background-color: #dc3023;
+  color: #FFF;
+  text-shadow: none;
+}
+
+.button:hover {
+  color: #dc3023;
+  background-color: #351e1c;
+}
+
+/* Images */
+.hero.parallax .foreground {
+  background-size: cover;
+}
+
+.hero .summary-down {
+  background: rgba( 255, 255, 255, 0.3 );
+  color: #FFF;
+}
+
+.hero .summary-down:after {
+  color: #FFF;
+  border-color: #FFF;
+}
+
+/* Body */
+body {
+  background: #FFF;
+}
+
+/* Header */
+header {
+  color: #FFF;
+  background-color: rgba(0,0,0,0.2);
+}
+
+header a {
+  color: #FFF;
+  text-shadow: 0 0 10px black;
+}
+
+/* Hero */
+.hero {
+  color: #FFF;
+}
+
+.hero .content {
+  text-shadow: 0 0 10px black;
+}
+
+.hero .content h2 {
+  margin-bottom: 0;
+}
+
+.hero.video .play {
+  background-color: transparent;
+}
+
+.hero.video .play:hover {
+  background-color: rgba( 0, 0, 0, .5);
+}
+
+.hero.video .play:before, .hero.video .play:after {
+  border-width: 1px ;
+}
+
+/* List */
+
+.list {
+  background-color: black;
+}
+
+.list li {
+  height: 80px;
+}
+
+.list.bottom .title {
+  padding-bottom: 40px;
+  background-color: rgba(255,255,255,0.5);
+  box-shadow: 0 2px 5px 0 rgba(0,0,0,0.16),0 2px 10px 0 rgba(0,0,0,0.12);
+}
+
+.list.bottom .image {
+  background-position: center;
+  background-size: cover;
+}
+
+.list.bottom li {
+  width: 31%;
+  margin: 1%;
+  background-color: rgba(255,255,255,0.5);
+  box-shadow: 0 2px 5px 0 rgba(0,0,0,0.16),0 2px 10px 0 rgba(0,0,0,0.12);
+}
+
+@media (max-width: 800px) {
+  .list.bottom li {
+    width: 100%;
+    margin: 10px 0;
+  }
+}
+
+.list li .fa {
+  font-size: 3em;
+  padding: 15px 35px;
+  position: absolute;
+}
+
+.list li p {
+  padding-left: 80px;
+  padding-right: 20px;
+}
+
+.list li:last-child p {
+  padding-left: 100px;
+}
+
+.list.right .info, .list.left .info {
+  background-color: #000;
+  color: #FFF;
+  display: table;
+}
+
+.list.right .image {
+  background-position: center;
+  background-size: cover;
+}
+
+.list.left .image {
+  background-position: center;
+  background-size: cover;
+}
+
+.list.right li, .list.left li {
+  width: 98%;
+  margin: 1%;
+  border: 1px solid transparent;
+}
+
+.list li {
+  transition: all .3s ease-out;
+}
+
+.list.right li:hover, .list.left li:hover {
+  border: 1px solid #FFF;
+}
+
+.list li:hover .fa, .list li:hover .fa {
+  color: #dc3023;
+}
+
+.list.right li p, .list.left li p {
+  padding-left: 100px;
+}
+
+/* Modal */
+.modal-open {
+  display: inline-block;
+  font-size: 1rem;
+  width: 1rem;
+  height: 1rem;
+  border: 1px solid black;
+  border-radius: 1rem;
+  line-height: 1rem;
+  vertical-align: top;
+  margin-left: 10px;
+  cursor: pointer;
+}
+
+.modal .content {
+  top: 40%;
+  transform: translateY(-50%);
+  color: black;
+  background-color: white;
+  max-width: 400px;
+  width: 100%;
+}
+
+.modal-close-position {
+  top: 10px;
+  right: 10px;
+}
+
+/* Quote */
+
+.quote {
+  background-position: center;
+  background-size: cover;
+}
+
+.quote blockquote {
+  background-color: rgba(255,255,255,0.5);
+  box-shadow: 0 2px 5px 0 rgba(0,0,0,0.16),0 2px 10px 0 rgba(0,0,0,0.12);
+}
+
+/* Gallery */
+
+.gallery-controls .button {
+  background: rgba( 255, 255, 255, 0.3 );
+  color: rgba(0,0,0,.3);
+}
+
+.gallery-controls .button:after {
+  color: #FFF;
+  border-color: #FFF;
+}
+
+.gallery-controls .gallery-item {
+  border-color: #FFF;
+  box-shadow: 0 2px 5px 0 rgba(0,0,0,0.16),0 2px 10px 0 rgba(0,0,0,0.12);
+  transition: all .3s ease-out;
+}
+
+.gallery .image1 {
+  background-image: url();
+  background-position: center;
+  background-size: cover;
+}
+
+.gallery .image2 {
+  background-position: center;
+  background-size: cover;
+}
+
+.gallery .image3 {
+  background-position: center;
+  background-size: cover;
+}
+
+.gallery .image4 {
+  background-position: center;
+  background-size: cover;
+}
+
+.gallery .image5 {
+  background-position: center;
+  background-size: cover;
+}
+
+.gallery .image6 {
+  background-position: center;
+  background-size: cover;
+}
+
+/* Grid */
+
+.grid {
+  background-color: black;
+}
+
+.grid .item:after {
+  content: '';
+  position: absolute;
+  left:0;
+  right:0;
+  width:100%;
+  height:100%;
+}
+
+.grid .item:hover:after {
+  background-color: rgba(255,255,255,.2);
+}
+
+.grid .image1 {
+  background-image: url();
+  background-position: center;
+  background-size: cover;
+  width: 25vw;
+  height: 25vw;
+}
+
+.grid .image2 {
+  background-position: center;
+  background-size: cover;
+  width: 50vw;
+  height: 50vw;
+}
+
+.grid .image3 {
+  background-position: center;
+  background-size: cover;
+  width: 25vw;
+  height: 25vw;
+}
+
+.grid .image4 {
+  background-position: 90% 50%;
+  background-size: cover;
+  width: 25vw;
+  height: 50vw;
+}
+
+.grid .image5 {
+  background-position: 80% 50%;
+  background-size: cover;
+  width: 50vw;
+  height: 50vw;
+}
+
+.grid .image6 {
+  background-position: center;
+  background-size: cover;
+  width: 25vw;
+  height: 50vw;
+}
+
+.grid .image7 {
+  background-position: center;
+  background-size: cover;
+  width: 25vw;
+  height: 25vw;
+}
+
+.grid .image8 {
+  background-position: center;
+  background-size: cover;
+  width: 25vw;
+  height: 25vw;
+}
+
+/* Hover more */
+.grid.hover-more-example .item {
+  width: 25vw;
+  height: 25vw;
+  clip: rect(0px, 25vw, 25vw, 0px);
+}
+
+@media (max-width: 1000px) {
+  .grid.hover-more-example .item {
+    width: 50vw;
+    height: 50vw;
+    clip: rect(0px, 50vw, 50vw, 0px);
+  }
+}
+
+@media (max-width: 600px) {
+  .grid.hover-more-example .item {
+    width: 100vw;
+    height: 100vw;
+    clip: rect(0px, 100vw, 100vw, 0px);
+  }
+}
+
+.grid.hover-more-example .hover-image1:after {
+  background-image: url(../img/hovermore1.jpg);
+  background-position: center;
+  background-size: auto 100%;
+}
+
+.grid.hover-more-example .hover-image2:after {
+  background-image: url(../img/hovermore2.jpg);
+  background-position: center;
+  background-size: auto 100%;
+}
+
+.grid.hover-more-example .hover-image3:after {
+  background-image: url(../img/hovermore3.jpg);
+  background-position: center;
+  background-size: auto 100%;
+}
+
+.grid.hover-more-example .hover-image4:after {
+  background-image: url(../img/hovermore4.jpg);
+  background-position: center;
+  background-size: auto 100%;
+}
+
+.hover-more {
+  color: #FFF !important;
+}
+
+.hover-more:hover:before {
+  background-color: rgba(0,0,0,0.8);
+}
+
+.hover-more:focus:before {
+  background-color: rgba(0,0,0,0.8);
+}
+
+.grid.hover-more-example .content {
+  padding: 30px;
+}
+
+/* Sign Up */
+.signup {
+  background-image: url(../img/signup.jpg);
+  background-position: center;
+  background-size: cover;
+}
+
+.signup .content {
+  color: #FFF;
+  background-color: rgba(0,0,0,0.8);
+  box-shadow: 0 2px 5px 0 rgba(0,0,0,0.16),0 2px 10px 0 rgba(0,0,0,0.12);
+  margin-top:100px;
+  margin-bottom:100px;
+  padding: 20px 40px;
+}
+
+.signup form {
+  display: table;
+  width:100%;
+  margin-top: 20px;
+  margin-bottom: 40px;
+}
+
+.signup form .ui-input-text {
+  width: 70%;
+  display: inline-block;
+  float: left;
+}
+
+.signup form input[name=email] {
+  width: 100%;
+}
+
+.signup form button {
+  width: 30%;
+  float: left;
+}
+
+@media (max-width: 600px) {
+  .signup form .ui-input-text, .signup form button {
+    width: 100%;
+  }
+
+  .signup form button {
+    margin-top: 10px;
+  }
+}
+
+/* Footer */
+
+footer {
+  background-color: #222;
+  color: #FFF;
+}
+
+footer nav .fa {
+  font-size: 2em;
+}

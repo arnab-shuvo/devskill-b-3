@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<html lang="en">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <head>
+    <title>Templates!</title>
+
+    <!-- Normalizer/Reset -->
+    <link rel="stylesheet" href="css/normalize.css" />
+    <!-- Font Awesome -->
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous" />
+
+    <!-- Our Styles and JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/es6-shim/0.35.1/es6-shim.min.js"></script>
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
+    <script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/layzr.js/2.0.2/layzr.min.js"></script>
+    <link rel="stylesheet" href="css/framework.css" />
+    <script src="js/framework.js"></script>
+
+    <!-- Block Level Styles and JS -->
+    <link rel="stylesheet" href="css/loader.css" />
+    <link rel="stylesheet" href="css/header.css" />
+    <link rel="stylesheet" href="css/hero.css" />
+    <link rel="stylesheet" href="css/hero-static.css" />
+    <link rel="stylesheet" href="css/hero-video.css" />
+    <script src="js/hero-video.js"></script>
+    <link rel="stylesheet" href="css/hero-parallax.css" />
+    <link rel="stylesheet" href="css/hero-informatic.css" />
+    <link rel="stylesheet" href="css/parallax.css" />
+    <script src="js/parallax.js"></script>
+    <link rel="stylesheet" href="css/footer.css" />
+    <link rel="stylesheet" href="css/list.css" />
+    <link rel="stylesheet" href="css/gallery.css" />
+    <script src="js/gallery.js"></script>
+    <link rel="stylesheet" href="css/lazyify.css" />
+    <script src="js/lazyify.js"></script>
+    <link rel="stylesheet" href="css/grid.css" />
+    <link rel="stylesheet" href="css/hover-more.css" />
+    <script src="js/grid.js"></script>
+    <script src="https://npmcdn.com/packery@2.1/dist/packery.pkgd.min.js"></script>
+    <script src="js/reanimate.js"></script>
+    <script src="js/layerify.js"></script>
+    <script src="js/scroll-to.js"></script>
+
+    <!-- Placeholder Overrides (fonts, colors, placeholder images) -->
+    <link rel="stylesheet" href="css/fonts.css" />
+    <link href='https://fonts.googleapis.com/css?family=Lato:400,300,100,100italic,300italic,400italic,700,700italic' rel='stylesheet' type='text/css' />
+    <link rel="stylesheet" href="css/placeholders.css" />
+
+    <!-- Demo Gallery Code, delete this when using in prod -->
+    <link rel="stylesheet" href="css/demo.css" />
+    <script src="js/demo.js"></script>
+
+  </head>
+  <body style="overflow:hidden">
+    <!-- HEADER -->
+    <header>
+      <nav>
+        <ul>
+          <li>
+            <a href="#">Product</a>
+          </li>
+          <li>
+            <a href="#">Our Story</a>
+          </li>
+          <li>
+            <a href="#">User Stories</a>
+          </li>
+          <li>
+            <a href="#">Specs</a>
+          </li>
+        </ul>
+        <a href="#">
+          <img class ="logo" src="./img/logo.png" alt="Company Logo"></img>
+        </a>
+        <a href="#cta" class="button call-to-action">
+          TRY NOW!
+        </a>
+        <ul class="page-links">
+          <li><a href="/">ANOTHER PAGE</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <!-- HERO -->
+    <section class="demo-gallery">
+      <section class="hero static" data-lazy="./img/hero.jpeg">
+        <div class="content">
+          <h2>HANZO E&#8209COMMERCE TEMPLATES</h2>
+          <h4>Cool Websites For Cool Ideas</h4>
+          <a href="#cta" class="button call-to-action">
+            TRY NOW!
+          </a>
+        </div>
+        <a class="button summary-down next-section" href="#"></a>
+      </section>
+      <section class="hero video" data-src="https://www.youtube.com/embed/qYodWEKCuGg" data-lazy="./img/hero-video.jpeg">
+        <a class="play button" href="#"></a>
+        <div class="content">
+          <h2>HANZO: E&#8209COMMERCE SIMPLIFIED</h2>
+          <h4>So Quick, You'll Have To Find Another Excuse To Skip Leg Day</h4>
+        </div>
+        <a class="button summary-down next-section" href="#"></a>
+        <div class="video-modal modal hidden">
+          <iframe width="100%" height="100%" src="" frameborder="0" allowfullscreen></iframe>
+          <a href="#cta" class="button call-to-action modal-close">
+            TRY NOW!
+          </a>
+          <div class="modal-close modal-close-position">
+            &#10005;
+          </div>
+        </div>
+      </section>
+      <section class="hero informatic list right">
+        <div class="content">
+          <div class="image" data-lazy="./img/hero-informatic.jpg">
+          </div>
+          <div class="info">
+            <h2>HANZO WEB TEMPLATES 2.0</h2>
+            <h4>Beautiful Enough That You Missed The Photoshopped Pixels</h4>
+              <a href="#cta" class="button call-to-action">
+                TRY NOW!
+              </a>
+          </div>
+        </div>
+        <a class="button summary-down next-section" href="#"></a>
+      </section>
+      <section class="hero parallax">
+        <div class="foreground" data-lazy="./img/hero-parallax-background.jpg"></div>
+        <div class="content">
+          <h2>HANZO WEB TEMPLATES 2.0</h2>
+          <h4>Beautiful Enough That You Missed The Photoshopped Pixels</h4>
+            <a href="#cta" class="button call-to-action">
+              TRY NOW!
+            </a>
+        </div>
+        <a class="button summary-down next-section" href="#"></a>
+      </section>
+    </section>
+
+    <!-- LIST -->
+    <section class="demo-gallery">
+      <section class="list bottom">
+        <div class="image" data-lazy="./img/list2.jpg"></div>
+        <div class="content title">
+          <h3>Building The New E&#8209Conomy<span class="modal-open" data-modal-selector="#helpful">?</span></h3>
+          <p>
+            HANZO's block based templates allow you to easily configure, update, and grow your website.
+            It's developer first simplicity allows for rapid iteration and flexibility.
+          </p>
+        </div>
+        <div class="info">
+          <ul class="content">
+            <li>
+              <i class="fa fa-bolt" aria-hidden="true"></i>
+              <p>
+                Pick the look you want.
+              </p>
+            </li>
+            <li>
+              <i class="fa fa-mobile" aria-hidden="true"></i>
+              <p>
+                Mobile Optimized.
+              </p>
+            </li>
+            <li>
+              <i class="fa fa-bed" aria-hidden="true"></i>
+              <p>
+                Developer friendly, developer first.
+              </p>
+            </li>
+          </ul>
+        </div>
+        <div id="helpful" class="modal hidden">
+          <div class="content">
+            This is helpful!
+            <div class="modal-close modal-close-position">
+              &#10005;
+            </div>
+          </div>
+        </div>
+      </section>
+      <section class="list right">
+        <div class="image" data-lazy="./img/list1.jpg"></div>
+        <div class="info">
+          <h3>Building The New E&#8209Conomy</h3>
+          <p>
+            HANZO's block based templates allow you to easily configure, update, and grow your website.
+            It's developer first simplicity allows for rapid iteration and flexibility.
+          </p>
+          <ul>
+            <li>
+              <i class="fa fa-bolt" aria-hidden="true"></i>
+              <p>
+                Pick the look you want. Extend it as your business grows.
+              </p>
+            </li>
+            <li>
+              <i class="fa fa-server" aria-hidden="true"></i>
+              <p>
+                Single page paradigm allows for the lowest cost hosting.
+              </p>
+            </li>
+            <li>
+              <i class="fa fa-mobile" aria-hidden="true"></i>
+              <p>
+                Built on open standards and tools allows for a truely customizeable experience.
+              </p>
+            </li>
+            <li>
+              <i class="fa fa-globe" aria-hidden="true"></i>
+              <p>
+                Responsive mobile optimized layouts work with the largest variety of devices.
+              </p>
+            </li>
+            <li>
+              <i class="fa fa-bed" aria-hidden="true"></i>
+              <p>
+                Developer friendly, developer first.  Free your engineers to use the tools they want.
+              </p>
+            </li>
+          </ul>
+        </div>
+      </section>
+      <section class="list left">
+        <div class="image" data-lazy="./img/list3.jpg"></div>
+        <div class="info">
+          <h3>Building The New E&#8209Conomy</h3>
+          <p>
+            HANZO's block based templates allow you to easily configure, update, and grow your website.
+            It's developer first simplicity allows for rapid iteration and flexibility.
+          </p>
+          <ul>
+            <li>
+              <i class="fa fa-bolt" aria-hidden="true"></i>
+              <p>
+                Pick the look you want. Extend it as your business grows.
+              </p>
+            </li>
+            <li>
+              <i class="fa fa-server" aria-hidden="true"></i>
+              <p>
+                Single page paradigm allows for the lowest cost hosting.
+              </p>
+            </li>
+            <li>
+              <i class="fa fa-mobile" aria-hidden="true"></i>
+              <p>
+                Built on open standards and tools allows for a truely customizeable experience.
+              </p>
+            </li>
+            <li>
+              <i class="fa fa-globe" aria-hidden="true"></i>
+              <p>
+                Responsive mobile optimized layouts work with the largest variety of devices.
+              </p>
+            </li>
+            <li>
+              <i class="fa fa-bed" aria-hidden="true"></i>
+              <p>
+                Developer friendly, developer first.  Free your engineers to use the tools they want.
+              </p>
+            </li>
+          </ul>
+        </div>
+      </section>
+    </section>
+
+    <!-- QUOTE -->
+    <section class="demo-gallery">
+      <section class="quote parallax" data-lazy="./img/quote.jpg">
+        <div class="content centered">
+          <blockquote>
+            Orange the color is named after the fruit.
+            <span class="attribution">-Someone</span>
+          </blockquote>
+          <blockquote>
+            The color pink is only about 400 years old.
+            <span class="attribution">-Someone</span>
+          </blockquote>
+          <blockquote>
+            Many languages treat blue and green as shades of the same color.
+            <br><br>
+            According to Brent Berlin and Paul Kay's 1969 study 'Basic Color Terms: Their Universality and Evolution', distinct terms for brown, purple, pink, orange and grey will not emerge in a language until the language has made a distinction between green and blue. In their account of the development of color terms the first terms to emerge are those for white/black (or light/dark), red and green/yellow.
+            <span class="attribution">-Wikipedia</span>
+          </blockquote>
+        </div>
+      </section>
+    </section>
+
+    <!-- GALLERY -->
+    <section class="gallery" data-autoplay="5000">
+      <section class="full image1" data-lazy="./img/gallery1.jpg">
+      </section>
+      <section class="full image2" data-lazy="./img/gallery2.jpg">
+      </section>
+      <section class="full image3" data-lazy="./img/gallery3.jpg">
+      </section>
+      <section class="full image4" data-lazy="./img/gallery4.jpg">
+      </section>
+      <section class="full image5" data-lazy="./img/gallery5.jpg">
+      </section>
+      <section class="full image6" data-lazy="./img/gallery6.jpg">
+      </section>
+    </section>
+
+    <!-- GRID -->
+    <section class="grid" data-autoplay="5000">
+      <div class="item image1" data-lazy="./img/grid1.jpg">
+      </div>
+      <div class="item image2" data-lazy="./img/grid2.jpg">
+      </div>
+      <div class="item image3" data-lazy="./img/grid3.jpg">
+      </div>
+      <div class="item image4" data-lazy="./img/grid4.jpg">
+      </div>
+      <div class="item image5" data-lazy="./img/grid5.jpg">
+      </div>
+      <div class="item image6" data-lazy="./img/grid6.jpg">
+      </div>
+      <div class="item image7" data-lazy="./img/grid7.jpg">
+      </div>
+      <div class="item image8" data-lazy="./img/grid8.jpg">
+      </div>
+    </section>
+
+    <!-- SIGNUP -->
+    <section id="call-to-action" class="signup parallax" data-lazy="./img/signup.jpg">
+      <div class="content narrow">
+        <h3>Be one of the first to use HANZO</h3>
+        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem ipsum dolor sit </p>
+        <form>
+          <input name="email" type="text" placeholder="Enter Your Email Address..."></input>
+          <button type="submit" class="button">Sign Me Up!</button>
+        </form>
+      </div>
+    </section>
+
+    <!-- HOVER MORE -->
+    <section class="grid hover-more-example">
+      <div class="item hover-more hover-image1" data-lazy="./img/hovermore1.jpg">
+        <div class="content centered">
+          <h4>Hover Shows More Info</h4>
+          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean sollicitudin pellentesque sem sed vehicula.</p>
+        </div>
+      </div>
+      <div class="item hover-more hover-image2" data-lazy="./img/hovermore2.jpg">
+        <div class="content centered">
+          <h4>Hover Shows More Info</h4>
+          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean sollicitudin pellentesque sem sed vehicula.</p>
+        </div>
+      </div>
+      <div class="item hover-more hover-image3" data-lazy="./img/hovermore3.jpg">
+        <div class="content centered">
+          <h4>Hover Shows More Info</h4>
+          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean sollicitudin pellentesque sem sed vehicula.</p>
+        </div>
+      </div>
+      <div class="item hover-more hover-image4" data-lazy="./img/hovermore4.jpg">
+        <div class="content centered">
+          <h4>Hover Shows More Info</h4>
+          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean sollicitudin pellentesque sem sed vehicula.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+      <nav>
+        <ul>
+          <li>
+            <a href="#">Product</a>
+          </li>
+          <li>
+            <a href="#">Team</a>
+          </li>
+          <li>
+            <a href="#">FAQ</a>
+          </li>
+          <li>
+            <a href="#">Press</a>
+          </li>
+          <li>|</li>
+          <li>
+            <a href="#">Terms</a>
+          </li>
+          <li>
+            <a href="#">Privacy</a>
+          </li>
+          <li>|</li>
+          <li>
+            <a href="#">About Us</a>
+          </li>
+          <li>
+            <a href="#">Contact Us</a>
+          </li>
+          <li>
+            <a href="#">Affiliate Marketing</a>
+          </li>
+        </ul>
+      </nav>
+      <nav>
+        <ul>
+          <li>
+            <a href="#"><i class="fa fa-facebook-square" aria-hidden="true"></i></a>
+          </li>
+          <li>
+            <a href="#"><i class="fa fa-twitter-square" aria-hidden="true"></i></a>
+          </li>
+          <li>
+            <a href="#"><i class="fa fa-youtube-square" aria-hidden="true"></i></a>
+          </li>
+          <li>
+            <a href="#"><i class="fa fa-hacker-news" aria-hidden="true"></i></a>
+          </li>
+        </ul>
+      </nav>
+      <a href="#">
+        <img class ="logo" src="./img/logo.png" alt="Company Logo"></img>
+      </a>
+      <small class="copyright">© HANZO, LLC 2016</small>
+    </footer>
+
+    <!-- Loader -->
+    <div class="loader">
+      <div class="sk-folding-cube">
+        <div class="sk-cube1 sk-cube"></div>
+        <div class="sk-cube2 sk-cube"></div>
+        <div class="sk-cube4 sk-cube"></div>
+        <div class="sk-cube3 sk-cube"></div>
+      </div>
+    </div>
+
+    <!-- Crowdstart analytics tag -->
+    <script>
+      !function(t,e,a){var r,n,c,i,o,s,l,u;if(null==t.analytics){for(r=[],r.methods=["ab","alias","group","identify","off","on","once","page","pageview","ready","track","trackClick","trackForm","trackLink","trackSubmit"],l=r.methods,c=function(t){r[t]=function(){var e;return e=Array.prototype.slice.call(arguments),e.unshift(t),r.push(e),r}},i=0,o=l.length;o>i;i++)s=l[i],c(s);return u=e.createElement("script"),u.async=!0,u.type="text/javascript",u.src=a,n=e.getElementsByTagName("script")[0],n.parentNode.insertBefore(u,n),t.analytics=r}}(window,document,"//cdn.crowdstart.com/a/suchtees.js");
+    </script>
+
+    <script>
+      // Test identify
+      analytics.debug = true
+
+      analytics.identify('123456')
+
+      // Test track
+      analytics.track('Sign-up', {
+        category: 'Lead',
+      })
+
+      analytics.track('Logged In', {
+        category: 'Account',
+        label: 'Premium',
+        value: 50
+      })
+
+      analytics.track('Viewed Product', {
+        id: '507f1f77bcf86cd799439011',
+        sku: 'G-32',
+        name: 'Monopoly: 3rd Edition',
+        price: 18.99,
+        category: 'Games'
+      });
+
+      analytics.track('Added Product', {
+        id: '507f1f77bcf86cd799439011',
+        sku: '45790-32',
+        name: 'Monopoly: 3rd Edition',
+        price: 18.99,
+        quantity: 3,
+        category: 'Games'
+      });
+
+      analytics.track('Removed Product', {
+        id: '507f1f77bcf86cd799439011',
+        sku: '45790-32',
+        name: 'Monopoly: 3rd Edition',
+        price: 18.99,
+        quantity: 2,
+        category: 'Games'
+      });
+
+      analytics.track('Completed Order', {
+        orderId: '50314b8e9bcf000000000000',
+        total: 30,
+        revenue: 25,
+        shipping: 3,
+        tax: 2,
+        discount: 2.5,
+        coupon: 'hasbros',
+        currency: 'USD',
+        repeat: true,
+        products: [
+          {
+            id: '507f1f77bcf86cd799439011',
+            sku: '45790-32',
+            name: 'Monopoly: 3rd Edition',
+            price: 19,
+            quantity: 1,
+            category: 'Games'
+          },
+          {
+            id: '505bd76785ebb509fc183733',
+            sku: '46493-32',
+            name: 'Uno Card Game',
+            price: 3,
+            quantity: 2,
+            category: 'Games'
+          }
+        ]
+      });
+
+      // Ecommerce events
+      analytics.track('Viewed Product Category', {
+        category: 'Games'
+      });
+
+      // Test Checkout labeling / Enhanced Ecommerce
+      analytics.track('Viewed Checkout Step', {
+        step: 1
+      });
+      analytics.track('Completed Checkout Step', {
+        step: 1
+      });
+
+      analytics.track('Viewed Checkout Step', {
+        step: 2
+      });
+      analytics.track('Completed Checkout Step', {
+        step: 2
+      });
+
+      analytics.track('Viewed Checkout Step', {
+        step: 3
+      });
+      analytics.track('Completed Checkout Step', {
+        step: 3
+      });
+
+      analytics.track('Viewed Checkout Step', {
+        step: 4
+      });
+      analytics.track('Completed Checkout Step', {
+        step: 4
+      });
+
+      // Promotions
+      analytics.track('Viewed Promotion', {
+        id: 'promo-1',
+        name: 'Some Promotion',
+        creative: 'creative1.jpg',
+        position: 'top',
+        category: 'Promotion'
+      });
+
+      analytics.track('Clicked Promotion', {
+        id: 'promo-1',
+        name: 'Some promotion',
+        creative: 'creative1.jpg',
+        position: 'top',
+        category: 'Promotion'
+      });
+    </script>
+  </body>
+</html>
+

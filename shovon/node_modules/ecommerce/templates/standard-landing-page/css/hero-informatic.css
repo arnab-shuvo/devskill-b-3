@@ -1,0 +1,46 @@
+.hero.informatic .content {
+  margin-top: 0vh !important;
+  height: 100vh;
+  max-width: 100vw !important;
+  margin-bottom: 0 !important;
+  display: table !important;
+  padding: 0 !important;
+  overflow: hidden;
+}
+
+.hero.informatic, .hero.informatic .image, .hero.informatic .info {
+  min-height: 600px !important;
+  height: 100vh;
+  display: table;
+  position: relative;
+}
+
+.hero.informatic .info.info.info {
+  padding-top: 20vh;
+  position: relative;
+}
+
+/* ie9/10 */
+@media screen and (min-width:0\0) {
+  .hero.informatic .content {
+    margin-top: 15vh !important;
+    height: auto !important;
+  }
+}
+
+@media screen and (max-width:600px\0) {
+  .hero.informatic .content {
+    margin-top: 10vh !important;
+  }
+}
+
+@media (max-width: 800px) {
+  .hero.informatic .image {
+    display: none;
+  }
+  .hero.informatic .info {
+    max-width: 100% !important;
+    text-align: center !important;
+    width: 100% !important;
+  }
+}
