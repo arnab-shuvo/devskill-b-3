@@ -16,9 +16,9 @@ import Skeleton from '@mui/material/Skeleton';
 import Rating from '@mui/material/Rating';
 import { Link } from 'react-router-dom';
 import Stack from "@mui/material/Stack";
-import {useNavigate} from 'react-router-dom'
 
 const Product = () => {
+    
     const { id } = useParams()
     const [product, setProduct] = useState(null)
     const [loading, setLoading] = useState(false)
@@ -33,7 +33,7 @@ const Product = () => {
 
         getProduct()
 
-    }, [])
+    }, [id])
 
     const deleteProduct = async () => {
         fetch(`https://fakestoreapi.com/products/${id}`, {

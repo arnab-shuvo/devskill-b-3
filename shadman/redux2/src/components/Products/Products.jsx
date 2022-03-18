@@ -13,11 +13,12 @@ import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 import Skeleton from '@mui/material/Skeleton';
 import { Link } from 'react-router-dom';
-
 import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
+import { useDispatch, useSelector } from 'react-redux';
+import {setproductList} from "../../redux/action/productAction"
 
 const styles = {
     productHeader: {
@@ -31,17 +32,31 @@ const styles = {
 }
 
 const Products = () => {
+    
+    const dispatch = useDispatch()
+    const { products } = useSelector(store=>store.products)
 
-    const [data, setData] = useState([])
-    const [filter, setFilter] = useState(data)
+    const data = products
+    let filter = data
+    
+
+    // const [filter, setFilter] = useState(data)
     const [loading, setLoading] = useState(false)
     const [categories, setCategories] = useState([])
     const [value, setValue] = useState("");
 
 
+    const setFilter = (data) => {
+        filter = data
+        
+    }
+
     const filterProduct = (cat) => {
         const updatedList = data.filter(x => x.category === cat)
-        setFilter(updatedList)
+        console.log(updatedList)
+        filter = updatedList
+        console.log(filter)
+
     }
 
     const handleSort = async (value) => {
@@ -62,10 +77,9 @@ const Products = () => {
         const getProducts = async () => {
             setLoading(true)
             const response = await fetch('https://fakestoreapi.com/products')
-
-            setData(await response.clone().json())
-            setFilter(await response.json())
+            dispatch(setproductList(await response.clone().json()))
             setLoading(false)
+            
 
         }
         const getCategories = async () => {
@@ -78,7 +92,7 @@ const Products = () => {
         getCategories()
         getProducts()
 
-    }, [])
+    },[])
 
     const Loading = () => {
         return <>

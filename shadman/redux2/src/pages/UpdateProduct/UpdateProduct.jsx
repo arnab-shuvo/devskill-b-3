@@ -46,7 +46,7 @@ const UpdateProduct = () => {
         updateProduct()
         getProduct()
 
-    }, [])
+    }, [id])
 
     const Loading = () => {
         return <>
