@@ -10,4 +10,11 @@ export const selectedProduct = (product)=>{
         type: action_type.SELECTED_PRODUCT,
         payload: product
     }
-} 
+}
+
+export const setProductEdit = (product)=>{
+    return {
+        type: action_type.SET_PRODUCT_EDIT,
+        payload: product,
+    }
+}

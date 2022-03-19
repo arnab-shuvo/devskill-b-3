@@ -1,10 +1,10 @@
 import React from 'react';
 import ProductForm from '../Components/ProductForm';
 
-const EditProduct = () => {
+const AddProcuct = () => {
     return (
         <ProductForm/>
     );
 };
 
-export default EditProduct;
+export default AddProcuct;

@@ -15,7 +15,7 @@ const Home = () => {
             })
     }, [])
     return (
-        <Container>
+        <Container sx={{mt: '50px'}}>
             <Grid container spacing={8}>
                 {products.map(product => (
                         <Grid
