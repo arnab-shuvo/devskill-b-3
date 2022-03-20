@@ -2,7 +2,7 @@ import { Button, Card, Container, Grid, TextField } from "@mui/material";
 import { Box } from "@mui/system";
 import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { GetProductAsync, UpdateProduct } from "../../services/ProductService";
+import { useProductDispatch } from "../../store";
 import { ProductType } from "../../utilities/ProductType";
 
 type IParams = {
@@ -11,10 +11,13 @@ type IParams = {
 
 const EditProduct = () => {
   const { productId } = useParams<IParams>();
-  const [product, setProduct] = useState<ProductType | null>(null);
   const naviagte = useNavigate();
+  const [product, setProduct] = useState<ProductType | null | undefined>(null);
+  const { actions, products } = useProductDispatch();
+  const { Update } = actions;
   useEffect(() => {
-    GetProductAsync(productId).then((x) => setProduct(x));
+    const data = products.find((x) => x.id === Number(productId));
+    setProduct(data);
   }, []);
 
   const uploadImage = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -100,7 +103,7 @@ const EditProduct = () => {
               </Button>
               <Button
                 variant="contained"
-                onClick={() => UpdateProduct(product)}
+                onClick={async () => await Update(product as ProductType)}
               >
                 Save
               </Button>

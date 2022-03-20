@@ -3,12 +3,13 @@ import { Box } from "@mui/system";
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Loader from "../../Loader";
-import { CreateProduct } from "../../services/ProductService";
+import { useProductDispatch } from "../../store";
 import { ProductType } from "../../utilities/ProductType";
 
 const CreateNewProduct = () => {
   const [product, setProduct] = useState<ProductType>({} as ProductType);
   const naviagte = useNavigate();
+  const {Insert} = useProductDispatch().actions;
 
   const uploadImage = (e: React.ChangeEvent<HTMLInputElement>) => {
     const data = { ...product };
@@ -16,8 +17,8 @@ const CreateNewProduct = () => {
     let reader = new FileReader();
     if (files !== null) reader.readAsDataURL(files[0]);
     reader.onload = (e) => {
-      if(e.target?.result?.toString() !== undefined)
-      data.image = e.target?.result?.toString();
+      if (e.target?.result?.toString() !== undefined)
+        data.image = e.target?.result?.toString();
       setProduct(data as ProductType);
     };
   };
@@ -87,12 +88,13 @@ const CreateNewProduct = () => {
                   variant="contained"
                   color="secondary"
                   sx={{ marginRight: "30px" }}
-                  onClick={() => naviagte('/')}
+                  onClick={() => naviagte("/")}
                 >
                   Cancle
                 </Button>
                 <Button
                   variant="contained"
+                  onClick={async () => await Insert(product)}
                 >
                   Save
                 </Button>
