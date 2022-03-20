@@ -18,3 +18,9 @@ export const setProductEdit = (product)=>{
         payload: product,
     }
 }
+export const setProductCategory = (products)=>{
+    return {
+        type: action_type.SET_PRODUCT_CATEGORY,
+        payload: products,
+    }
+}

@@ -1,9 +1,11 @@
 import {combineReducers} from 'redux';
 import { editProductReducer} from './editProductReducer';
 import { productReducer } from './productReducer';
+import { selectCategoryReducer } from './selectCategoryReducer';
 import { selectedProductReducer } from './selectedProductReducer';
 export const reducers = combineReducers({
     allProducts: productReducer,
     singleProduct: selectedProductReducer,
-    productEdit: editProductReducer
+    productEdit: editProductReducer,
+    category: selectCategoryReducer
 })
