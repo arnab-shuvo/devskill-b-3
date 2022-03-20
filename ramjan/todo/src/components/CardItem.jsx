@@ -36,13 +36,13 @@ function CardItem(props) {
                     <Button
                         variant='contained'
                         onClick={() => {
-                        props.onSelectDelete(props.id)
+                        props.onSelectDelete(props.index)
                         }}> Delete
                     </Button>
                     <Button
                                   variant='contained'
                                   onClick={() => {
-                                    props.onSeleectEdit(props.id)
+                                    props.onSeleectEdit(props.index)
                                   }}
                     > Edit </Button>
                 </ButtonGroup>

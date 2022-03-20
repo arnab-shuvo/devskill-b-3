@@ -32,7 +32,11 @@ const styles = {
 function Lists() {
     const [inputList, setInputList] = useState('')
     const [error, setError] = useState(false);
-    const [taskList, setTaskList ] = useState([])
+    const [taskList, setTaskList] = useState([])
+    const [edit, setEdit] = useState(false)
+    const [editedTask, setEditedtask] = useState('') 
+    const [toEdit, setToEdit] = useState('')
+    const [etidItem, setEditItem ] =useState('')
 
     const addtask = () => {
        
@@ -61,8 +65,28 @@ function Lists() {
         }))
 
     }
-    const editItem = (id) => {
-            console.log(id);
+
+    const editItem = (index) => {
+        setEdit(true)
+        const toBeEdited = taskList(index)
+        console.log(index)
+        // setEditedtask(toBeEdited)
+        
+      
+
+        // setToEdit(props.id)
+        //     setEditItem(props.task)
+        //     console.log(props);
+    }
+
+    const submitTask = (e) => {
+        
+        const previousTask = [...taskList]
+        console.log(previousTask)
+
+        // setEditTask(true)
+        // setEditItem(props.task)
+        // console.log(props);
     }
     
     return (
@@ -73,7 +97,9 @@ function Lists() {
                      <Typography variant='h3'> ToDo App </Typography> 
                     </CardContent>
                 
-                    <Grid container spacing={ 2 } className='center' >
+                    {
+                        edit ? 
+                        <Grid container spacing={ 2 } className='center' >
                         <Grid item xs={9} md={8} >
                             <TextField
                                 error = {error}
@@ -81,27 +107,52 @@ function Lists() {
                                 fullWidth
                                 label='add your new todo'
                                 variant='filled'
-                                onChange={ (e)=> changeHandle(e) }
-                                
+                                value={editedTask}
+                                onChange={(e)=>setEditedtask(e.target.value)}
+                                 
                         />
                         </Grid> 
                         <Grid item xs={1} md={2}>
                             <Button
                                 fullWidth
-                                onClick={addtask}
+                                onClick={submitTask}
                                
                                 variant="contained"
-                                color="primary"> +
+                                color="primary"> Edit
                             </Button>
                         </Grid>
-                    </Grid> 
+                            </Grid> :
+                            <Grid container spacing={ 2 } className='center' >
+                            <Grid item xs={9} md={8} >
+                                <TextField
+                                    error = {error}
+                                    helperText ='Enter Valid Word'
+                                    fullWidth
+                                    label='add your new todo'
+                                    variant='filled'
+                                    onChange={ (e)=> changeHandle(e) }
+                                    
+                            />
+                            </Grid> 
+                            <Grid item xs={1} md={2}>
+                                <Button
+                                    fullWidth
+                                    onClick={addtask}
+                                   
+                                    variant="contained"
+                                    color="primary"> Add
+                                </Button>
+                            </Grid>
+                        </Grid> 
+                    }
+                    
                     {/* List will show here */}
                     {
                         taskList.length === 0 ? <img src={ Empty } alt='empty' /> :
                         taskList.map((task, index) => 
                             <CardItem
                                 key={index}
-                                id={index}
+                                index={index}
                                 task={task}
                                 onSelectDelete={deleteItems}
                                 onSeleectEdit ={editItem}
