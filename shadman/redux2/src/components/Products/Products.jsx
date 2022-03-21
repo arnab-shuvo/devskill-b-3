@@ -33,44 +33,16 @@ const styles = {
 
 const Products = () => {
     
-    const dispatch = useDispatch()
     const { products } = useSelector(store=>store.products)
 
-    const data = products
-    let filter = data
-    
+    const dispatch = useDispatch()
 
-    // const [filter, setFilter] = useState(data)
+    const data = [...products]
+    let filter = [...products]
+    
     const [loading, setLoading] = useState(false)
     const [categories, setCategories] = useState([])
     const [value, setValue] = useState("");
-
-
-    const setFilter = (data) => {
-        filter = data
-        
-    }
-
-    const filterProduct = (cat) => {
-        const updatedList = data.filter(x => x.category === cat)
-        console.log(updatedList)
-        filter = updatedList
-        console.log(filter)
-
-    }
-
-    const handleSort = async (value) => {
-        const checkValue = (value === "Ascending") ? "asc" : "desc"
-        
-        await fetch(`https://fakestoreapi.com/products?sort=${checkValue}`)
-            .then(res => res.json())
-            .then(json => setFilter(json))
-
-    }
-
-    const handleChange = (e) => {
-        setValue(e.target.value)
-    }
 
     useEffect(() => {
 
@@ -92,7 +64,25 @@ const Products = () => {
         getCategories()
         getProducts()
 
-    },[])
+    },[dispatch])
+
+    const handleChange = (e) => {
+        setValue(e.target.value)
+    }
+
+    const filterProduct = (cat) => {
+        filter = data.filter(x => x.category === cat)
+        dispatch(setproductList(filter))
+    }
+
+    const handleSort = async (value) => {
+        const checkValue = (value === "Ascending") ? "asc" : "desc"
+        
+        await fetch(`https://fakestoreapi.com/products?sort=${checkValue}`)
+            .then(res => res.json())
+            .then(json => dispatch(setproductList(json)))
+
+    }
 
     const Loading = () => {
         return <>
@@ -122,7 +112,7 @@ const Products = () => {
                 <Grid container justifyContent={"center"} sx={{ py: 4 }} spacing={2}>
                     <Grid item md={10}>
                         <Box sx={{ display: { xs: "none", md: "flex" } }} spacing={2}>
-                            <Button onClick={() => setFilter(data)} variant='outlined' sx={{ ml: 4, mr: 1, color: "black", display: "block", border: "2px black solid" }}>
+                            <Button onClick = {()=>{dispatch(setproductList(products))}} variant='outlined' sx={{ ml: 4, mr: 1, color: "black", display: "block", border: "2px black solid" }}>
                                 All Products
                             </Button>
                             {
@@ -146,8 +136,8 @@ const Products = () => {
                                     label="Categories"
                                     onChange={handleChange}
                                 >
-                                    <MenuItem value={10} onClick={()=>handleSort("Ascending")}>Ascending</MenuItem>
-                                    <MenuItem value={20} onClick={()=>handleSort("Descending")}>Descending</MenuItem>
+                                <MenuItem value={10} onClick={()=>handleSort("Ascending")}>Ascending</MenuItem>
+                                <MenuItem value={20} onClick={()=>handleSort("Descending")}>Descending</MenuItem>
 
 
                                 </Select>
@@ -157,7 +147,7 @@ const Products = () => {
                 </Grid>
                 <Grid container justifyContent={"center"}  >
                     <Grid item container md={12} spacing={3}>
-                        {filter.map((product) => {
+                        {data.map((product) => {
                             return (
                                 <Grid md={3} item >
                                     <Card sx={{ maxWidth: 345 }}>
