@@ -77,228 +77,228 @@ const Product = () => {
     );
   };
 
+  // const ShowProduct = () => {
+
+  //     return <div>
+  //     <Grid container>
+  //     <Card sx={{ display: "flex" }}>
+  //       <Grid item md={4}>
+  //         <CardMedia
+  //           component="img"
+  //           sx={{ height: 400, width: 400 }}
+  //           image={product?.image}
+  //           alt="Live from space album cover"
+  //         />
+  //       </Grid>
+  //       <Grid item md={1}></Grid>
+  //       <Grid item md={7}>
+  //         <Box sx={{ display: "flex", flexDirection: "column" }}>
+  //           <CardHeader
+  //             avatar={
+  //               <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe">
+  //                 {product?.title[0]}
+  //               </Avatar>
+  //             }
+  //             title={product?.title}
+  //             subheader={product?.category}
+  //           />
+
+  //           <CardContent>
+  //             <Typography variant="body2" color="text.secondary">
+  //               {product?.description}
+  //             </Typography>
+  //             <Typography variant="h4" color="text.secondary">
+  //               Price: {product?.price}
+  //             </Typography>
+  //             {product?.rating.rate ? (
+  //               <Rating value={product.rating.rate} />
+  //             ) : null}
+  //           </CardContent>
+  //           <Box>
+  //             <CardActions>
+  //               <Link
+  //                 to={`/products`}
+  //                 style={{ textDecoration: "none", margin: "4px" }}
+  //               >
+  //                 <Button
+  //                   variant="outlined"
+  //                   sx={{
+  //                     color: "black",
+  //                     display: "block",
+  //                     border: "2px black solid",
+  //                   }}
+  //                 >
+  //                   View All Products
+  //                 </Button>
+  //               </Link>
+  //               <Link
+  //                 to={`/products/${id}`}
+  //                 style={{ textDecoration: "none", margin: "4px" }}
+  //               >
+  //                 <Button
+  //                   variant="outlined"
+  //                   sx={{
+  //                     color: "black",
+  //                     display: "block",
+  //                     border: "2px black solid",
+  //                   }}
+  //                 >
+  //                   Add to Cart
+  //                 </Button>
+  //               </Link>
+  //               <Link
+  //                 to={`/update-product/${id}`}
+  //                 style={{ textDecoration: "none", margin: "4px" }}
+  //               >
+  //                 <Button
+  //                   variant="outlined"
+  //                   sx={{
+  //                     color: "black",
+  //                     display: "block",
+  //                     border: "2px black solid",
+  //                   }}
+  //                 >
+  //                   Update Product
+  //                 </Button>
+  //               </Link>
+  //               <Link
+  //                 to={`/products`}
+  //                 style={{ textDecoration: "none", margin: "4px" }}
+  //               >
+  //                 <Button
+  //                   onClick={deleteProduct}
+  //                   variant="outlined"
+  //                   sx={{
+  //                     color: "black",
+  //                     display: "block",
+  //                     border: "2px black solid",
+  //                   }}
+  //                 >
+  //                   Delete Product
+  //                 </Button>
+  //               </Link>
+  //             </CardActions>
+  //           </Box>
+  //         </Box>
+  //       </Grid>
+  //     </Card>
+  //   </Grid>
+  //     </div>
+  // }
+
   const ShowProduct = () => {
+    return (
+      <div>
+        {Object.keys(product).length === 0 ? (
+          <h1> ...Loading </h1>
+        ) : (
+          <Grid container>
+            <Card sx={{ display: "flex" }}>
+              <Grid item md={4}>
+                <CardMedia
+                  component="img"
+                  sx={{ height: 400, width: 400 }}
+                  image={product?.image}
+                  alt="Live from space album cover"
+                />
+              </Grid>
+              <Grid item md={1}></Grid>
+              <Grid item md={7}>
+                <Box sx={{ display: "flex", flexDirection: "column" }}>
+                  <CardHeader
+                    avatar={
+                      <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe">
+                        {product?.title[0]}
+                      </Avatar>
+                    }
+                    title={product?.title}
+                    subheader={product?.category}
+                  />
 
-      return <div>
-      <Grid container>
-      <Card sx={{ display: "flex" }}>
-        <Grid item md={4}>
-          <CardMedia
-            component="img"
-            sx={{ height: 400, width: 400 }}
-            image={product?.image}
-            alt="Live from space album cover"
-          />
-        </Grid>
-        <Grid item md={1}></Grid>
-        <Grid item md={7}>
-          <Box sx={{ display: "flex", flexDirection: "column" }}>
-            <CardHeader
-              avatar={
-                <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe">
-                  {product?.title[0]}
-                </Avatar>
-              }
-              title={product?.title}
-              subheader={product?.category}
-            />
-
-            <CardContent>
-              <Typography variant="body2" color="text.secondary">
-                {product?.description}
-              </Typography>
-              <Typography variant="h4" color="text.secondary">
-                Price: {product?.price}
-              </Typography>
-              {product?.rating.rate ? (
-                <Rating value={product.rating.rate} />
-              ) : null}
-            </CardContent>
-            <Box>
-              <CardActions>
-                <Link
-                  to={`/products`}
-                  style={{ textDecoration: "none", margin: "4px" }}
-                >
-                  <Button
-                    variant="outlined"
-                    sx={{
-                      color: "black",
-                      display: "block",
-                      border: "2px black solid",
-                    }}
-                  >
-                    View All Products
-                  </Button>
-                </Link>
-                <Link
-                  to={`/products/${id}`}
-                  style={{ textDecoration: "none", margin: "4px" }}
-                >
-                  <Button
-                    variant="outlined"
-                    sx={{
-                      color: "black",
-                      display: "block",
-                      border: "2px black solid",
-                    }}
-                  >
-                    Add to Cart
-                  </Button>
-                </Link>
-                <Link
-                  to={`/update-product/${id}`}
-                  style={{ textDecoration: "none", margin: "4px" }}
-                >
-                  <Button
-                    variant="outlined"
-                    sx={{
-                      color: "black",
-                      display: "block",
-                      border: "2px black solid",
-                    }}
-                  >
-                    Update Product
-                  </Button>
-                </Link>
-                <Link
-                  to={`/products`}
-                  style={{ textDecoration: "none", margin: "4px" }}
-                >
-                  <Button
-                    onClick={deleteProduct}
-                    variant="outlined"
-                    sx={{
-                      color: "black",
-                      display: "block",
-                      border: "2px black solid",
-                    }}
-                  >
-                    Delete Product
-                  </Button>
-                </Link>
-              </CardActions>
-            </Box>
-          </Box>
-        </Grid>
-      </Card>
-    </Grid>
+                  <CardContent>
+                    <Typography variant="body2" color="text.secondary">
+                      {product?.description}
+                    </Typography>
+                    <Typography variant="h4" color="text.secondary">
+                      Price: {product?.price}
+                    </Typography>
+                    {product?.rating.rate ? (
+                      <Rating value={product.rating.rate} />
+                    ) : null}
+                  </CardContent>
+                  <Box>
+                    <CardActions>
+                      <Link
+                        to={`/products`}
+                        style={{ textDecoration: "none", margin: "4px" }}
+                      >
+                        <Button
+                          variant="outlined"
+                          sx={{
+                            color: "black",
+                            display: "block",
+                            border: "2px black solid",
+                          }}
+                        >
+                          View All Products
+                        </Button>
+                      </Link>
+                      <Link
+                        to={`/products/${id}`}
+                        style={{ textDecoration: "none", margin: "4px" }}
+                      >
+                        <Button
+                          variant="outlined"
+                          sx={{
+                            color: "black",
+                            display: "block",
+                            border: "2px black solid",
+                          }}
+                        >
+                          Add to Cart
+                        </Button>
+                      </Link>
+                      <Link
+                        to={`/update-product/${id}`}
+                        style={{ textDecoration: "none", margin: "4px" }}
+                      >
+                        <Button
+                          variant="outlined"
+                          sx={{
+                            color: "black",
+                            display: "block",
+                            border: "2px black solid",
+                          }}
+                        >
+                          Update Product
+                        </Button>
+                      </Link>
+                      <Link
+                        to={`/products`}
+                        style={{ textDecoration: "none", margin: "4px" }}
+                      >
+                        <Button
+                          onClick={deleteProduct}
+                          variant="outlined"
+                          sx={{
+                            color: "black",
+                            display: "block",
+                            border: "2px black solid",
+                          }}
+                        >
+                          Delete Product
+                        </Button>
+                      </Link>
+                    </CardActions>
+                  </Box>
+                </Box>
+              </Grid>
+            </Card>
+          </Grid>
+        )}
       </div>
-  }
-
-//   const ShowProduct = () => {
-//     return (
-//       <div>
-//         {Object.keys(product).length === 0 ? (
-//           <h1> ...Loading </h1>
-//         ) : (
-//           <Grid container>
-//             <Card sx={{ display: "flex" }}>
-//               <Grid item md={4}>
-//                 <CardMedia
-//                   component="img"
-//                   sx={{ height: 400, width: 400 }}
-//                   image={product?.image}
-//                   alt="Live from space album cover"
-//                 />
-//               </Grid>
-//               <Grid item md={1}></Grid>
-//               <Grid item md={7}>
-//                 <Box sx={{ display: "flex", flexDirection: "column" }}>
-//                   <CardHeader
-//                     avatar={
-//                       <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe">
-//                         {product?.title[0]}
-//                       </Avatar>
-//                     }
-//                     title={product?.title}
-//                     subheader={product?.category}
-//                   />
-
-//                   <CardContent>
-//                     <Typography variant="body2" color="text.secondary">
-//                       {product?.description}
-//                     </Typography>
-//                     <Typography variant="h4" color="text.secondary">
-//                       Price: {product?.price}
-//                     </Typography>
-//                     {product?.rating.rate ? (
-//                       <Rating value={product.rating.rate} />
-//                     ) : null}
-//                   </CardContent>
-//                   <Box>
-//                     <CardActions>
-//                       <Link
-//                         to={`/products`}
-//                         style={{ textDecoration: "none", margin: "4px" }}
-//                       >
-//                         <Button
-//                           variant="outlined"
-//                           sx={{
-//                             color: "black",
-//                             display: "block",
-//                             border: "2px black solid",
-//                           }}
-//                         >
-//                           View All Products
-//                         </Button>
-//                       </Link>
-//                       <Link
-//                         to={`/products/${id}`}
-//                         style={{ textDecoration: "none", margin: "4px" }}
-//                       >
-//                         <Button
-//                           variant="outlined"
-//                           sx={{
-//                             color: "black",
-//                             display: "block",
-//                             border: "2px black solid",
-//                           }}
-//                         >
-//                           Add to Cart
-//                         </Button>
-//                       </Link>
-//                       <Link
-//                         to={`/update-product/${id}`}
-//                         style={{ textDecoration: "none", margin: "4px" }}
-//                       >
-//                         <Button
-//                           variant="outlined"
-//                           sx={{
-//                             color: "black",
-//                             display: "block",
-//                             border: "2px black solid",
-//                           }}
-//                         >
-//                           Update Product
-//                         </Button>
-//                       </Link>
-//                       <Link
-//                         to={`/products`}
-//                         style={{ textDecoration: "none", margin: "4px" }}
-//                       >
-//                         <Button
-//                           onClick={deleteProduct}
-//                           variant="outlined"
-//                           sx={{
-//                             color: "black",
-//                             display: "block",
-//                             border: "2px black solid",
-//                           }}
-//                         >
-//                           Delete Product
-//                         </Button>
-//                       </Link>
-//                     </CardActions>
-//                   </Box>
-//                 </Box>
-//               </Grid>
-//             </Card>
-//           </Grid>
-//         )}
-//       </div>
-//     );
-//   };
+    );
+  };
 
   return (
     <div>
