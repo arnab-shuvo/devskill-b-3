@@ -4,5 +4,6 @@ const ActionType = {
   increase: "increase",
   decrease: "decrease",
   setAllProducts: "setAllProducts",
+  setToken: "setToken",
 };
 export default ActionType;

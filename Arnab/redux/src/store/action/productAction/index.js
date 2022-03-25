@@ -13,12 +13,11 @@ const seterror = (list) => ({
 
 export const getProductListAction = () => {
   return async (dispatch, getStore) => {
-    console.log(getStore().counterStore);
-    // try {
-    //   const data = await productListApi();
-    //   dispatch(setProductList(data));
-    // } catch (error) {
-    //   dispatch(setProductList(data));
-    // }
+    try {
+      const data = await productListApi();
+      dispatch(setProductList(data));
+    } catch (error) {
+      dispatch(setProductList(error));
+    }
   };
 };
