@@ -1,0 +1,23 @@
+.fluid-container-hero {
+    width: 100%;
+    background-color: #0A1929;
+}
+
+.navigation-fluid {
+    background-color: #ffbb00;
+    padding: 10px 0;
+}
+.navbar-layout {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    list-style: none;
+    padding: 0;
+    color: #111;
+    text-decoration: none;
+}
+.navbar-layout li a{
+    list-style: none;
+    color: #0A1929;
+    text-decoration: none;
+}

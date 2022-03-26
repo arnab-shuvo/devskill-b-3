@@ -1,0 +1,10 @@
+.createProduct{
+    text-align: center;
+    margin: 10px;
+    height: 100vh;
+
+}
+.createProduct label{
+    display: block;
+    padding: 10px;
+}
