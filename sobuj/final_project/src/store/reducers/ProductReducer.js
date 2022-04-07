@@ -11,7 +11,7 @@ const productReducer = (state = initialState, action) =>{
             return{...state, productList: action.payload}
         
         case ActionType.getProductDetail:
-            return{...state, productDetail:action.payload}
+            return{...state, productDetail: action.payload}
             
         default:
             return state;
