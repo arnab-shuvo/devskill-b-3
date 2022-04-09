@@ -9,6 +9,8 @@ import Navbar from '../../../Components/Navbar';
 // import { store } from '../../../store/index';
 import { getProductList } from '../../../store/action/ProductAction';
 import ProductBlock from '../../../Components/ProductBlock';
+import Pagination from '@mui/material/Pagination';
+import Stack from '@mui/material/Stack';
 
 const Item = styled(Paper)(({ theme }) => ({
     backgroundColor: 'transparent',
@@ -19,7 +21,6 @@ const Item = styled(Paper)(({ theme }) => ({
   }));
 
 const Product = () =>{
-
 
     const { productList } = useSelector((store) => store.productList);
     console.log(productList, "===store");
@@ -48,6 +49,9 @@ const Product = () =>{
                         );
                     })}
                 </Grid>
+                <Stack spacing={2}> 
+                    <Pagination count={10} color="secondary" />
+                </Stack>
             </Item>
         </Grid>
         </>

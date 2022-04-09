@@ -19,11 +19,11 @@ const MyButton = styled(({ color, ...other }) => <Button {...other} />)({
   margin: 8,
 });
 
-export default function AdaptingStyledComponents() {
+export default function AdaptingStyledComponents({action}) {
   return (
     <React.Fragment>
-      <MyButton color="red">Red</MyButton>
-      <MyButton color="blue">Blue</MyButton>
+      {/* <MyButton color="red">Red</MyButton> */}
+      <MyButton color="blue" onClick={action}>Signup</MyButton>
     </React.Fragment>
   );
 }
