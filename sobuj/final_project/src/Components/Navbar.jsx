@@ -28,6 +28,7 @@ import NotificationsIcon from '@material-ui/icons/Notifications';
 import MoreIcon from '@material-ui/icons/MoreVert';
 import { useStyles } from './Styles/UseStyle';
 import { Nav } from './Styles/NavStyle';
+import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
 
 
 export default function Navbar() {
@@ -107,7 +108,7 @@ export default function Navbar() {
       <MenuItem>
         <IconButton aria-label="show 11 new notifications" color="inherit">
           <Badge badgeContent={11} color="secondary">
-            <NotificationsIcon />
+            <AddShoppingCartIcon />
           </Badge>
         </IconButton>
         <p>Notifications</p>
@@ -169,14 +170,14 @@ export default function Navbar() {
           </div>
 
           <div className={classes.sectionDesktop}>
-            <IconButton aria-label="show 4 new mails" color="inherit">
+            {/* <IconButton aria-label="show 4 new mails" color="inherit">
               <Badge badgeContent={4} color="secondary">
                 <MailIcon />
               </Badge>
-            </IconButton>
+            </IconButton> */}
             <IconButton aria-label="show 17 new notifications" color="inherit">
-              <Badge badgeContent={17} color="secondary">
-                <NotificationsIcon />
+              <Badge badgeContent={1} color="secondary">
+                <AddShoppingCartIcon /> 
               </Badge>
             </IconButton>
             <IconButton

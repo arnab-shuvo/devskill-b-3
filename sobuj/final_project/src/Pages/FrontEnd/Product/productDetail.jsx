@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { makeStyles } from '@material-ui/core/styles';
-import { Button, Grid, Typography } from '@mui/material';
+import { Button, Grid, Skeleton, Typography } from '@mui/material';
 import Box from '@mui/material/Box';
 
 import Rating from '@mui/material/Rating';
@@ -10,10 +10,12 @@ import Paper from '@mui/material/Paper';
 import Preloader from '../../../Components/Preloader';
 import { useNavigate, useParams } from "react-router-dom";
 import Navbar from "../../../Components/Navbar";
+import NavbarMui from "../../../Components/NavbarMui";
 
 import { getProductDetail } from "../../../store/action/ProductAction";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
+import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
 
 const useStyles = makeStyles(() => ({
   root: {
@@ -60,19 +62,40 @@ const ProductDetail = () =>{
             });
         }, [id]);
     
+    const addToCart = () =>{
 
+    }
+
+    const toCartDetail = () =>{
+          navigate(`/`);
+    }
+
+    const loading = () =>{
+      return(
+        <>
+            <Grid item xs={6} md={4} sm={4} justifyContent="center">
+              <Skeleton height={400} />
+            </Grid>
+            <Grid item xs={6}  md={8} sm={8} justifyContent="left">
+              <Skeleton height={150} width={300} />
+              <Skeleton height={50} width={300} />
+            </Grid>
+        </>
+      )
+    }
     return(
         <>      
             <Navbar />
+            <NavbarMui />
 
-            <Grid container sx={{ mt:5 }} item xs={8} justifyContent="center" >
-                 <Grid item xs={6} justifyContent="center">
+            <Grid container item sx={{ mt:5 }}  xs={12} justifyContent="center" >
+                 <Grid item xs={6} md={4} sm={4} justifyContent="center">
                   <div className="product-image-wrapper" justifyContent="right">
-                    <img alt={ title} src={"http://127.0.0.1:8080"+  image} style={{ width: 550, border:"1px solid #ccc", padding:"20px" }} />
+                    <img alt={ title} src={"http://127.0.0.1:8080"+  image} style={{ width: "90%", border:"1px solid #ccc", padding:"20px" }} />
                   </div>
                 </Grid> 
 
-                <Grid item xs={6} >
+                <Grid item xs={6}  md={8} sm={8} justifyContent="left">
                   <Typography variant="h3" gutterBottom component="div">
                     { title}
                   </Typography>
@@ -84,13 +107,21 @@ const ProductDetail = () =>{
                     $ { price}
                   </Typography>
 
-                  
                   <Button 
                     variant="contained" 
                     color="secondary" 
-                    onClick={toHome}
+                    onClick={addToCart}
                     sx={{ height:60, mt:10 }}
-                    >Back to Home</Button>
+                    startIcon={<AddShoppingCartIcon />}
+                    >add to cart</Button>
+
+                    <Button 
+                    variant="outlined" 
+                    color="secondary" 
+                    onClick={toCartDetail}
+                    sx={{ height:60, mt:10 }}
+                    >go to cart</Button>
+                  
                 </Grid>
               </Grid>
         </>

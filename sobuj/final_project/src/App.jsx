@@ -16,6 +16,7 @@ import ProductCreate from './Pages/Backend/Product/Create';
 import ProductView from './Pages/Backend/Product/View';
 import ProductUpdate from './Pages/Backend/Product/Update';
 import ManageProduct from './Pages/Backend/Product/Admin';
+import Category from './Pages/FrontEnd/Product/Category';
 
 function App() {
     const [showLoader, setShowLoader] = useState(true)
@@ -38,6 +39,9 @@ function App() {
           <Route path='/slogin/' element={<SignInSide />}  />
           <Route path='/signup/' element={<Signup />}  />
           <Route path='/product-detail/:id' element={<ProductDetail />}  />
+          <Route path='/category/' element={<Category />} />
+          <Route path='/product-category/:id' element={<Category />} />
+
           <Route path='*' element={<Page404 />} />
 
 

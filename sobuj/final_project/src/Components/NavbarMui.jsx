@@ -128,6 +128,9 @@ export default function PrimarySearchAppBar() {
               <li>
                 <Link to={`/all-products`}>All Products</Link>
               </li>
+              <li>
+                <Link to={`/category`}>Categories</Link>
+              </li>
             </ul>
           </Nav>
 

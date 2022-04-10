@@ -1,15 +1,17 @@
 
 const ActionType = {
     getProductList: 'GET-PRODUCT-LIST',
-    getLoadProducts: 'GET-ALL-PRODUCTS',
+    getLoadProducts: 'ALL-PRODUCTS',
     getProductDetail: 'GET-PRODUCT-DETAIL',
+    deleteProduct:'DELETE-PRODUCT',
+
     setToken: 'SET-TOKEN',
     registration: 'REGISTRATION',
     login:'LOGIN',
-    addToCart: 'ADD-TO-CART',
+    ADD_TO_CART: 'ADD-TO-CART',
+    DEL_FROM_CART: 'DEL-FEOM-CART',
     checkout: 'CHECKOUT',
 
-    deleteProduct:'DELETE-PRODUCT',
-
+    GET_CATEGORY_LIST: 'GET-CATEGORY-LIST',
 }
 export default ActionType;
