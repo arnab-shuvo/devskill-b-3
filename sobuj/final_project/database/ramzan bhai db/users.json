@@ -1,0 +1,21 @@
+[{
+  "_id": {
+    "$oid": "62452c74fa9ad4199cbfa67d"
+  },
+  "address": {
+    "geolocation": {
+      "lat": "0",
+      "long": "0"
+    },
+    "city": "N/A",
+    "street": "N/A",
+    "number": 0,
+    "zipcode": "0"
+  },
+  "role": "admin",
+  "email": "admin@gmail.com",
+  "username": "admin",
+  "password": "$2b$10$lEql379HZdzeqvTAy.BKheog3TjnUthvNiZH9dLCCs5qFoSWCsRPK",
+  "phone": "01919470684",
+  "__v": 0
+}]

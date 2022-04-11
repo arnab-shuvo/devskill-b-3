@@ -23,7 +23,7 @@ const Products = ({productList, showDetail, delProd, updateProd}) =>{
                     <Grid container item>
                         {productList.map((product)=>{
                             return(
-                                    <ProductBlock product={product} showDetail={showDetail} delProd={delProd} updateProd={updateProd} />
+                            <ProductBlock product={product} showDetail={showDetail} delProd={delProd} updateProd={updateProd} />
                             );
                         })}
                     </Grid>

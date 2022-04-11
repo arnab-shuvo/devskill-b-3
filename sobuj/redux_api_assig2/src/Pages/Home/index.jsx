@@ -57,7 +57,7 @@ const styles ={
 
 const Home = () => {
   const { products } = useSelector((store) => store.products);
-  // console.log(products, "===store");
+  console.log(products, "===store");
   const dispatch = useDispatch();
 
   const productList = products;
