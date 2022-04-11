@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { makeStyles } from '@material-ui/core/styles';
 import { Button, Grid, Skeleton, Typography } from '@mui/material';
 import Box from '@mui/material/Box';
-
+import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
 import Rating from '@mui/material/Rating';
 
 import { styled } from '@mui/material/styles';
@@ -12,10 +12,9 @@ import { useNavigate, useParams } from "react-router-dom";
 import Navbar from "../../../Components/Navbar";
 import NavbarMui from "../../../Components/NavbarMui";
 
+import { useDispatch, useSelector } from "react-redux";
 import { getProductDetail } from "../../../store/action/ProductAction";
-import { useDispatch } from "react-redux";
-import { useSelector } from "react-redux";
-import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
+import { addCart, delCart } from "../../../store/action/AddToCartAction";
 
 const useStyles = makeStyles(() => ({
   root: {
@@ -47,8 +46,8 @@ const ProductDetail = () =>{
     }
     
     const { id } = useParams();
-    console.log(id, "===id");
-    
+    //console.log(id, "===id");
+
     const { productDetail } = useSelector((store) => store.productDetail);
     const { title, image, description, price, category}     = productDetail;
 
@@ -62,9 +61,9 @@ const ProductDetail = () =>{
             });
         }, [id]);
     
-    const addToCart = () =>{
-
-    }
+    const addProduct = (product) => {
+      dispatch(addCart(product));
+    };
 
     const toCartDetail = () =>{
           navigate(`/`);
@@ -110,7 +109,7 @@ const ProductDetail = () =>{
                   <Button 
                     variant="contained" 
                     color="secondary" 
-                    onClick={addToCart}
+                    onClick={addProduct}
                     sx={{ height:60, mt:10 }}
                     startIcon={<AddShoppingCartIcon />}
                     >add to cart</Button>

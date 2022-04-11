@@ -2,19 +2,20 @@ import styled from 'styled-components';
 
 export const Nav = styled.nav`
   display:flex;
-  justify-content:space-between ;
+  justify-content:left;
   align-items:center ;
   .brand{
     .container{
       cursor:pointer;
       display: flex;
-      justify-content:center;
+      justify-content:left;
       gap: 0.4rem;
       font-size:2.5rem;
       font-weight: 900;
       text-transform: capitalize ;
       color:#532c77 ;
       bottom:0;
+      width:400px;
     }
     span{
       color:#e6ab16;
@@ -22,6 +23,20 @@ export const Nav = styled.nav`
     .toggle{
       display: none;
     }
+  }
+  @media (min-width: 699px) and (max-width:1000px){
+      .brand {
+        .container{
+          max-width: 200px;
+        }          
+      }
+  }
+  @media (max-width: 1200px){
+      .brand {
+        .container{
+          max-width: 300px;
+        }          
+      }
   }
   .header {
       display: block;

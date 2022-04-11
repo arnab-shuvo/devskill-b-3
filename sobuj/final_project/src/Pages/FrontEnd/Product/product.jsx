@@ -77,7 +77,7 @@ const Product = () =>{
                 ))}
             </ButtonGroup>
                 <Grid container item>
-                    {productList.map((product)=>{
+                {productList.map((product)=>{
                         return(
                         <ProductBlock product={product} key={product.id} />
                         );

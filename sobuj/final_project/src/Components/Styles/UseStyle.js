@@ -14,8 +14,13 @@ export const useStyles = makeStyles((theme) => ({
         display: 'block',
       },
     },
+    searchDropdown: {
+      position: 'relative',
+      height:'50px',
+    },
     search: {
       position: 'relative',
+      border:"1px solid #eee",
       borderRadius: theme.shape.borderRadius,
       backgroundColor: alpha(theme.palette.common.white, 0.15),
       '&:hover': {
@@ -53,6 +58,8 @@ export const useStyles = makeStyles((theme) => ({
     },
     sectionDesktop: {
       display: 'none',
+      position:"absolute",
+      right:'5ch',
       [theme.breakpoints.up('md')]: {
         display: 'flex',
       },

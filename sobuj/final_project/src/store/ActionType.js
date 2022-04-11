@@ -9,7 +9,8 @@ const ActionType = {
     registration: 'REGISTRATION',
     login:'LOGIN',
     ADD_TO_CART: 'ADD-TO-CART',
-    DEL_FROM_CART: 'DEL-FEOM-CART',
+    REMOVE_FROM_CART: 'REMOVE-FROM-CART',
+    UPDATE_CART: 'UPDATE-CART',
     checkout: 'CHECKOUT',
 
     GET_CATEGORY_LIST: 'GET-CATEGORY-LIST',

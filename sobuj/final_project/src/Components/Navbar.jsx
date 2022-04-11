@@ -30,8 +30,17 @@ import { useStyles } from './Styles/UseStyle';
 import { Nav } from './Styles/NavStyle';
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
 
+import { useDispatch, useSelector } from 'react-redux';
 
 export default function Navbar() {
+  
+  // Destructuring "categoryList" from CategoryReducer
+  const { categoryList } = useSelector((state) => state.prodCategories); // prodCategories is comming from RootReducer (prodCategories:CategoryReducer,)
+  
+   // Destructuring "cart" from CartReducer
+  const state = useSelector((state) => state.cartItems); // cartItems is coming from RootReducer (cartItems:cartReducer,)
+  console.log(state, "===cart");
+
   const classes = useStyles();
 
   const navigate = useNavigate();
@@ -97,17 +106,17 @@ export default function Navbar() {
       open={isMobileMenuOpen}
       onClose={handleMobileMenuClose}
     >
-      <MenuItem>
+      {/* <MenuItem>
         <IconButton aria-label="show 4 new mails" color="inherit">
           <Badge badgeContent={4} color="secondary">
             <MailIcon />
           </Badge>
         </IconButton>
         <p>Messages</p>
-      </MenuItem>
+      </MenuItem> */}
       <MenuItem>
         <IconButton aria-label="show 11 new notifications" color="inherit">
-          <Badge badgeContent={11} color="secondary">
+          <Badge badgeContent={ state.length === 0 ? ("0") : state.length } color="secondary">
             <AddShoppingCartIcon />
           </Badge>
         </IconButton>
@@ -126,10 +135,16 @@ export default function Navbar() {
       </MenuItem>
     </Menu>
   );
- 
+
+  const [category, setCategory] = React.useState('');
+
+  const handleChange = (e) => {//event: SelectChangeEvent
+    setCategory(e.target.value);
+  };
+
   return (
     <>
-        <Nav>
+        <Nav >
           
           
           <div className='brand'>
@@ -139,23 +154,32 @@ export default function Navbar() {
               </div>
               <div className="toggle"></div>            
           </div>
-
-          <FormControl sx={{ m: 1, minWidth: 120 }}>
-              <InputLabel htmlFor="grouped-native-select">All</InputLabel>
-              <Select native defaultValue="" id="grouped-native-select" label="Grouping">
-                <option aria-label="None" value="" />
-                <optgroup label="Category 1">
-                  <option value={1}>Option 1</option>
-                  <option value={2}>Option 2</option>
-                </optgroup>
-                <optgroup label="Category 2">
-                  <option value={3}>Option 3</option>
-                  <option value={4}>Option 4</option>
-                </optgroup>
+           
+          
+        <div className={classes.searchDropdown}>
+          <FormControl sx={{p:0, minWidth: 120 }} justifyContent="left">
+          <InputLabel id="demo-select-small">Categories</InputLabel>
+              <Select
+                labelId="demo-select-small"
+                id="demo-select-small"
+                value={category}
+                label="Category"
+                onChange={handleChange}
+              >
+                <MenuItem value="">
+                  <em>None</em>
+                </MenuItem>
+                {categoryList.map((row)=>{
+                  return(
+                    <MenuItem value={row._id}>{row.name}</MenuItem>
+                  );
+                })}
               </Select>
-          </FormControl>
+        </FormControl>
+        </div>
+        
 
-          <div className={classes.search}>
+        <div className={classes.search}>
             <div className={classes.searchIcon}>
               <SearchIcon />
             </div>
@@ -167,16 +191,13 @@ export default function Navbar() {
               }}
               inputProps={{ 'aria-label': 'search' }}
             />
-          </div>
+        </div>
 
           <div className={classes.sectionDesktop}>
-            {/* <IconButton aria-label="show 4 new mails" color="inherit">
-              <Badge badgeContent={4} color="secondary">
-                <MailIcon />
-              </Badge>
-            </IconButton> */}
             <IconButton aria-label="show 17 new notifications" color="inherit">
-              <Badge badgeContent={1} color="secondary">
+              <Badge 
+                badgeContent={ state.length === 0 ? ("0") : state.length }
+                color="secondary">
                 <AddShoppingCartIcon /> 
               </Badge>
             </IconButton>
@@ -202,7 +223,6 @@ export default function Navbar() {
               <MoreIcon />
             </IconButton>
           </div>
-
           {renderMobileMenu}
           {renderMenu}
         </Nav>
