@@ -2,25 +2,66 @@ import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Avatar from "@mui/material/Avatar";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
-import Checkbox from "@mui/material/Checkbox";
 import Container from "@mui/material/Container";
 import CssBaseline from "@mui/material/CssBaseline";
-import FormControlLabel from "@mui/material/FormControlLabel";
 import Grid from "@mui/material/Grid";
-import Link from "@mui/material/Link";
+// import Link from "@mui/material/Link";
 import TextField from "@mui/material/TextField";
 import Typography from "@mui/material/Typography";
 import * as React from "react";
+import { SubmitHandler, useForm } from "react-hook-form";
+import { Link, useNavigate } from "react-router-dom";
+import Notification, { NotificationType } from "../../Notification";
+import { useUserDispatch } from "../../store/action-dispatchs";
+import { GetMyInfoAsync, SignInUserAsync } from "../../utilis/API/Auth";
+import { UserSigninDto } from "../../utilis/DTOs/User";
+
+type Inputs = {
+  email: string;
+  password: string;
+};
 
 export default function SignIn() {
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get("email"),
-      password: data.get("password"),
-    });
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<Inputs>();
+
+  const { ClearUserInfo, SetUserInfo } = useUserDispatch();
+  const navigate = useNavigate();
+
+  const onSubmit: SubmitHandler<Inputs> = async (data) => {
+    var userSigninInfo: UserSigninDto = {
+      email: data.email,
+      password: data.password,
+    };
+
+    const userInfo = await SignInUserAsync(userSigninInfo);
+
+    if (userInfo !== undefined) {
+      const userBasicInfo = await GetMyInfoAsync(userInfo.token);
+      Notification(NotificationType.success, "LOGIN SUCCESS");
+      SetUserInfo({
+        expireDate: new Date(userInfo.expire_at * 1000),
+        authorized: true,
+        role: userInfo.role,
+        token: userInfo.token,
+        user: userBasicInfo,
+      });
+      if (userInfo.role === "admin") {
+        navigate("/admin");
+      } else {
+        navigate("/user");
+      }
+    } else {
+      Notification(NotificationType.error, "LOGIN FAILED");
+    }
   };
+
+  React.useEffect(() => {
+    ClearUserInfo();
+  }, []);
 
   return (
     <Container component="main" maxWidth="xs">
@@ -39,31 +80,42 @@ export default function SignIn() {
         <Typography component="h1" variant="h5">
           Sign in
         </Typography>
-        <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
+        <Box
+          component="form"
+          onSubmit={handleSubmit(onSubmit)}
+          noValidate
+          sx={{ mt: 1 }}
+          minWidth="350px"
+        >
           <TextField
             margin="normal"
-            required
+            error={errors.email ? true : false}
             fullWidth
+            type={"email"}
             id="email"
             label="Email Address"
-            name="email"
             autoComplete="email"
             autoFocus
+            {...register("email", { required: "Please provide email." })}
           />
+          <Typography color={"red"}>{errors.email?.message}</Typography>
           <TextField
             margin="normal"
-            required
+            error={errors.password ? true : false}
             fullWidth
-            name="password"
             label="Password"
             type="password"
             id="password"
             autoComplete="current-password"
+            {...register("password", {
+              required: "Please provide password.",
+              minLength: {
+                value: 6,
+                message: "Min password langth is 6",
+              },
+            })}
           />
-          <FormControlLabel
-            control={<Checkbox value="remember" color="primary" />}
-            label="Remember me"
-          />
+          <Typography color={"red"}>{errors.password?.message}</Typography>
           <Button
             type="submit"
             fullWidth
@@ -73,15 +125,8 @@ export default function SignIn() {
             Sign In
           </Button>
           <Grid container>
-            <Grid item xs>
-              <Link href="#" variant="body2">
-                Forgot password?
-              </Link>
-            </Grid>
             <Grid item>
-              <Link href="#" variant="body2">
-                {"Don't have an account? Sign Up"}
-              </Link>
+              <Link to="/signup">{"Don't have an account? Sign Up"}</Link>
             </Grid>
           </Grid>
         </Box>
