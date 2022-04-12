@@ -1,0 +1,33 @@
+.home-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.home-header > h1 {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.home-header > .actions {
+  flex-basis: 60%;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  margin-bottom: 2em;
+}
+
+.pagination-bar {
+  margin: 2em auto;
+  padding: 2em;
+  background-color: aliceblue;
+  box-shadow: 0.1em 0.1em 0.1em 0.1em rgb(230, 230, 230);
+  border-radius: 0.5em;
+  width: 90%;
+  max-width: 400px;
+  display: flex;
+  justify-content: space-between;
+  list-style: none;
+}
+
+.pagination-bar > li {
+  cursor: pointer;
+}

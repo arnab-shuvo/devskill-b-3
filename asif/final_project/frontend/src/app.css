@@ -1,0 +1,14 @@
+* {
+  margin: 0;
+}
+.container {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.body {
+  max-width: 1000px;
+  margin: 3em auto;
+  flex: 1;
+}

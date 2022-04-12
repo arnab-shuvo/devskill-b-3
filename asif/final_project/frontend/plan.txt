@@ -1,0 +1,32 @@
+next
+
+
+-- product page filtering by category, sorting (completed)
+-- product page search option(completed)
+--product detail page(where add to cart option will exist(completed but oparation of add cart left)
+
+-- user login, logout
+---- cart add, delete, update quantity
+---- order
+
+-- user profile
+---- user profile update
+
+-- order page
+---- update order(if the order is not accepted yet!)
+
+////
+////
+////
+-- admin login, logout
+
+-- admin dashboard
+----- order list, delete and accepte button
+---- order filter by status
+
+-- block a user
+
+-- add , update, delete a category, product
+
+
+order status = [pending, accepted, delivered]

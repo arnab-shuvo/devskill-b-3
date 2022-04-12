@@ -1,0 +1,4 @@
+testing is complete to delete cart 
+
+next is create order, update order , delete order
+creating admin login, change order status of customer

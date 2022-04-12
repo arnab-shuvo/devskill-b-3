@@ -1,0 +1,9 @@
+.sort-container {
+  width: 50%;
+  max-width: 10em;
+}
+
+.sort-container > h3 {
+  font-family: "Times New Roman", Times, serif;
+  font-weight: 400;
+}

@@ -1,0 +1,9 @@
+.filter-container {
+  width: 50%;
+  max-width: 10em;
+}
+
+.filter-container > h3 {
+  font-family: "Times New Roman", Times, serif;
+  font-weight: 400;
+}

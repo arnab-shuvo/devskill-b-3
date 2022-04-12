@@ -1,0 +1,13 @@
+.search-input {
+  padding: 1em;
+  border-radius: 0.3em;
+}
+
+.search-button {
+  cursor: pointer;
+  padding: 0.5em 0.3em;
+  margin: 0 0.5em;
+  border: none;
+  border-radius: 0.2em;
+  box-shadow: 0.1em 0.1em 0.2em 0.2em rgb(206, 206, 206);
+}
