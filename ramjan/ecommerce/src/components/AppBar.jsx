@@ -37,7 +37,7 @@ function AppBar() {
                 }
             </Grid>
             <Grid style={ styles.promo } item xs={12} sm={6} md={6}>
-                <Button style={ styles.buttonColor} variant='text' startIcon={<ThumbUpOutlinedIcon/>}> 14 Dayes Mone Banck </Button>
+               <Button style={ styles.buttonColor} variant='text' startIcon={<ThumbUpOutlinedIcon/>}> 14 Dayes Mone Banck </Button>
                <Button style={ styles.buttonColor} variant='text' startIcon={<InsertEmoticonOutlinedIcon/>}> Promo Code</Button>
             </Grid>
           

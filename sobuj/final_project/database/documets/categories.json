@@ -1,0 +1,136 @@
+[{
+  "_id": {
+    "$oid": "62484b3398062c484481fdda"
+  },
+  "name": "Men",
+  "description": "Men Fasion Items",
+  "image": "",
+  "__v": 0,
+  "parent": "0"
+},{
+  "_id": {
+    "$oid": "62484b4f98062c484481fddb"
+  },
+  "name": "Women",
+  "description": "Women Fasion Items",
+  "image": "",
+  "__v": 0,
+  "parent": "0"
+},{
+  "_id": {
+    "$oid": "62484bb598062c484481fddc"
+  },
+  "name": "Home & Living",
+  "description": "Home & Living essential items",
+  "image": "",
+  "__v": 0,
+  "parent": "0"
+},{
+  "_id": {
+    "$oid": "62484e664f944091c4a40a2f"
+  },
+  "name": "Topwear",
+  "description": "Topwear dresses for Men",
+  "image": "",
+  "parent": "62484b3398062c484481fdda",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "62484eae4f944091c4a40a30"
+  },
+  "name": "Bottom Wear",
+  "description": "Bottom Wear dresses for Men",
+  "image": "",
+  "parent": "62484b3398062c484481fdda",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "62484ec54f944091c4a40a31"
+  },
+  "name": "Festive Wear",
+  "description": "Festival dresses for Men",
+  "image": "",
+  "parent": "62484b3398062c484481fdda",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "62484ef04f944091c4a40a32"
+  },
+  "name": "Sports Wear",
+  "description": "Sports dresses for Men",
+  "image": "",
+  "parent": "62484b3398062c484481fdda",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "62484f054f944091c4a40a33"
+  },
+  "name": "Footwear",
+  "description": "Footwears for Men",
+  "image": "",
+  "parent": "62484b3398062c484481fdda",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "62484f634f944091c4a40a34"
+  },
+  "name": "Watches",
+  "description": "Watches for Women",
+  "image": "",
+  "parent": "62484b4f98062c484481fddb",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "62484f6e4f944091c4a40a35"
+  },
+  "name": "Topwear",
+  "description": "Topwear for Women",
+  "image": "",
+  "parent": "62484b4f98062c484481fddb",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "62484f7a4f944091c4a40a36"
+  },
+  "name": "Bottom wear",
+  "description": "Bottom wear for Women",
+  "image": "",
+  "parent": "62484b4f98062c484481fddb",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "62484f8e4f944091c4a40a37"
+  },
+  "name": "Brand Fashion wear",
+  "description": "Brand Fashion wear for Women",
+  "image": "",
+  "parent": "62484b4f98062c484481fddb",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "62484f9e4f944091c4a40a38"
+  },
+  "name": "Footwear",
+  "description": "Footwear for Women",
+  "image": "",
+  "parent": "62484b4f98062c484481fddb",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "62484fb14f944091c4a40a39"
+  },
+  "name": "Bag & Backpack",
+  "description": "Bag & Backpack for Women",
+  "image": "",
+  "parent": "62484b4f98062c484481fddb",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "62484fc34f944091c4a40a3a"
+  },
+  "name": "Bag & Backpack",
+  "description": "Bag & Backpack for Men",
+  "image": "",
+  "parent": "62484b3398062c484481fdda",
+  "__v": 0
+}]
