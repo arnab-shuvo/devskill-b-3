@@ -18,14 +18,15 @@ model Admin {
 }
 
 model Customer {
-  id       Int     @unique @default(autoincrement())
-  name     String  @db.VarChar(200)
-  email    String
-  password String
-  status   String?
-  number   String?
-  Cart     Cart[]
-  Order    Order[]
+  id           Int     @unique @default(autoincrement())
+  name         String  @db.VarChar(200)
+  email        String
+  password     String
+  status       String?
+  order_status String?
+  number       String?
+  Cart         Cart[]
+  Order        Order[]
 }
 
 model Category {
@@ -44,24 +45,31 @@ model Product {
   category_id Int
   Cart        Cart[]
 
+  Order Order[]
 }
 
 model Cart {
   id          Int      @unique @default(autoincrement())
+  name        String
+  image       String
   quantity    Int      @default(1)
   price       Int
-  Product     Product  @relation(fields: [product_id], references: [id])
-  product_id  Int
   Customer    Customer @relation(fields: [customer_id], references: [id])
   customer_id Int
+  Product     Product  @relation(fields: [product_id], references: [id])
+  product_id  Int
 }
 
 model Order {
-  id                                    Int      @unique @default(autoincrement())
-  product_id_quantity_price_list_string String
-  price                                 Int
-  status                                String?  @default("pending")
-  Customer                              Customer @relation(fields: [customer_id], references: [id])
-  customer_id                           Int
+  id          Int      @unique @default(autoincrement())
+  Product     Product  @relation(fields: [product_id], references: [id])
+  product_id  Int
+  name        String
+  image       String
+  quantity    Int
+  price       Int
+  status      String?  @default("pending")
+  Customer    Customer @relation(fields: [customer_id], references: [id])
+  customer_id Int
 
 }

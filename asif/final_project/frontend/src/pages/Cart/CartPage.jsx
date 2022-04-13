@@ -67,11 +67,11 @@ const CartPage = () => {
               <div className="cart-page-list">
                 {cart_reducer.map((cart, index) => (
                   <div className="cart-item">
-                    <h3>{cart.Product.name}</h3>
+                    <h3>{cart.name}</h3>
                     <img
                       className="cart-image"
-                      src={cart.Product.image}
-                      alt={cart.Product.name}
+                      src={cart.image}
+                      alt={cart.name}
                     />
                     <p>
                       <strong>Price</strong> : {cart.price}
@@ -136,9 +136,7 @@ const CartPage = () => {
                     <strong>Total Price</strong> : {get_total_price()}
                   </p>
                   <Button
-                    onClick={() =>
-                      dispatch(on_order(get_total_price(), navigate))
-                    }
+                    onClick={() => dispatch(on_order(navigate))}
                     className="order-button"
                     variant="contained"
                     color="success"

@@ -4,7 +4,6 @@ import { Avatar } from "@mui/material";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { logout } from "../../store/action_types";
 import { user_logout } from "../../store/thunks/user_thunks";
 const Navigation = () => {
   const { token } = useSelector((store) => store.user_reducer);
@@ -18,6 +17,7 @@ const Navigation = () => {
       </div>
 
       <div className={`navlinks`}>
+        {token && <p onClick={() => navigate("/order")}>Order</p>}
         {token && <p onClick={() => navigate("/carts")}>Carts</p>}
         {token ? (
           <p onClick={() => dispatch(user_logout())}>Logout</p>

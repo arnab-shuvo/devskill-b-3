@@ -258,10 +258,11 @@ export const delete_product = async (req, res, next) => {
 //
 export const create_cart = async (req, res, next) => {
   try {
-    const { product_id, customer_id, price } = req.query;
+    const { customer_id } = req.query;
+    const { product_id, name, image, price } = req.body;
     const cart_exist = await cart.findFirst({
       where: {
-        product_id: JSON.parse(product_id),
+        product_id: JSON.parse(req.body.product_id),
         customer_id: JSON.parse(customer_id),
       },
     });
@@ -269,9 +270,11 @@ export const create_cart = async (req, res, next) => {
       return res.status(300).json({ message: "Cart Already Exist!" }).end();
     const new_cart = await cart.create({
       data: {
+        name,
+        image,
+        price: JSON.parse(price),
         product_id: JSON.parse(product_id),
         customer_id: JSON.parse(customer_id),
-        price: JSON.parse(price),
       },
     });
     if (!new_cart)
@@ -291,7 +294,6 @@ export const get_carts = async (req, res, next) => {
   try {
     const carts = await cart.findMany({
       where: { customer_id: JSON.parse(req.query.customer_id) },
-      include: { Product: { select: { name: true, image: true } } },
     });
     return res.status(200).json({ carts }).end();
   } catch (error) {
@@ -344,20 +346,29 @@ export const delete_all_cart = async (req, res, next) => {
 //
 export const create_order = async (req, res, next) => {
   try {
-    const { product_id_quantity_price_list_string, price } = req.body.data;
-    const new_order = await order.create({
-      data: {
-        product_id_quantity_price_list_string,
-        price,
-        customer_id: JSON.parse(req.query.customer_id),
-      },
-    });
-    if (new_order) {
-      await cart.deleteMany({
-        where: { customer_id: JSON.parse(req.query.customer_id) },
+    const { cart_list } = req.body.data;
+    let order_items = [];
+    cart_list.map(async (cart_item) => {
+      const new_order = await order.create({
+        data: {
+          product_id: cart_item.product_id,
+          name: cart_item.name,
+          image: cart_item.image,
+          quantity: cart_item.quantity,
+          price: cart_item.price,
+          customer_id: JSON.parse(req.query.customer_id),
+        },
       });
-    }
-    return res.status(200).json({ order: new_order }).end();
+      order_items.push(new_order);
+    });
+    await cart.deleteMany({
+      where: { customer_id: JSON.parse(req.query.customer_id) },
+    });
+    await customer.update({
+      where: { id: JSON.parse(req.query.customer_id) },
+      data: { order_status: "pending..." },
+    });
+    return res.status(200).json({ order_items }).end();
   } catch (error) {
     return res.status(404).json({ error: error.message }).end();
   }
@@ -382,8 +393,10 @@ export const update_order = async (req, res, next) => {
 export const get_customer_order = async (req, res, next) => {
   try {
     const { customer_id } = req.query;
-    const order_list = await order.findFirst({ where: { customer_id } });
-    return res.status(200).json({ order_list }).end();
+    const customer_order_items = await order.findMany({
+      where: { customer_id: JSON.parse(customer_id) },
+    });
+    return res.status(200).json({ customer_order_items }).end();
   } catch (error) {
     return res.status(404).json({ error: error.message }).end();
   }
@@ -404,13 +417,25 @@ export const get_all_order = async (req, res, next) => {
 //required customer_id
 export const delete_order = async (req, res, next) => {
   try {
-    await order.delete({ where: { customer_id: req.query.customer_id } });
+    await order.delete({
+      where: { id: JSON.parse(req.query.order_id) },
+    });
     return res.status(200).end();
   } catch (error) {
     return res.status(404).json({ error: error.message }).end();
   }
 };
 
+export const delete_customers_all_order = async (req, res, next) => {
+  try {
+    await order.deleteMany({
+      where: { customer_id: JSON.parse(req.query.customer_id) },
+    });
+    return res.status(200).end();
+  } catch (error) {
+    return res.status(404).json({ error: error.message }).end();
+  }
+};
 //
 //
 //

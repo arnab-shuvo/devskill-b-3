@@ -8,6 +8,7 @@ import Home from "./pages/Home/Home";
 import ProductDetails from "./pages/Product_Details/ProductDetails";
 import Login from "./pages/Auth/Login/Login";
 import OrderPage from "./pages/Order/OrderPage";
+import ProfilePage from "./pages/Profile/ProfilePage";
 const App = () => {
   return (
     <div className="container">
@@ -20,6 +21,7 @@ const App = () => {
             element={<ProductDetails />}
           />
           <Route path="/login" element={<Login />} />
+          <Route path="/profile" element={<ProfilePage />} />
           <Route path="/carts" element={<CartPage />} />
           <Route path="/order" element={<OrderPage />} />
           <Route path="*" element={<h1>404 not found</h1>} />

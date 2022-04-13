@@ -24,6 +24,7 @@ import {
   update_product,
   admin_login,
   delete_all_cart,
+  delete_customers_all_order,
 } from "./controller.js";
 
 export default (app) => {
@@ -51,10 +52,11 @@ export default (app) => {
   //
   //
   app.get("/orders", get_all_order);
-  app.get("/orders/customer-orders", get_customer_order);
+  app.get("/orders/customer-order", get_customer_order);
   app.post("/orders/create-order", create_order);
   app.post("/orders/update-order", update_order);
-  app.post("/orders/delete-order", delete_order);
+  app.get("/orders/delete-order", delete_order);
+  app.get("/orders/delete-customers-all-order", delete_customers_all_order);
   //
   //
   //

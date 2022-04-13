@@ -14,7 +14,13 @@ const Product_Details = () => {
   //
   const on_add_cart = async () => {
     const response = await axios.post(
-      `http://localhost:8000/carts/create-cart?product_id=${product?.id}&customer_id=${user_data.user?.id}&price=${product?.price}`
+      `http://localhost:8000/carts/create-cart?customer_id=${user_data.user?.id}`,
+      {
+        product_id,
+        name: product.name,
+        image: product.image,
+        price: product.price,
+      }
     );
     response.status == 200
       ? cogoToast.success(response.data.message)
