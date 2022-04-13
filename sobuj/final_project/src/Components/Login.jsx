@@ -35,8 +35,8 @@ function Copyright(props) {
 
 const theme = createTheme();
 
-export default function Login() {
-  const [token, setToken] = useState(null);
+export default function Login({setToken}) {
+  //const [token, setToken] = useState(null);
 
   async function loginUser(credentials) {
     return fetch("http://localhost:8080/signin", {
@@ -47,10 +47,9 @@ export default function Login() {
       body: JSON.stringify(credentials),
     })
       .then((data) => data.json())
-      .then((json) => console.log(json))
-      .then((data)=> setToken(data) )
+      .then((json) => json);
+      
   }
-
 
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
@@ -61,8 +60,11 @@ export default function Login() {
       email,
       password
     });
+    console.log(user, "===user");
     setToken(user.userInfo.token);
-    console.log(token, '=== token after set');
+    
+    // console.log(token, '=== token after set');
+
   }
   
 
@@ -77,7 +79,7 @@ export default function Login() {
   return (
     <ThemeProvider theme={theme}>
 
-      <h2>User Token is: {token && token.length>0 && token.map((user)=><p>{user.userInfo.token}</p>)}</h2>
+      {/* {token} */}
 
       <Grid container component="main" sx={{ height: '100vh' }}>
         <CssBaseline />

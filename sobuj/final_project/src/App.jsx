@@ -23,12 +23,12 @@ import Category from './Pages/FrontEnd/Product/Category';
 import CartDetail from './Pages/FrontEnd/Checkout/Cart';
 import useToken from './Components/useToken';
 
- 
+
 function App() {
 
   // const [token, setToken] = useState();
-  
-
+  // const token = getToken();
+  // console.log(token, "===token form app")
   const [showLoader, setShowLoader] = useState(true)
     useEffect(()=>{
         setTimeout(()=>{
@@ -41,10 +41,12 @@ function App() {
     }
 
   
-  const { token, setToken } = useToken();
-  if(!token) {
-    return <Login setToken={setToken} />
-  }
+    const { token, setToken } = useToken();
+    if(!token) {
+      return <Login setToken={setToken} />
+    }else{
+      console.log(token, "====Token  After login")
+    }
 
   return (
     <>   

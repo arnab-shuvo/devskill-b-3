@@ -13,9 +13,10 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 import { useDispatch, useSelector } from 'react-redux';
 import { deleteProduct, getProductList } from '../../../store/action/ProductAction';
-import { Link, useNavigate } from "react-router-dom"; 
 import UpdateProduct from './Update';
 import CreateProduct from './Create';
+import { Grid } from '@material-ui/core';
+import BackendLayout from '../../../Layouts/Backend/Layouts';
 
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
@@ -58,102 +59,118 @@ const StyledTableCell = styled(TableCell)(({ theme }) => ({
   
 const ManageProduct = () =>{
 
-const navigate = useNavigate();
-const toAdminDashboard = () =>{
-      navigate(`/admin/`);
-  }
- 
-  //Update Procut
-  const [selectUpdate, setSelectUpdate] = useState(null);
-  const [open, setOpen] = React.useState(false);
-  const handleOpen = () => setOpen(true);
-  const handleClose = () => {
-      setOpen(false)
-      setSelectUpdate = null
-  };
+    //Update Procut
+    const [selectUpdate, setSelectUpdate] = useState(null);
+    const [open, setOpen] = React.useState(false);
+    const handleOpen = () => setOpen(true);
+    const handleClose = () => {
+        setOpen(false)
+        setSelectUpdate = null
+    };
 
-  const updateProduct = (product) => {
-    //alert("Update Product-"+ id)
-    setSelectUpdate(product);
-    setOpen(true);
-  };    
+    const updateProduct = (product) => {
+      //alert("Update Product-"+ id)
+      setSelectUpdate(product);
+      setOpen(true);
+    };    
 
-    const { productList } = useSelector((store) => store.productList);
-    //console.log(productList, "===store");
+      const { productList } = useSelector((store) => store.productList);
+      //console.log(productList, "===store");
 
-    const dispatch = useDispatch();
-    useEffect(()=>{
-        fetch("http://127.0.0.1:8080/products")
-        .then((res) => res.json())
-        .then((json) => {
-            dispatch(getProductList(json));
-        });
-    }, []);
+      const dispatch = useDispatch();
+      useEffect(()=>{
+          fetch("http://127.0.0.1:8080/products")
+          .then((res) => res.json())
+          .then((json) => {
+              dispatch(getProductList(json));
+          });
+      }, []);
 
-    const handleDelete = (id) =>{
-        if(window.confirm("Are you sure for about the delation?")){
-            dispatch(deleteProduct(id));
-        }
-    }
+      const handleDelete = (id) =>{
+          if(window.confirm("Are you sure for about the delation?")){
+              dispatch(deleteProduct(id));
+          }
+      }
 
-    return<>
-    <Button variant="contained" color='secondary' onClick={toAdminDashboard}> Dashboard </Button>
-    <Button sx={{ ml:"5px;" }} variant="contained" color='primary' onClick={handleOpen}> Add </Button>
-     
-    {selectUpdate !== null ? (
-      <UpdateProduct
-        product={selectUpdate}
-        openModal={open}
-        handleClose={handleClose}
-      />
-    ) : (
-      <CreateProduct />
-    )}
+    return (
+      <>
+        <Grid container spacing={1}>
+          {/* <Button variant="contained" color='secondary' onClick={toAdminDashboard}> Dashboard </Button>
+            <Button sx={{ ml:"5px;" }} variant="contained" color='primary' onClick={handleOpen}> Add </Button> */}
 
-    <TableContainer component={Paper}>
-      <Table sx={{ minWidth: 700 }} aria-label="customized table">
-        <TableHead>
-          <TableRow>
-            <StyledTableCell>Title</StyledTableCell>
-            <StyledTableCell align="right">Category</StyledTableCell>
-            <StyledTableCell align="right">Price</StyledTableCell>
-            <StyledTableCell align="right">Stock</StyledTableCell>
-            <StyledTableCell align="right">Image</StyledTableCell>
-            <StyledTableCell align="right">Action</StyledTableCell>
-          </TableRow>
-        </TableHead>
-        <TableBody>
-            {productList.map((product)=>{
-                let image =  product.image;
-                return(
-                // <p  key={product._id} >{product.title}</p>
-                
-                <StyledTableRow key={product._id}>
-                    <StyledTableCell component="th" scope="row">
+          {selectUpdate !== null && (
+            <UpdateProduct
+              product={selectUpdate}
+              openModal={open}
+              handleClose={handleClose}
+            />
+          )}
+          <CreateProduct />
+          <TableContainer component={Paper}>
+            <Table sx={{ minWidth: 700 }} aria-label="customized table">
+              <TableHead>
+                <TableRow>
+                  <StyledTableCell>Title</StyledTableCell>
+                  <StyledTableCell align="right">Category</StyledTableCell>
+                  <StyledTableCell align="right">Price</StyledTableCell>
+                  <StyledTableCell align="right">Stock</StyledTableCell>
+                  <StyledTableCell align="right">Image</StyledTableCell>
+                  <StyledTableCell align="right">Action</StyledTableCell>
+                </TableRow>
+              </TableHead>
+              <TableBody>
+                {productList.map((product) => {
+                  let image = product.image;
+                  return (
+                    // <p  key={product._id} >{product.title}</p>
+
+                    <StyledTableRow key={product._id}>
+                      <StyledTableCell component="th" scope="row">
                         {product.title}
-                    </StyledTableCell>
-                    <StyledTableCell align="right">{product.category.name}</StyledTableCell>
-                    <StyledTableCell align="right">{product.price}</StyledTableCell>
-                    <StyledTableCell align="right">{product.stock}</StyledTableCell>
-                    <StyledTableCell align="right">
-                        <img height={"100"} src={"http://127.0.0.1:8080"+image} />
-                    </StyledTableCell>
-                    <StyledTableCell align="right">
+                      </StyledTableCell>
+                      <StyledTableCell align="right">
+                        {product.category.name}
+                      </StyledTableCell>
+                      <StyledTableCell align="right">
+                        {product.price}
+                      </StyledTableCell>
+                      <StyledTableCell align="right">
+                        {product.stock}
+                      </StyledTableCell>
+                      <StyledTableCell align="right">
+                        <img
+                          height={"100"}
+                          src={"http://127.0.0.1:8080" + image}
+                        />
+                      </StyledTableCell>
+                      <StyledTableCell align="right">
                         <ButtonGroup disableElevation variant="contained">
-                            <Button variant="contained" color='secondary'  onClick={()=>updateProduct(product._id)}>   
-                                <EditIcon />
-                            </Button>
-                            <Button variant="contained" color='error' onClick={()=>handleDelete(product._id)}> <DeleteIcon /> </Button>
+                          <Button
+                            variant="contained"
+                            color="secondary"
+                            onClick={() => updateProduct(product._id)}
+                          >
+                            <EditIcon />
+                          </Button>
+                          <Button
+                            variant="contained"
+                            color="error"
+                            onClick={() => handleDelete(product._id)}
+                          >
+                            {" "}
+                            <DeleteIcon />{" "}
+                          </Button>
                         </ButtonGroup>
-                    </StyledTableCell>
-                </StyledTableRow>
-            );
-            })}
-
-        </TableBody>
-      </Table>
-    </TableContainer>
-    </>
+                      </StyledTableCell>
+                    </StyledTableRow>
+                  );
+                })}
+              </TableBody>
+            </Table>
+          </TableContainer>
+        </Grid>
+      </>
+    );
 }
 
-export default ManageProduct;
+export default BackendLayout(ManageProduct);
