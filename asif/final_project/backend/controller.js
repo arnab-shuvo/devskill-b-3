@@ -87,13 +87,15 @@ export const customer_profile = async (req, res, next) => {
 // required {req.body:{token:token, data:data}}
 export const update_customer_profile = async (req, res, next) => {
   try {
-    const { password } = await jsonwebtoken.verify(req.body.token, "secret");
+    const { id, name, email, number } = req.body.data;
     const updated_customer_profile = await customer.update({
-      where: { password },
-      data: { ...req.body.data },
+      where: { id },
+      data: { name, email, number },
+      select: { name: true, email: true, number: true, id: true },
     });
     return res.status(200).json({ updated_customer_profile }).end();
   } catch (error) {
+    console.log(error.message);
     return res.status(404).json({ error: error.message }).end();
   }
 };
@@ -281,7 +283,10 @@ export const create_cart = async (req, res, next) => {
       return res.status(200).json({ message: "Cart didn't added" }).end();
     return res
       .status(200)
-      .json({ message: new_cart ? "Cart Added" : "Cart didn't added" })
+      .json({
+        message: new_cart ? "Cart Added" : "Cart didn't added",
+        cart: new_cart,
+      })
       .end();
   } catch (error) {
     return res.status(404).json({ error: error.message }).end();

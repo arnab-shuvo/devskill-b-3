@@ -1,0 +1,44 @@
+.edit-profile{
+    width: 400px;
+    margin: auto;
+    box-shadow: .1em .1em .1em .1em rgb(211, 211, 211);
+    padding: 1em 0;
+    border-radius: .3em;
+    display: grid;
+    place-content: center;
+    gap: 1em;
+}
+
+.edit-profile > h1{
+    font-weight: 500;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+
+}
+.edit-profile > form {
+    display: grid;
+    place-content: center;
+    gap: .7em;
+}
+
+.edit-profile > form > div{
+    display: flex;
+    flex-direction: column;
+    
+    
+}
+
+.edit-profile > form > div > label {
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-size: 1rem;
+}
+.edit-profile > form > div > input{
+    padding: 1em;
+    border:none;
+    border-bottom: 1px solid rgb(185, 185, 185);
+    outline: none;
+    font-size: 1rem;
+}
+
+.edit-profile > form > div > input:hover{
+    border-bottom: 1px solid black;
+}

@@ -9,12 +9,14 @@ export const get_carts = (navigate) => async (dispatch, getState) => {
       const response = await axios.get(
         `http://localhost:8000/carts?customer_id=${user_reducer.user?.id}`
       );
-      response.data.carts.length == 0
-        ? cogoToast.warn("you didn't add any cart yet!") && navigate("/")
-        : dispatch({
-            type: add_carts,
-            payload: { carts: response.data.carts },
-          });
+
+      if (response.data.carts.length == 0) {
+        return cogoToast.warn("you didn't add any cart yet!");
+      }
+      dispatch({
+        type: add_carts,
+        payload: { carts: response.data.carts },
+      });
     } catch (error) {
       return cogoToast.error(error);
     }

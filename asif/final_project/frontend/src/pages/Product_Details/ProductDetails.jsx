@@ -3,18 +3,20 @@ import "./product_details.css";
 import { useParams } from "react-router-dom";
 import { Button, Grid } from "@mui/material";
 import axios from "axios";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import cogoToast from "cogo-toast";
+import { add_carts } from "../../store/action_types";
 const Product_Details = () => {
   const { product_id } = useParams();
-  const user_data = useSelector((state) => state.user_reducer);
+  const dispatch = useDispatch();
+  const { cart_reducer, user_reducer } = useSelector((state) => state);
   const [product, setProduct] = useState(null);
 
   //
   //
   const on_add_cart = async () => {
     const response = await axios.post(
-      `http://localhost:8000/carts/create-cart?customer_id=${user_data.user?.id}`,
+      `http://localhost:8000/carts/create-cart?customer_id=${user_reducer.user?.id}`,
       {
         product_id,
         name: product.name,
@@ -23,7 +25,11 @@ const Product_Details = () => {
       }
     );
     response.status == 200
-      ? cogoToast.success(response.data.message)
+      ? cogoToast.success(response.data.message) &&
+        dispatch({
+          type: add_carts,
+          payload: { carts: [...cart_reducer, response.data.cart] },
+        })
       : cogoToast.warn("Cart already exist");
   };
   //
@@ -66,7 +72,7 @@ const Product_Details = () => {
             <p>
               <strong>Price</strong> : {product.price}
             </p>
-            {user_data.token && (
+            {user_reducer.token && (
               <div className="product-details-action">
                 <p>
                   Add To Cart :

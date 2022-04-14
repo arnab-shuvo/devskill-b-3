@@ -1,4 +1,3 @@
-import React from "react";
 import "./navigation_styles.css";
 import { Avatar } from "@mui/material";
 import { useSelector } from "react-redux";
@@ -6,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { user_logout } from "../../store/thunks/user_thunks";
 const Navigation = () => {
-  const { token } = useSelector((store) => store.user_reducer);
+  const { user_reducer } = useSelector((store) => store);
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -17,16 +16,18 @@ const Navigation = () => {
       </div>
 
       <div className={`navlinks`}>
-        {token && <p onClick={() => navigate("/order")}>Order</p>}
-        {token && <p onClick={() => navigate("/carts")}>Carts</p>}
-        {token ? (
+        {user_reducer.token && <p onClick={() => navigate("/order")}>Order</p>}
+        {user_reducer.token && <p onClick={() => navigate("/carts")}>Carts</p>}
+        {user_reducer.token ? (
           <p onClick={() => dispatch(user_logout())}>Logout</p>
         ) : (
           <p onClick={() => navigate("/login")}>Login</p>
         )}
-        <p className="profile-wrapper">
-          Profile <Avatar />
-        </p>
+        {user_reducer.token && (
+          <p className="profile-wrapper" onClick={() => navigate("/profile")}>
+            Profile <Avatar />
+          </p>
+        )}
       </div>
     </div>
   );

@@ -9,6 +9,7 @@ import ProductDetails from "./pages/Product_Details/ProductDetails";
 import Login from "./pages/Auth/Login/Login";
 import OrderPage from "./pages/Order/OrderPage";
 import ProfilePage from "./pages/Profile/ProfilePage";
+import EditProfile from "./pages/Edit Profile/EditProfile";
 const App = () => {
   return (
     <div className="container">
@@ -22,6 +23,7 @@ const App = () => {
           />
           <Route path="/login" element={<Login />} />
           <Route path="/profile" element={<ProfilePage />} />
+          <Route path="/edit-profile" element={<EditProfile />} />
           <Route path="/carts" element={<CartPage />} />
           <Route path="/order" element={<OrderPage />} />
           <Route path="*" element={<h1>404 not found</h1>} />

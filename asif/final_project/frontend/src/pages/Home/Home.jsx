@@ -29,36 +29,31 @@ const Home = () => {
       }
     };
     execute();
+    console.log("pr");
   }, [selected_page]);
   //
   //
   //
   return (
     <>
-      {products.length == 0 ? (
-        <h1>Sorry there is no product</h1>
-      ) : (
-        <>
-          <div className="home-header">
-            <h1>Products</h1>
-            <div className="actions">
-              <Search setProducts={setProducts} setPageCount={set_page_count} />
-              <Filter setProducts={setProducts} />
-              <Sort page={selected_page} setProducts={setProducts} />
-            </div>
-          </div>
-          <Grid container spacing={3}>
-            {products.map((product) => (
-              <Product product={product} />
-            ))}
-          </Grid>
-          <ReactPaginate
-            className="pagination-bar"
-            pageCount={page_count}
-            onPageChange={({ selected }) => set_selected_page(selected + 1)}
-          />
-        </>
-      )}
+      <div className="home-header">
+        <h1>Products</h1>
+        <div className="actions">
+          <Search setProducts={setProducts} setPageCount={set_page_count} />
+          <Filter setProducts={setProducts} />
+          <Sort page={selected_page} setProducts={setProducts} />
+        </div>
+      </div>
+      <Grid container spacing={3}>
+        {products.map((product) => (
+          <Product product={product} />
+        ))}
+      </Grid>
+      <ReactPaginate
+        className="pagination-bar"
+        pageCount={page_count}
+        onPageChange={({ selected }) => set_selected_page(selected + 1)}
+      />
     </>
   );
 };
