@@ -16,7 +16,7 @@ import { deleteProduct, getProductList } from '../../../store/action/ProductActi
 import UpdateProduct from './Update';
 import CreateProduct from './Create';
 import { Grid } from '@material-ui/core';
-import BackendLayout from '../../../Layouts/Backend/Layouts';
+import BackendLayout from '../../../Layouts/Backend/AdminLayout';
 
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({

@@ -7,7 +7,7 @@ const ActionType = {
 
     setToken: 'SET-TOKEN',
     registration: 'REGISTRATION',
-    login:'LOGIN',
+    USER_LOGIN:'USER-LOGIN',
     ADD_TO_CART: 'ADD-TO-CART',
     REMOVE_FROM_CART: 'REMOVE-FROM-CART',
     UPDATE_CART: 'UPDATE-CART',

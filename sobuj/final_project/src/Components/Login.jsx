@@ -14,8 +14,12 @@ import Typography from '@mui/material/Typography';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { useNavigate } from "react-router-dom"; 
 import PropTypes from 'prop-types';
-import { useState } from 'react';
-import { useEffect } from 'react';
+import { useState, useEffect} from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+// import { userActions } from '../store/action/UserAction';
+import { setUserInfo } from '../store/action/UserAction';
+import { userLogin } from '../store/action/UserAction';
+
 
 function Copyright(props) {
   return (
@@ -31,13 +35,29 @@ function Copyright(props) {
 }
 
 
-
-
 const theme = createTheme();
 
-export default function Login({setToken}) {
-  //const [token, setToken] = useState(null);
+export default function Login() {
 
+  const dispatch = useDispatch();
+  
+  // Destructuring "userInformation" from UserReducer
+  // userReducedInfo is comming from RootReducer (userReducedInfo:UserReducer,)
+  const { userInformation } = useSelector((store) => store.userStore); 
+
+  // useEffect(() => {
+  //   dispatch(loadCategories());
+  // }, []);
+  
+  const navigate = useNavigate();
+    const toSignup = () =>{
+      navigate(`/signup/`);
+  }
+    const toHome = () =>{
+      navigate(`/`);
+  } 
+
+  
   async function loginUser(credentials) {
     return fetch("http://localhost:8080/signin", {
       method: "POST",
@@ -51,30 +71,46 @@ export default function Login({setToken}) {
       
   }
 
+  //Handle Submit 
+ 
+
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
   
   const handleFormSubmit = async e =>{
     e.preventDefault();
+
+    // if (email && password) {
+    //     //console.log(password, "===password after submit");
+    //     // dispatch(userActions.login(email, password));
+    //     let result = await fetch("http://localhost:8080/signin", {
+    //       method: "POST",
+    //       headers: {
+    //         "Content-Type": "application/json",
+    //         "Accept":"application/json",
+    //       },
+    //       body: JSON.stringify(email, password),
+    //     })
+    //     dispatch(setUserInfo(result));
+
+    //     console.log(result, "====result from login page")
+    // }
+
     const user = await loginUser({
       email,
       password
     });
     console.log(user, "===user");
-    setToken(user.userInfo.token);
+    dispatch(setUserInfo(user));
+    console.log(user.userInfo.role, "====result from login page")
+    if(user.userInfo.role === 'admin'){
+      navigate('/admin');
+    }else if(user.userInfo.role === 'user'){
+      navigate('/user/home');
+    }
     
-    // console.log(token, '=== token after set');
-
   }
   
-
-  const navigate = useNavigate();
-    const toSignup = () =>{
-      navigate(`/signup/`);
-  }
-    const toHome = () =>{
-      navigate(`/`);
-  } 
 
   return (
     <ThemeProvider theme={theme}>
@@ -175,6 +211,6 @@ export default function Login({setToken}) {
   );
 }
 
- Login.propTypes = {
-   setToken: PropTypes.func.isRequired,
- }
+//  Login.propTypes = {
+//    setToken: PropTypes.func.isRequired,
+//  }

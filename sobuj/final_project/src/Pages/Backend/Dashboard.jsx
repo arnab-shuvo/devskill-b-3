@@ -5,7 +5,7 @@ import Paper from "@mui/material/Paper";
 import Chart from "../../Components/Backend/Chart";
 import Deposits from "../../Components/Backend/Deposit";
 import Orders from "../../Components/Backend/Orders";
-import BackendLayout from "../../Layouts/Backend/Layouts";
+import BackendLayout from "../../Layouts/Backend/AdminLayout";
 
 
 const Dashboard = () => {

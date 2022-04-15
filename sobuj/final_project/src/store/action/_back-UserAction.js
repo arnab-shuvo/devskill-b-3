@@ -5,36 +5,29 @@ import { userService } from '../../store/service/UserService';
 import { alertActions } from './AlertActions';
 import { history } from '../helpers/History';
 import { userConstants } from '../constants/UserConstants';
+// import { useNavigate } from "react-router-dom";
 
+// const navigate = useNavigate();
+// import { useDispatch } from "react-redux";
+// // 
+// const getCategories = (signin) =>({
+//     type: ActionType.USER_LOGIN,
+//     payload: sigin,
+// });
 
-//Login Action
-export const setUserInfo = (userInfo) =>({
-    type: ActionType.setToken,
-    payload: userInfo,
-});
-
-//Logout Action
-export const logout=()=>{
-    userService.logout();
-    return { type: userConstants.LOGOUT };
-}
-/*
-export const userLogin = () =>{ // Dispatcher
+// export const userLogin = () =>{ // Dispatcher
     
-    return function(dispatch){
-        axios
-        // .get(`${process.env.REACT_APP_API+"/category/"}`)
-        .get(`${"http://127.0.0.1:8080/category"}`)
-        .then((response) =>{
-            console.log("response", response);
-            //dispatch(getCategories(response.data));
-        })
-        .catch((error)=>console.log(error));
-    };
-};
-
-
-
+//     return function(dispatch){
+//         axios
+//         // .get(`${process.env.REACT_APP_API+"/category/"}`)
+//         .get(`${"http://127.0.0.1:8080/category"}`)
+//         .then((response) =>{
+//             console.log("response", response);
+//             //dispatch(getCategories(response.data));
+//         })
+//         .catch((error)=>console.log(error));
+//     };
+// };
 
 export const userActions = {
     login,
@@ -77,5 +70,3 @@ function logout() {
     userService.logout();
     return { type: userConstants.LOGOUT };
 }
-
- */

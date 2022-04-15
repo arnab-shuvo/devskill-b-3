@@ -20,6 +20,7 @@ const RootReducer = combineReducers({
     productDetail: productReducer,
 
     prodCategories:CategoryReducer,
+    userReducedInfo:userReducer,
     token:userReducer,
 
     cartItems:cartReducer,

@@ -81,6 +81,7 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
 const mdTheme = createTheme();
 
 const BackendLayout = (PageComponent) => {
+  console.log("hi from admin panel");
     return function WithPage({ ...props }) {
         
         const [open, setOpen] = React.useState(true);
@@ -89,6 +90,7 @@ const BackendLayout = (PageComponent) => {
         };
 
         return (
+          
             <ThemeProvider theme={mdTheme}>
             <Box sx={{ display: 'flex' }}>
                 <CssBaseline />

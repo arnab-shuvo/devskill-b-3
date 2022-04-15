@@ -32,8 +32,13 @@ import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
 
 import { useDispatch, useSelector } from 'react-redux';
 
-export default function Navbar() {
+export default function Navbar({}) {
   
+  // Destructuring "categoryList" from CategoryReducer
+  const { userInformation } = useSelector((store) => store.userStore); 
+  console.log(userInformation, '=====userInformation')
+
+
   // Destructuring "categoryList" from CategoryReducer
   const { categoryList } = useSelector((state) => state.prodCategories); // prodCategories is comming from RootReducer (prodCategories:CategoryReducer,)
   
@@ -44,16 +49,20 @@ export default function Navbar() {
   const classes = useStyles();
 
   const navigate = useNavigate();
-    const toLogin = () =>{
-      navigate(`/login/`);
-  }
+  
   const toLoginSide = () =>{
-      navigate(`/slogin/`);
+      navigate(`/login/`);
   }
   const toSignup = () =>{
       navigate(`/signup/`);
   }
+  const toLogout = ()=> {
+    // remove user from local storage to log user out
+    
+    localStorage.removeItem('token');
+    navigate('/')
 
+}
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
 
@@ -88,10 +97,15 @@ export default function Navbar() {
       open={isMenuOpen}
       onClose={handleMenuClose}
     >
-      <MenuItem onClick={toLoginSide}>Signin</MenuItem>
-      <MenuItem onClick={toSignup}>Signup</MenuItem>
-      {/* <MenuItem onClick={handleMenuClose}>Signin</MenuItem>
-      <MenuItem onClick={handleMenuClose}>Signup</MenuItem> */}
+      
+          <MenuItem onClick={toLoginSide}>My Account</MenuItem>
+          <MenuItem onClick={toLogout}>Logout</MenuItem>
+       
+          <MenuItem onClick={toLoginSide}>Signin</MenuItem>
+          <MenuItem onClick={toSignup}>Signup</MenuItem>
+        
+      
+      
     </Menu>
   );
 
