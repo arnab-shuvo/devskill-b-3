@@ -1,4 +1,11 @@
 import styled from 'styled-components';
+ 
+export const NavSliceTop = styled.div`
+  width:100%;
+  display:flex;
+  justify-content:right;
+  align-items:right ;
+`;
 
 export const Nav = styled.nav`
   display:flex;

@@ -1,21 +1,17 @@
-import React, { useState } from 'react';
-import styled from "styled-components";
-import { Container } from "../../../Components/Styles/Common.styles";
+import React from 'react'
 import { Link } from 'react-router-dom';
 import Navbar from '../../../Components/Navbar';
+import './styles.css';
 
-const Page404 = () =>{
+const FrontDashboard = () => {
+  return (
 
-    return <>
-        <Navbar />
-        <Container>
-            
-
-                <h1>Welcome to Dashboard</h1>
-            
-        </Container>
-        <Link to={`/`} >Back to Home</Link>
-    </>
+    <div className='wrapper'>
+      <Navbar />
+         <h2>This is Dashboard, which is showing after login </h2>
+ 
+    </div>
+  )
 }
 
-export default Page404;
+export default FrontDashboard;

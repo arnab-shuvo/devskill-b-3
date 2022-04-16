@@ -20,9 +20,9 @@ const RootReducer = combineReducers({
     productDetail: productReducer,
 
     prodCategories:CategoryReducer,
-    userReducedInfo:userReducer,
     token:userReducer,
 
+    cartData:cartReducer,
     cartItems:cartReducer,
 });
 

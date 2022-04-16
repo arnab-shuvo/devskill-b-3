@@ -27,42 +27,74 @@ import MailIcon from '@material-ui/icons/Mail';
 import NotificationsIcon from '@material-ui/icons/Notifications';
 import MoreIcon from '@material-ui/icons/MoreVert';
 import { useStyles } from './Styles/UseStyle';
-import { Nav } from './Styles/NavStyle';
+import { Nav, NavSliceTop } from './Styles/NavStyle';
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
 
 import { useDispatch, useSelector } from 'react-redux';
+// import { unSetUserInfo } from '../store/action/UserAction';
+import NavbarMui from './NavbarMui';
+import { logout } from '../store/action/UserAction';
+import { useEffect } from 'react';
+import { getCartItems } from "../store/action/AddToCartAction";
 
-export default function Navbar({}) {
-  
+
+
+export default function Navbar() {
+  const dispatch = useDispatch();
+
   // Destructuring "categoryList" from CategoryReducer
-  const { userInformation } = useSelector((store) => store.userStore); 
-  console.log(userInformation, '=====userInformation')
-
-
-  // Destructuring "categoryList" from CategoryReducer
-  const { categoryList } = useSelector((state) => state.prodCategories); // prodCategories is comming from RootReducer (prodCategories:CategoryReducer,)
+  // prodCategories is comming from RootReducer (prodCategories:CategoryReducer,)
+  const { categoryList } = useSelector((state) => state.prodCategories); 
   
+
    // Destructuring "cart" from CartReducer
-  const state = useSelector((state) => state.cartItems); // cartItems is coming from RootReducer (cartItems:cartReducer,)
-  console.log(state, "===cart");
+   // cartItems is coming from RootReducer (cartItems:cartReducer,)
+  //const cart = useSelector((store) => store.cartData); //Stored Cart 
+  const cartItems = useSelector((store) =>store.cartItems); // Getting Cart Items
+  console.log(cartItems, "=========cart Items");
+
+  const userInfo = useSelector((store) =>store.userStore);
+  //const loggedInUser = userInfo.token.userInfo;
+  const token = userInfo.token.userInfo.token;
+  console.log(token, '==========token');
+
+  useEffect(() => {
+    if(token){
+       fetch(`http://127.0.0.1:8080/cart`,{
+              method: "GET",
+              headers: {
+                "authorization": "bearer "+ token
+              }
+        })
+      .then((res) => res.json())
+      .then((json) => {
+        dispatch(getCartItems(json));
+      });
+    }
+
+  }, []);
 
   const classes = useStyles();
 
   const navigate = useNavigate();
-  
-  const toLoginSide = () =>{
+    const toLogin = () =>{
       navigate(`/login/`);
   }
+  
   const toSignup = () =>{
       navigate(`/signup/`);
   }
-  const toLogout = ()=> {
-    // remove user from local storage to log user out
-    
-    localStorage.removeItem('token');
-    navigate('/')
+  
+  const toAccount = () =>{
+      navigate(`/user/home/`);
+  }
+  
+  const toLogout = () =>{
+    dispatch(logout());
+    window.location.reload();
+    navigate(`/`);
+  }
 
-}
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
 
@@ -97,15 +129,23 @@ export default function Navbar({}) {
       open={isMenuOpen}
       onClose={handleMenuClose}
     >
+      { 
+        (userInfo.isAuthUser===true) ?
+        (
+          <>
+              <MenuItem onClick={toAccount}>My Account</MenuItem>
+              <MenuItem onClick={toLogout}>Logout</MenuItem>
+          </>
+        ):
+        (
+          <>
+              <MenuItem onClick={toLogin}>Signin</MenuItem>
+              <MenuItem onClick={toSignup}>Signup</MenuItem>
+          </>
+        )
+      }
       
-          <MenuItem onClick={toLoginSide}>My Account</MenuItem>
-          <MenuItem onClick={toLogout}>Logout</MenuItem>
        
-          <MenuItem onClick={toLoginSide}>Signin</MenuItem>
-          <MenuItem onClick={toSignup}>Signup</MenuItem>
-        
-      
-      
     </Menu>
   );
 
@@ -120,17 +160,10 @@ export default function Navbar({}) {
       open={isMobileMenuOpen}
       onClose={handleMobileMenuClose}
     >
-      {/* <MenuItem>
-        <IconButton aria-label="show 4 new mails" color="inherit">
-          <Badge badgeContent={4} color="secondary">
-            <MailIcon />
-          </Badge>
-        </IconButton>
-        <p>Messages</p>
-      </MenuItem> */}
+ 
       <MenuItem>
         <IconButton aria-label="show 11 new notifications" color="inherit">
-          <Badge badgeContent={ state.length === 0 ? ("0") : state.length } color="secondary">
+          <Badge badgeContent={ cartItems.length === 0 ? ("0") : cartItems.length } color="secondary">
             <AddShoppingCartIcon />
           </Badge>
         </IconButton>
@@ -158,9 +191,24 @@ export default function Navbar({}) {
 
   return (
     <>
-        <Nav >
-          
-          
+            {
+              (userInfo.isAuthUser===true) ? 
+              (
+                <>
+                 <NavSliceTop>
+                    {userInfo.token.userInfo.user}
+                  </NavSliceTop>
+                </>
+              )
+              :
+              (
+                <> 
+                    Public Area
+                </>
+              )
+            }
+       <Nav > 
+           
           <div className='brand'>
               <div className='container'  >
                 {/* <img src={logo} width="110px" alt=""/> */}
@@ -190,6 +238,8 @@ export default function Navbar({}) {
                 })}
               </Select>
         </FormControl>
+            
+          
         </div>
         
 
@@ -210,7 +260,7 @@ export default function Navbar({}) {
           <div className={classes.sectionDesktop}>
             <IconButton aria-label="show 17 new notifications" color="inherit">
               <Badge 
-                badgeContent={ state.length === 0 ? ("0") : state.length }
+                badgeContent={ cartItems.length === 0 ? ("0") : cartItems.length }
                 color="secondary">
                 <AddShoppingCartIcon /> 
               </Badge>
@@ -240,6 +290,8 @@ export default function Navbar({}) {
           {renderMobileMenu}
           {renderMenu}
         </Nav>
+
+        <NavbarMui />
 
     </>
   )

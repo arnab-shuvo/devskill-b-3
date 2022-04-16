@@ -8,101 +8,98 @@ import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import PeopleIcon from "@mui/icons-material/People";
 import BarChartIcon from "@mui/icons-material/BarChart";
 import LayersIcon from "@mui/icons-material/Layers";
-import AssignmentIcon from "@mui/icons-material/Assignment";
-import { NavLink } from "react-router-dom";
+import LogoutIcon from '@mui/icons-material/Logout';
+import { logout } from "../../store/action/UserAction";
+import { NavLink, useNavigate } from "react-router-dom";
+import { connect } from "react-redux";
+import { Divider } from "@material-ui/core";
+import { useDispatch } from "react-redux";
 
-export const mainListItems = (
-  <React.Fragment>
-    <NavLink to={"/admin"}>
-      <ListItemButton>
-        <ListItemIcon>
-          <DashboardIcon />
-        </ListItemIcon>
-        Dashboard
-      </ListItemButton>
-    </NavLink>
 
-    <NavLink to={"/manage-product"}>
-      <ListItemButton>
-        <ListItemIcon>
-          <ShoppingCartIcon />
-        </ListItemIcon>
-        Manage Products
-        <ListItemText />
-      </ListItemButton>
-    </NavLink>
+const SideNavbarAdmin = () => {
+  
 
-    <NavLink to={"/manage-product"}>
-      <ListItemButton>
-        <ListItemIcon>
-          <ShoppingCartIcon />
-        </ListItemIcon>
-        <ListItemText primary="Orders" />
-      </ListItemButton>
-    </NavLink>
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const toLogout = ()=>{
+    dispatch(logout());
+    navigate(`/login/`);
+  }
 
-    <NavLink to={"/manage-product"}>
-      <ListItemButton>
-        <ListItemIcon>
-          <PeopleIcon />
-        </ListItemIcon>
-        <ListItemText primary="Users" />
-      </ListItemButton>
-    </NavLink>
-
-    <NavLink to={"/manage-product"}>
-      <ListItemButton>
-        <ListItemIcon>
-          <BarChartIcon />
-        </ListItemIcon>
-        <ListItemText primary="Reports" />
-      </ListItemButton>
-    </NavLink>
-
-    <NavLink to={"/manage-product"}>
-      <ListItemButton>
-        <ListItemIcon>
-          <LayersIcon />
-        </ListItemIcon>
-        <ListItemText primary="Integrations" />
-      </ListItemButton>
-    </NavLink>
-
-  </React.Fragment>
-);
-
-export const secondaryListItems = (
-  <React.Fragment>
-    <ListSubheader component="div" inset>
-      Saved reports
-    </ListSubheader>
+  // console.log(this.state.isAuthUser, '==== isAuthUser' )
+  return(
+  <>
     
-    <NavLink to={"/manage-product"}>
-    <ListItemButton>
-      <ListItemIcon>
-        <AssignmentIcon />
-      </ListItemIcon>
-      <ListItemText primary="Current month" />
-    </ListItemButton>
-    </NavLink>  
     
-    <NavLink to={"/manage-product"}>
-    <ListItemButton>
-      <ListItemIcon>
-        <AssignmentIcon />
-      </ListItemIcon>
-      <ListItemText primary="Last quarter" />
-    </ListItemButton>
-    </NavLink>
+      <NavLink to={"/admin"}>
+          <ListItemButton>
+            <ListItemIcon>
+              <DashboardIcon />
+            </ListItemIcon>
+            Dashboard
+          </ListItemButton>
+        </NavLink>
+
+        <NavLink to={"/manage-product"}>
+          <ListItemButton>
+            <ListItemIcon>
+              <ShoppingCartIcon />
+            </ListItemIcon>
+            Manage Products
+            <ListItemText />
+          </ListItemButton>
+        </NavLink>
+
+        <NavLink to={"/manage-product"}>
+          <ListItemButton>
+            <ListItemIcon>
+              <ShoppingCartIcon />
+            </ListItemIcon>
+            <ListItemText primary="Orders" />
+          </ListItemButton>
+        </NavLink>
+
+        <NavLink to={"/manage-product"}>
+          <ListItemButton>
+            <ListItemIcon>
+              <PeopleIcon />
+            </ListItemIcon>
+            <ListItemText primary="Users" />
+          </ListItemButton>
+        </NavLink>
+
+        <NavLink to={"/manage-product"}>
+          <ListItemButton>
+            <ListItemIcon>
+              <BarChartIcon />
+            </ListItemIcon>
+            <ListItemText primary="Reports" />
+          </ListItemButton>
+        </NavLink>
+
+        <NavLink to={"/manage-product"}>
+          <ListItemButton>
+            <ListItemIcon>
+              <LayersIcon />
+            </ListItemIcon>
+            <ListItemText primary="Integrations" />
+          </ListItemButton>
+        </NavLink>
+                        
+        <Divider sx={{ my: 1 }} />
+        
+        <ListItemButton onClick={toLogout}>
+          <ListItemIcon>
+            <LogoutIcon />
+          </ListItemIcon>
+          <ListItemText primary="Logout" />
+        </ListItemButton>
+     
     
-    <NavLink to={"/manage-product"}>
-    <ListItemButton>
-      <ListItemIcon>
-        <AssignmentIcon />
-      </ListItemIcon>
-      <ListItemText primary="Year-end sale" />
-    </ListItemButton>
-    </NavLink>
-    
-  </React.Fragment>
-);
+  </>
+  )
+
+
+}
+
+export default SideNavbarAdmin;

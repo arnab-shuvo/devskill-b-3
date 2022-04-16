@@ -39,92 +39,138 @@ const Item = styled(Paper)(({ theme }) => ({
 
 
 
-const ProductDetail = () =>{
-    const navigate = useNavigate();
-    const toHome = () =>{
-        navigate(`/`);
+const ProductDetail = () => {
+  const navigate = useNavigate();
+  //Checking if the user logged in or not
+  const userInfo = useSelector((store) => store.userStore);
+
+  const { id } = useParams();
+  //console.log(id, "===id");
+
+  const { productDetail } = useSelector((store) => store.productDetail);
+  const { title, image, description, price, category } = productDetail;
+
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    fetch(`http://127.0.0.1:8080/products/${id}`)
+      .then((res) => res.json())
+      .then((json) => {
+        dispatch(getProductDetail(json));
+      });
+  }, [id]);
+
+  async function addCartProduct(data) {
+    console.log(data.token, "token data............")
+    return fetch("http://localhost:8080/cart", {
+      method: "POST",
+      headers: {
+        "Content-type" : "application/json",
+        "Accept"       : "application/json",
+        "authorization": "bearer "+ data.token
+      },
+      body: JSON.stringify({
+        product: {
+          id: data.prodID,
+          quantity: data.initialQty,
+        },
+      }),
+    })
+      .then((res) => res.json())
+      .then((json) => json);
+  }
+
+  const handleCart = async (e) => {
+    e.preventDefault();
+    if (userInfo.isAuthUser === true) {
+      // console.log(userInfo.token.userInfo.token, "====User Token")
+      const token = userInfo.token.userInfo.token;
+      let prodID = id;
+      let initialQty = 1;
+      //console.log(token, "token data............")
+      const cartData = await addCartProduct({
+        prodID,
+        initialQty,
+        token,
+      });
+
+      dispatch(addCart(cartData));
+      console.log(cartData, "==== CartData");
+    } else {
+      navigate(`/login`);
     }
-    
-    const { id } = useParams();
-    //console.log(id, "===id");
+  };
 
-    const { productDetail } = useSelector((store) => store.productDetail);
-    const { title, image, description, price, category}     = productDetail;
+  const toCartDetail = () => {
+    navigate(`/`);
+  };
 
-    const dispatch = useDispatch();
+  const loading = () => {
+    return (
+      <>
+        <Grid item xs={6} md={4} sm={4} justifyContent="center">
+          <Skeleton height={400} />
+        </Grid>
+        <Grid item xs={6} md={8} sm={8} justifyContent="left">
+          <Skeleton height={150} width={300} />
+          <Skeleton height={50} width={300} />
+        </Grid>
+      </>
+    );
+  };
+  return (
+    <>
+      <Navbar />
+ 
+      <Grid container item sx={{ mt: 5 }} xs={12} justifyContent="center">
+        <Grid item xs={6} md={4} sm={4} justifyContent="center">
+          <div className="product-image-wrapper" justifyContent="right">
+            <img
+              alt={title}
+              src={"http://127.0.0.1:8080" + image}
+              style={{
+                width: "90%",
+                border: "1px solid #ccc",
+                padding: "20px",
+              }}
+            />
+          </div>
+        </Grid>
 
-    useEffect(()=>{
-            fetch (`http://127.0.0.1:8080/products/${id}`)
-            .then((res) => res.json())
-            .then((json) =>{
-                dispatch(getProductDetail(json));
-            });
-        }, [id]);
-    
-    const addProduct = (product) => {
-      dispatch(addCart(product));
-    };
+        <Grid item xs={6} md={8} sm={8} justifyContent="left">
+          <Typography variant="h3" gutterBottom component="div">
+            {title}
+          </Typography>
+          <Typography variant="subtitle2" gutterBottom component="div">
+            {description}
+          </Typography>
 
-    const toCartDetail = () =>{
-          navigate(`/`);
-    }
+          <Typography sx={{ mt: 10 }} variant="h4" gutterBottom component="div">
+            $ {price}
+          </Typography>
 
-    const loading = () =>{
-      return(
-        <>
-            <Grid item xs={6} md={4} sm={4} justifyContent="center">
-              <Skeleton height={400} />
-            </Grid>
-            <Grid item xs={6}  md={8} sm={8} justifyContent="left">
-              <Skeleton height={150} width={300} />
-              <Skeleton height={50} width={300} />
-            </Grid>
-        </>
-      )
-    }
-    return(
-        <>      
-            <Navbar />
-            <NavbarMui />
+          <Button
+            variant="contained"
+            color="secondary"
+            onClick={handleCart}
+            sx={{ height: 60, mt: 10 }}
+            startIcon={<AddShoppingCartIcon />}
+          >
+            add to cart
+          </Button>
 
-            <Grid container item sx={{ mt:5 }}  xs={12} justifyContent="center" >
-                 <Grid item xs={6} md={4} sm={4} justifyContent="center">
-                  <div className="product-image-wrapper" justifyContent="right">
-                    <img alt={ title} src={"http://127.0.0.1:8080"+  image} style={{ width: "90%", border:"1px solid #ccc", padding:"20px" }} />
-                  </div>
-                </Grid> 
-
-                <Grid item xs={6}  md={8} sm={8} justifyContent="left">
-                  <Typography variant="h3" gutterBottom component="div">
-                    { title}
-                  </Typography>
-                  <Typography variant="subtitle2" gutterBottom component="div">
-                    { description}
-                  </Typography>
-
-                  <Typography sx={{ mt:10 }} variant="h4" gutterBottom component="div">
-                    $ { price}
-                  </Typography>
-
-                  <Button 
-                    variant="contained" 
-                    color="secondary" 
-                    onClick={addProduct}
-                    sx={{ height:60, mt:10 }}
-                    startIcon={<AddShoppingCartIcon />}
-                    >add to cart</Button>
-
-                    <Button 
-                    variant="outlined" 
-                    color="secondary" 
-                    onClick={toCartDetail}
-                    sx={{ height:60, mt:10 }}
-                    >go to cart</Button>
-                  
-                </Grid>
-              </Grid>
-        </>
-    )
-}
+          <Button
+            variant="outlined"
+            color="secondary"
+            onClick={toCartDetail}
+            sx={{ height: 60, mt: 10 }}
+          >
+            go to cart
+          </Button>
+        </Grid>
+      </Grid>
+    </>
+  );
+};
 
 export default ProductDetail;

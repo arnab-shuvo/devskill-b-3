@@ -13,3 +13,9 @@ export const delCart = (cartProduct) =>({
     type: ActionType.DEL_FROM_CART,
     payload: cartProduct
 });
+
+//Get Cart Items
+export const getCartItems = (cartItems) =>({
+    type: ActionType.CART_ITEMS,
+    payload: cartItems
+})

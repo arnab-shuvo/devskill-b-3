@@ -14,12 +14,11 @@ import Typography from '@mui/material/Typography';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { useNavigate } from "react-router-dom"; 
 import PropTypes from 'prop-types';
-import { useState, useEffect} from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-// import { userActions } from '../store/action/UserAction';
+import { useState } from 'react';
+import { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { setUserInfo } from '../store/action/UserAction';
-import { userLogin } from '../store/action/UserAction';
-
 
 function Copyright(props) {
   return (
@@ -35,29 +34,15 @@ function Copyright(props) {
 }
 
 
+
+
 const theme = createTheme();
 
 export default function Login() {
-
+  //const [token, setToken] = useState(null);
   const dispatch = useDispatch();
-  
-  // Destructuring "userInformation" from UserReducer
-  // userReducedInfo is comming from RootReducer (userReducedInfo:UserReducer,)
-  const { userInformation } = useSelector((store) => store.userStore); 
+  const { userInfo } = useSelector((store) => store.userStore);
 
-  // useEffect(() => {
-  //   dispatch(loadCategories());
-  // }, []);
-  
-  const navigate = useNavigate();
-    const toSignup = () =>{
-      navigate(`/signup/`);
-  }
-    const toHome = () =>{
-      navigate(`/`);
-  } 
-
-  
   async function loginUser(credentials) {
     return fetch("http://localhost:8080/signin", {
       method: "POST",
@@ -71,51 +56,38 @@ export default function Login() {
       
   }
 
-  //Handle Submit 
- 
-
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
   
   const handleFormSubmit = async e =>{
     e.preventDefault();
-
-    // if (email && password) {
-    //     //console.log(password, "===password after submit");
-    //     // dispatch(userActions.login(email, password));
-    //     let result = await fetch("http://localhost:8080/signin", {
-    //       method: "POST",
-    //       headers: {
-    //         "Content-Type": "application/json",
-    //         "Accept":"application/json",
-    //       },
-    //       body: JSON.stringify(email, password),
-    //     })
-    //     dispatch(setUserInfo(result));
-
-    //     console.log(result, "====result from login page")
-    // }
-
     const user = await loginUser({
       email,
       password
     });
-    console.log(user, "===user");
     dispatch(setUserInfo(user));
-    console.log(user.userInfo.role, "====result from login page")
+    //console.log(user.userInfo.role, '=== token after set');
     if(user.userInfo.role === 'admin'){
       navigate('/admin');
     }else if(user.userInfo.role === 'user'){
-      navigate('/user/home');
+      navigate('/user/home')
     }
+       
     
   }
   
 
+  const navigate = useNavigate();
+    const toSignup = () =>{
+      navigate(`/signup/`);
+  }
+    const toHome = () =>{
+      navigate(`/`);
+  } 
+
   return (
     <ThemeProvider theme={theme}>
 
-      {/* {token} */}
 
       <Grid container component="main" sx={{ height: '100vh' }}>
         <CssBaseline />

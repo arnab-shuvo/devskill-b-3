@@ -61,14 +61,14 @@ const AvatersCustom = styled(Paper)(({ theme }) => ({
   backgroundColor: "rgba(0, 0, 0, 0.2)",
 }));
 
-const Home = ({token}) => {
+const Home = () => {
   const [showLoader, setShowLoader] = useState(true);
   
   return (
     <>
       <ScrollToTop />
-      <Navbar token={token} />
-      <NavbarMui />
+      <Navbar />
+      
       <Hero />
       <Services />
 
