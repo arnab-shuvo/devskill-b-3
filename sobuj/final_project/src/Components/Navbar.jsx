@@ -1,20 +1,12 @@
-
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import logo from "../Assets/logo.png";
-import {Button} from './Styles/Button';
 import { Link, useNavigate } from "react-router-dom"; 
-import ButtonMui1 from './ButtonMui1';
 
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import ListSubheader from '@mui/material/ListSubheader';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
-
-
-import { alpha, makeStyles } from '@material-ui/core/styles';
-import AppBar from '@material-ui/core/AppBar';
-import Toolbar from '@material-ui/core/Toolbar';
 import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
 import InputBase from '@material-ui/core/InputBase';
@@ -23,7 +15,6 @@ import Menu from '@material-ui/core/Menu';
 import MenuIcon from '@material-ui/icons/Menu';
 import SearchIcon from '@material-ui/icons/Search';
 import AccountCircle from '@material-ui/icons/AccountCircle';
-import MailIcon from '@material-ui/icons/Mail';
 import NotificationsIcon from '@material-ui/icons/Notifications';
 import MoreIcon from '@material-ui/icons/MoreVert';
 import { useStyles } from './Styles/UseStyle';
@@ -31,48 +22,47 @@ import { Nav, NavSliceTop } from './Styles/NavStyle';
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
 
 import { useDispatch, useSelector } from 'react-redux';
-// import { unSetUserInfo } from '../store/action/UserAction';
 import NavbarMui from './NavbarMui';
 import { logout } from '../store/action/UserAction';
-import { useEffect } from 'react';
-import { getCartItems } from "../store/action/AddToCartAction";
+import { loadCartItems } from "../store/action/AddToCartAction";
 
 
 
 export default function Navbar() {
   const dispatch = useDispatch();
-
+  
   // Destructuring "categoryList" from CategoryReducer
   // prodCategories is comming from RootReducer (prodCategories:CategoryReducer,)
   const { categoryList } = useSelector((state) => state.prodCategories); 
   
 
-   // Destructuring "cart" from CartReducer
+   // Destructuring saved "cartItemsData" from CartReducer
    // cartItems is coming from RootReducer (cartItems:cartReducer,)
-  //const cart = useSelector((store) => store.cartData); //Stored Cart 
-  const cartItems = useSelector((store) =>store.cartItems); // Getting Cart Items
-  console.log(cartItems, "=========cart Items");
+  const cartItemsData = useSelector((store) =>store.cartItems); // Getting Cart Items
+   
+  // const [token, setToken] = useState(null);
+   
+  const { cart } = useSelector((store) => store.cartItems); 
+  const loggedInUser = useSelector((store) =>store.userStore);
+  
+  console.log(cart, '=== cart list...'); 
+    //const [cartLength, setCartLength] = useState('0'); 
 
-  const userInfo = useSelector((store) =>store.userStore);
-  //const loggedInUser = userInfo.token.userInfo;
-  const token = userInfo.token.userInfo.token;
-  console.log(token, '==========token');
-
+  var cartLength;
+  if(loggedInUser.isAuthUser === true ){
+    cartLength = cart.products.length;
+  }else{
+    cartLength = cart.length;
+    console.log(cartLength, '===== No items in Cart');
+  }
+  
   useEffect(() => {
-    if(token){
-       fetch(`http://127.0.0.1:8080/cart`,{
-              method: "GET",
-              headers: {
-                "authorization": "bearer "+ token
-              }
-        })
-      .then((res) => res.json())
-      .then((json) => {
-        dispatch(getCartItems(json));
-      });
-    }
-
+    if(loggedInUser.isAuthUser === true){
+          //setCartLength(cart.products.length);
+          dispatch(loadCartItems(loggedInUser.token.userInfo.token));
+      };
   }, []);
+
 
   const classes = useStyles();
 
@@ -89,8 +79,13 @@ export default function Navbar() {
       navigate(`/user/home/`);
   }
   
+  const  toCartDetail = () =>{
+      navigate(`/user/cart/`);
+  }
+  
   const toLogout = () =>{
-    dispatch(logout());
+    localStorage.clear();
+    dispatch(logout()); //Not working...
     window.location.reload();
     navigate(`/`);
   }
@@ -130,18 +125,20 @@ export default function Navbar() {
       onClose={handleMenuClose}
     >
       { 
-        (userInfo.isAuthUser===true) ?
+        (loggedInUser.isAuthUser===true) ?
         (
-          <>
-              <MenuItem onClick={toAccount}>My Account</MenuItem>
+          <span>
+            <MenuItem onClick={toAccount}>My Account</MenuItem>
               <MenuItem onClick={toLogout}>Logout</MenuItem>
-          </>
+          </span>
+              
+          
         ):
         (
-          <>
+          <span>
               <MenuItem onClick={toLogin}>Signin</MenuItem>
               <MenuItem onClick={toSignup}>Signup</MenuItem>
-          </>
+           </span>
         )
       }
       
@@ -162,8 +159,8 @@ export default function Navbar() {
     >
  
       <MenuItem>
-        <IconButton aria-label="show 11 new notifications" color="inherit">
-          <Badge badgeContent={ cartItems.length === 0 ? ("0") : cartItems.length } color="secondary">
+        <IconButton aria-label="show 11 new notifications" color="inherit" onClick={toCartDetail}>
+          <Badge badgeContent={ cartLength === 0 ? ("0") : cartLength } color="secondary">
             <AddShoppingCartIcon />
           </Badge>
         </IconButton>
@@ -192,11 +189,11 @@ export default function Navbar() {
   return (
     <>
             {
-              (userInfo.isAuthUser===true) ? 
+              (loggedInUser.isAuthUser===true) ? 
               (
                 <>
                  <NavSliceTop>
-                    {userInfo.token.userInfo.user}
+                    {loggedInUser.token.userInfo.user}
                   </NavSliceTop>
                 </>
               )
@@ -258,9 +255,9 @@ export default function Navbar() {
         </div>
 
           <div className={classes.sectionDesktop}>
-            <IconButton aria-label="show 17 new notifications" color="inherit">
+            <IconButton aria-label="show 17 new notifications" color="inherit"  onClick={toCartDetail}>
               <Badge 
-                badgeContent={ cartItems.length === 0 ? ("0") : cartItems.length }
+                badgeContent={ cartLength === 0 ? ("0") : cartLength }
                 color="secondary">
                 <AddShoppingCartIcon /> 
               </Badge>

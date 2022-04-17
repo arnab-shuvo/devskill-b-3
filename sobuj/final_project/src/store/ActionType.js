@@ -11,7 +11,7 @@ const ActionType = {
     registration: 'REGISTRATION',
     login:'LOGIN',
     ADD_TO_CART: 'ADD-TO-CART',
-    CART_ITEMS: 'CART-ITEMS',
+    GET_CART_ITEMS: 'GET-CART-ITEMS',
     REMOVE_FROM_CART: 'REMOVE-FROM-CART',
     UPDATE_CART: 'UPDATE-CART',
     checkout: 'CHECKOUT',

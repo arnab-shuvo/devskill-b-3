@@ -61,7 +61,7 @@ const ProductDetail = () => {
   }, [id]);
 
   async function addCartProduct(data) {
-    console.log(data.token, "token data............")
+    console.log(data.token, " ====token data............")
     return fetch("http://localhost:8080/cart", {
       method: "POST",
       headers: {
@@ -83,7 +83,6 @@ const ProductDetail = () => {
   const handleCart = async (e) => {
     e.preventDefault();
     if (userInfo.isAuthUser === true) {
-      // console.log(userInfo.token.userInfo.token, "====User Token")
       const token = userInfo.token.userInfo.token;
       let prodID = id;
       let initialQty = 1;
@@ -95,7 +94,7 @@ const ProductDetail = () => {
       });
 
       dispatch(addCart(cartData));
-      console.log(cartData, "==== CartData");
+      //console.log(cartData, "==== SavingCartData");
     } else {
       navigate(`/login`);
     }
@@ -108,10 +107,12 @@ const ProductDetail = () => {
   const loading = () => {
     return (
       <>
-        <Grid item xs={6} md={4} sm={4} justifyContent="center">
+        <Grid item xs={6} md={4} sm={4} justify="center"> 
+          {/* justifyContent="center" */}
           <Skeleton height={400} />
         </Grid>
-        <Grid item xs={6} md={8} sm={8} justifyContent="left">
+        <Grid item xs={6} md={8} sm={8} justify="left">
+          {/* justifyContent="left" */}
           <Skeleton height={150} width={300} />
           <Skeleton height={50} width={300} />
         </Grid>
@@ -122,9 +123,9 @@ const ProductDetail = () => {
     <>
       <Navbar />
  
-      <Grid container item sx={{ mt: 5 }} xs={12} justifyContent="center">
-        <Grid item xs={6} md={4} sm={4} justifyContent="center">
-          <div className="product-image-wrapper" justifyContent="right">
+      <Grid container item sx={{ mt: 5 }} xs={12} justify="center">
+        <Grid item xs={6} md={4} sm={4} justify="center">
+          <div className="product-image-wrapper" justify="right">
             <img
               alt={title}
               src={"http://127.0.0.1:8080" + image}
@@ -137,7 +138,7 @@ const ProductDetail = () => {
           </div>
         </Grid>
 
-        <Grid item xs={6} md={8} sm={8} justifyContent="left">
+        <Grid item xs={6} md={8} sm={8} justify="left">
           <Typography variant="h3" gutterBottom component="div">
             {title}
           </Typography>

@@ -51,7 +51,7 @@ function App() {
 
           {/* Order & Checkout and Cart */}
           <Route path='/user/home/' element={<FrontDashboard />} />
-          <Route path='/cart/' element={<CartDetail />} />
+          <Route path='/user/cart/' element={<CartDetail />} />
 
           {/* Admin Panel Links */}
           <Route path='/admin/' element={<Dashboard />}  />
