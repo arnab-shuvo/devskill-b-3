@@ -6,16 +6,13 @@ import { useNavigate } from "react-router-dom";
 import "./profile_page_styles.css";
 const ProfilePage = () => {
   const { user_reducer } = useSelector((store) => store);
-  const { name, email, number, status } = user_reducer.user;
+  const { name, image, email, number, status } = user_reducer.user;
   const navigate = useNavigate();
   return (
     <div className="profile">
       <div className="first">
         <div className="image">
-          <img
-            alt={name}
-            src="https://www.w3schools.com/howto/img_avatar.png"
-          />
+          <img alt={name} src={image} />
         </div>
         <Button
           onClick={() => navigate("/edit-profile")}

@@ -1,0 +1,14 @@
+.order-list-container{
+    flex: 1;
+    
+}
+.owner-order-list-header{
+    margin: 1em 0;
+}
+
+.order-list{
+    display: grid;
+    gap: 1em;
+    margin: 0 2em;
+    
+}

@@ -5,8 +5,8 @@
 }
 
 .login-form {
-  min-width: 300px;
-  max-width: 500px;
+ width: 300px;
+  margin: auto;
   display: flex;
   flex-direction: column;
   gap: 1em;

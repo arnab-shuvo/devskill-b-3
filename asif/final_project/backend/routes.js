@@ -25,6 +25,9 @@ import {
   admin_login,
   delete_all_cart,
   delete_customers_all_order,
+  get_all_customer,
+  change_customer_status,
+  delete_customer,
 } from "./controller.js";
 
 export default (app) => {
@@ -60,6 +63,7 @@ export default (app) => {
   //
   //
   //
+
   app.get("/customer/profile/:token", customer_profile);
   app.post("/customer/update-profile", update_customer_profile);
   app.post("/customer/customer-signup", customer_signup);
@@ -68,4 +72,7 @@ export default (app) => {
   //
   //
   app.post("/admin/login", admin_login);
+  app.get("/admin/get-all-customers", get_all_customer);
+  app.get("/admin/change-customer-status", change_customer_status);
+  app.get("/admin/delete-customer", delete_customer);
 };

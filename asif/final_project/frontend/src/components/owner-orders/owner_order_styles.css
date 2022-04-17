@@ -1,0 +1,27 @@
+.order-item{
+    border-radius: .4em;
+    box-shadow: .1em .1em .1em .1em rgb(203, 203, 203);
+    display: flex;
+    gap: .5em;
+    align-items: center;
+    padding: 1em;
+}
+.order-item > img{
+    width: 5em;
+    border-radius: 50%;
+}
+.order-item > .items{
+    display: grid;
+    gap: .4em;
+    place-items: center;
+}
+.order-item > .items > .product{
+    width: 15em;
+    display: flex;
+    gap: 1em;
+    align-items: center;
+    /* justify-content: space-between; */
+}
+.order-item > .items > .product >p {
+    flex-basis: 50%;
+}

@@ -13,6 +13,8 @@
     "motion": "^10.7.0",
     "react": "^18.0.0",
     "react-dom": "^18.0.0",
+    "react-file-base64": "^1.0.3",
+    "react-icons": "^4.3.1",
     "react-paginate": "^8.1.2",
     "react-redux": "^7.2.8",
     "react-router-dom": "^6.3.0",

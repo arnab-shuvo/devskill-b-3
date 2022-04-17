@@ -14,8 +14,23 @@ export const user_login = (e, data) => async (dispatch) => {
     payload: { user: response.data.customer, token: response.data.token },
   });
 };
-export const user_logout = () => (dispatch) => {
+export const user_logout = (navigate) => (dispatch) => {
   dispatch({ type: logout });
+  return navigate("/");
+};
+
+export const user_signup = (e, data, navigate) => async (dispatch) => {
+  e.preventDefault();
+  const { name, image, email, password, confirm_password, number } = data;
+  if (!name || !email || !password || !confirm_password || !number)
+    return cogoToast.warn("Fill all the field!");
+  if (password !== confirm_password)
+    return cogoToast.warn("password should matched!");
+  const response = await axios.post(
+    "http://localhost:8000/customer/customer-signup",
+    { name, image, email, password, number }
+  );
+  navigate("/login");
 };
 
 export const user_update = (e, data) => async (dispatch, getState) => {

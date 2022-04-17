@@ -2,7 +2,7 @@ import { Button } from "@mui/material";
 import React from "react";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { Navigate, useNavigate } from "react-router-dom";
 
 import {
   get_order_items,
@@ -18,52 +18,58 @@ const OrderPage = () => {
     order_reducer.length == 0 && dispatch(get_order_items(navigate));
   }, []);
   return (
-    <div className="order-page-container">
-      {order_reducer.length == 0 ? (
-        <h1>Loading...</h1>
+    <>
+      {!user_reducer.token ? (
+        <Navigate replace to="/" />
       ) : (
-        <>
-          <h1>Your Orders are {user_reducer?.user.order_status}</h1>
-          <div className="order-list-wrapper">
-            {order_reducer.map((order, index) => (
-              <div className="order_list_item">
-                <div className="left">
-                  <div className="order-list-item-image">
-                    <img src={order.image} alt={order.name} />
+        <div className="order-page-container">
+          {order_reducer.length == 0 ? (
+            <h1>Loading...</h1>
+          ) : (
+            <>
+              <h1>Your Orders are {user_reducer?.user.order_status}</h1>
+              <div className="order-list-wrapper">
+                {order_reducer.map((order, index) => (
+                  <div className="order_list_item">
+                    <div className="left">
+                      <div className="order-list-item-image">
+                        <img src={order.image} alt={order.name} />
+                      </div>
+                      <div className="order-list-item-info">
+                        <p>{order.name}</p>
+                        <p>
+                          <strong>quantity:{order.quantity} </strong>
+                          <strong> price:{order.price}</strong>
+                        </p>
+                      </div>
+                    </div>
+                    <Button
+                      onClick={() =>
+                        dispatch(delete_customer_order(index, order.id))
+                      }
+                      disabled={
+                        user_reducer.user.order_status !== "pending" && false
+                      }
+                      variant="contained"
+                      color="error"
+                    >
+                      Delete
+                    </Button>
                   </div>
-                  <div className="order-list-item-info">
-                    <p>{order.name}</p>
-                    <p>
-                      <strong>quantity</strong> : {order.quantity}
-                      <strong>price</strong> : {order.price}
-                    </p>
-                  </div>
-                </div>
+                ))}
                 <Button
-                  onClick={() =>
-                    dispatch(delete_customer_order(index, order.id))
-                  }
-                  disabled={
-                    user_reducer.user.order_status !== "pending" && false
-                  }
+                  onClick={() => dispatch(delete_customers_all_order(navigate))}
                   variant="contained"
-                  color="error"
+                  color="secondary"
                 >
-                  Delete
+                  Delete All Order
                 </Button>
               </div>
-            ))}
-            <Button
-              onClick={() => dispatch(delete_customers_all_order(navigate))}
-              variant="contained"
-              color="secondary"
-            >
-              Delete All Order
-            </Button>
-          </div>
-        </>
+            </>
+          )}
+        </div>
       )}
-    </div>
+    </>
   );
 };
 

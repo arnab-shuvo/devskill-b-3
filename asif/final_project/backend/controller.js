@@ -11,7 +11,7 @@ export const customer_signup = async (req, res, next) => {
   try {
     const { email, password } = req.body;
     const customer_exist = await customer.findFirst({
-      where: { email: email },
+      where: { email },
     });
     if (customer_exist)
       return res.status(404).json({ message: "customer already exist" }).end();
@@ -23,6 +23,7 @@ export const customer_signup = async (req, res, next) => {
         password: encrypted_password,
       },
     });
+
     return res.status(200).json(new_customer).end();
   } catch (error) {
     return res.status(404).json({ error: error.message }).end();
@@ -220,10 +221,18 @@ export const get_product = async (req, res, next) => {
 //
 export const create_product = async (req, res, next) => {
   try {
-    const new_product = await product.create({
-      data: { ...req.body },
+    const { name, price, image, description, category_id } = req.body;
+    await product.create({
+      data: {
+        name,
+        price: JSON.parse(price),
+        image,
+        description,
+        category_id: JSON.parse(category_id),
+      },
     });
-    return res.status(200).json({ product: new_product }).end();
+
+    return res.status(200).end();
   } catch (error) {
     return res.status(404).json({ error: error.message }).end();
   }
@@ -249,7 +258,7 @@ export const update_product = async (req, res, next) => {
 //
 export const delete_product = async (req, res, next) => {
   try {
-    await product.delete({ where: { id: JSON.parse(req.query.id) } });
+    await product.delete({ where: { id: JSON.parse(req.query.product_id) } });
     return res.status(200).end();
   } catch (error) {
     return res.status(404).json({ error: error.message }).end();
@@ -371,7 +380,7 @@ export const create_order = async (req, res, next) => {
     });
     await customer.update({
       where: { id: JSON.parse(req.query.customer_id) },
-      data: { order_status: "pending..." },
+      data: { order_status: "pending" },
     });
     return res.status(200).json({ order_items }).end();
   } catch (error) {
@@ -411,8 +420,19 @@ export const get_customer_order = async (req, res, next) => {
 //
 export const get_all_order = async (req, res, next) => {
   try {
-    const orders = await order.findMany();
-    return res.status(200).json({ orders });
+    const orders = await customer.findMany({
+      where: { order_status: req.query.order_status },
+      select: {
+        id: true,
+        name: true,
+        image: true,
+        order_status: true,
+        Order: { select: { name: true, quantity: true } },
+      },
+    });
+
+    console.log(orders, req.query);
+    return res.status(200).json({ orders }).end();
   } catch (error) {
     return res.status(404).json({ error: error.message }).end();
   }
@@ -436,6 +456,10 @@ export const delete_customers_all_order = async (req, res, next) => {
     await order.deleteMany({
       where: { customer_id: JSON.parse(req.query.customer_id) },
     });
+    await customer.update({
+      where: { id: JSON.parse(req.query.customer_id) },
+      data: { order_status: req.query.order_status },
+    });
     return res.status(200).end();
   } catch (error) {
     return res.status(404).json({ error: error.message }).end();
@@ -448,6 +472,7 @@ export const delete_customers_all_order = async (req, res, next) => {
 export const admin_login = async (req, res, next) => {
   try {
     const { email, password } = req.body;
+
     const admin_exist = await admin.findFirst({ where: { email } });
     if (!admin_exist)
       return res.status(404).json({ message: "admin doesn't exist" }).end();
@@ -457,8 +482,64 @@ export const admin_login = async (req, res, next) => {
         .status(404)
         .json({ message: "password did not matched" })
         .end();
-    const token = await jsonwebtoken.sign({ name: admin_exist.name, password });
-    return res.status(200).json({ token }).end();
+    const token = await jsonwebtoken.sign(
+      { name: admin_exist.name, password },
+      "secret"
+    );
+    return res
+      .status(200)
+      .json({
+        token,
+        owner: { name: admin_exist.name, email: admin_exist.email },
+      })
+      .end();
+  } catch (error) {
+    return res.status(404).json({ error: error.message }).end();
+  }
+};
+
+export const get_all_customer = async (req, res, next) => {
+  try {
+    const customers = await customer.findMany({
+      select: {
+        id: true,
+        name: true,
+        image: true,
+        order_status: true,
+        status: true,
+      },
+    });
+    return res.status(200).json({ customers }).end();
+  } catch (error) {
+    return res.status(404).json({ error: error.message }).end();
+  }
+};
+
+export const change_customer_status = async (req, res, next) => {
+  try {
+    const updated_customer = await customer.update({
+      where: { id: JSON.parse(req.query.customer_id) },
+      data: { status: req.query.status },
+      select: {
+        id: true,
+        name: true,
+        image: true,
+        order_status: true,
+        status: true,
+      },
+    });
+    return res.status(200).json({ updated_customer }).end();
+  } catch (error) {
+    return res.status(404).json({ error: error.message }).end();
+  }
+};
+
+export const delete_customer = async (req, res, next) => {
+  try {
+    await customer.delete({
+      where: { id: JSON.parse(req.query.customer_id) },
+    });
+    return res.status(200).end();
   } catch (error) {
     return res.status(404).json({ error: error.message }).end();
   }

@@ -1,0 +1,17 @@
+.left-navigation{
+    flex-basis: 25%;
+    display: grid;
+    height: 50vh;
+    border-right:  .5px solid rgb(198, 198, 198);
+}
+
+.left-navigation > .bar{
+    font-size:x-large;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    display: flex;
+    gap: .5em;
+    align-items: center;
+    padding: 1em;
+    border-bottom: .5px solid rgb(198, 198, 198);
+}
+.bar>p{cursor: pointer;}

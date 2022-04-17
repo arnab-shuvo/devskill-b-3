@@ -20,9 +20,10 @@ model Admin {
 model Customer {
   id           Int     @unique @default(autoincrement())
   name         String  @db.VarChar(200)
+  image        String? @default("https://st2.depositphotos.com/1006318/5909/v/950/depositphotos_59094779-stock-illustration-profile-icon-male-avatar.jpg")
   email        String
   password     String
-  status       String?
+  status       String? @default("available")
   order_status String?
   number       String?
   Cart         Cart[]
@@ -32,6 +33,7 @@ model Customer {
 model Category {
   id      Int       @unique @default(autoincrement())
   name    String    @db.VarChar(100)
+  image   String?
   Product Product[]
 }
 

@@ -1,8 +1,12 @@
 import React from "react";
 import Grid from "@mui/material/Grid";
 import "./product.css";
-import { Link } from "react-router-dom";
-const Product = ({ product }) => {
+import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { Button } from "@mui/material";
+const Product = ({ index, product, on_product_delete }) => {
+  const { token } = useSelector((store) => store.owner_reducer);
+  const navigate = useNavigate();
   return (
     <Grid
       item
@@ -12,14 +16,36 @@ const Product = ({ product }) => {
       lg={3}
       marginX="auto"
       className="product-item"
-      component={Link}
-      to={`/product-details/${product.id}`}
     >
-      <div className="product-image-container">
-        <img alt={product.name} src={product.image} className="product-image" />
+      <div
+        className="product-info"
+        onClick={() => navigate(`/product-details/${product.id}`)}
+      >
+        <div className="product-image-container">
+          <img
+            alt={product.name}
+            src={product.image}
+            className="product-image"
+          />
+        </div>
+        <h3 className="product-name">{product.name}</h3>
+        <p>{product.description.slice(0, 30)}...</p>
       </div>
-      <h3 className="product-name">{product.name}</h3>
-      <p>{product.description.slice(0, 30)}...</p>
+      {token && (
+        <div className="product-actions">
+          <Button color="secondary" variant="contained" size="small">
+            Edit
+          </Button>
+          <Button
+            onClick={() => on_product_delete(product.id, index)}
+            color="error"
+            variant="contained"
+            size="small"
+          >
+            Delete
+          </Button>
+        </div>
+      )}
     </Grid>
   );
 };

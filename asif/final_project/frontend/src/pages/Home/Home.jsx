@@ -8,6 +8,7 @@ import Product from "../../components/Product/Product";
 import Filter from "../../components/Home Header/Filter/Filter";
 import Sort from "../../components/Home Header/Sort/Sort";
 import Search from "../../components/Home Header/Search/Search";
+import { delete_product } from "../../store/thunks/owner_thunk";
 const Home = () => {
   const [products, setProducts] = useState([]);
   const [selected_page, set_selected_page] = useState(1);
@@ -15,6 +16,16 @@ const Home = () => {
   //
   //
   //
+
+  const on_product_delete = async (product_id, index) => {
+    const deleted = await delete_product(product_id);
+    deleted
+      ? setProducts((prev_products) => [
+          ...prev_products.slice(0, index),
+          ...prev_products.slice(index + 1),
+        ])
+      : cogotoast.warn("cant delete the product");
+  };
 
   useEffect(() => {
     const execute = async () => {
@@ -29,7 +40,6 @@ const Home = () => {
       }
     };
     execute();
-    console.log("pr");
   }, [selected_page]);
   //
   //
@@ -45,8 +55,12 @@ const Home = () => {
         </div>
       </div>
       <Grid container spacing={3}>
-        {products.map((product) => (
-          <Product product={product} />
+        {products.map((product, index) => (
+          <Product
+            index={index}
+            product={product}
+            on_product_delete={on_product_delete}
+          />
         ))}
       </Grid>
       <ReactPaginate

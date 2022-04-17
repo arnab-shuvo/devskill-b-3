@@ -10,6 +10,12 @@ import Login from "./pages/Auth/Login/Login";
 import OrderPage from "./pages/Order/OrderPage";
 import ProfilePage from "./pages/Profile/ProfilePage";
 import EditProfile from "./pages/Edit Profile/EditProfile";
+import Signup from "./pages/Auth/Signup/Signup";
+import OwnerDashboard from "./pages/Owner Dashboard/OwnerDashboard";
+import OwnerOrderList from "./components/owner-components/order-lists/OwnerOrderList";
+import OwnerCustomerList from "./components/owner-components/customer-lists/OwnerCustomerList";
+import OwnerCategoryPage from "./components/owner-components/owner-category/OwnerCategoryPage";
+import OwnerProductsPage from "./components/owner-components/owner-products/OwnerProductsPage";
 const App = () => {
   return (
     <div className="container">
@@ -21,7 +27,16 @@ const App = () => {
             path="/product-details/:product_id"
             element={<ProductDetails />}
           />
+
+          <Route path="/owner-login" element={<Login />} />
+          <Route path="/owner-dashboard" element={<OwnerDashboard />}>
+            <Route path="order-list" element={<OwnerOrderList />} />
+            <Route path="all-customer-list" element={<OwnerCustomerList />} />
+            <Route path="categories" element={<OwnerCategoryPage />} />
+            <Route path="products" element={<OwnerProductsPage />} />
+          </Route>
           <Route path="/login" element={<Login />} />
+          <Route path="/signup" element={<Signup />} />
           <Route path="/profile" element={<ProfilePage />} />
           <Route path="/edit-profile" element={<EditProfile />} />
           <Route path="/carts" element={<CartPage />} />

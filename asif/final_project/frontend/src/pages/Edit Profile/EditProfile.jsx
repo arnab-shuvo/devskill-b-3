@@ -10,6 +10,7 @@ const EditProfile = () => {
   const [data, setData] = useState({
     id,
     name,
+
     email,
     number,
   });

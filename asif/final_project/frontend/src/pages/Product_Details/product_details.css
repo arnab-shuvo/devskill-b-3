@@ -1,22 +1,47 @@
 .product-details-wrapper {
-  padding: 2em;
-  background-color: honeydew;
-  border-radius: 1em;
-  box-shadow: 0.1em 0.1em 0.1em 0.1em rgb(228, 228, 228);
-}
-.left {
+  width: 90%;
+  max-width: 30em;
   margin: auto;
+  padding: 1em;
+  border-radius: 0.4em;
+  box-shadow: 0.1em 0.1em 0.1em 0.1em rgb(210, 210, 210);
+  background-color: azure;
 }
 
-.left > h3 {
+.product-details-wrapper > h1 {
+  text-align: center;
+  font-weight: 400;
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+    "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+}
+
+.product-details-wrapper > .header {
+  margin-top: 1.5em;
+  display: grid;
+  gap: 1em;
+  place-items: center;
+}
+.product-details-wrapper > .header > h3 {
   font-size: 1.5rem;
-  font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif;
-  font-weight: 500;
+  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+}
+.product-details-wrapper > .header > img {
+  width: 90%;
+  margin: auto;
+  border-radius: 0.4em;
 }
 
-.product-details-image {
-  height: 20em;
+.product-details-wrapper > .body {
+  font-size: 1.3rem;
+  display: grid;
+  place-items: center;
+  gap: 1em;
+}
 
-  border-radius: 0.2em;
-  box-shadow: 0.1em 0.1em 0.1em 0.1em rgb(224, 224, 224);
+.product-details-wrapper > .footer {
+  width: fit-content;
+  margin: auto;
+  display: flex;
+  align-items: center;
+  gap: 2em;
 }

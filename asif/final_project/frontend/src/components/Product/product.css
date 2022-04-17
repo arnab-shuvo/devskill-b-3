@@ -16,3 +16,10 @@
   object-fit: cover;
   border-radius: 0.5em;
 }
+
+.product-actions{
+  padding: 1em 0;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+}
