@@ -53,7 +53,8 @@ function Products() {
 
 
     const getProductId = (id) => {
-        setShowProduct(false)
+       
+		setShowProduct(false)
         fetch(`https://fakestoreapi.com/products/${id}`)
         .then( (res)=> res.json() )
         .then( (data)=> setProductDetails(data) )
@@ -241,10 +242,11 @@ function Products() {
                            </Grid>
                            <Grid item sx={ 12} sm={12} md={12} lg={12}>
                             <TextField
-                                    fullWidth
+                                   fullWidth
                                    label='description'
                                    name='description'
-                                    helperText='Please add description'
+                                   helperText='Please add description'
+                                   helperText='Please add description'
                                    required
                                    onChange={handelingInputsEvent }
                                 />

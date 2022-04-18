@@ -1,0 +1,35 @@
+{
+  "name": "bazzar",
+  "private": true,
+  "version": "0.0.0",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "@emotion/react": "^11.8.2",
+    "@emotion/styled": "^11.8.1",
+    "@mui/icons-material": "^5.5.1",
+    "@mui/material": "^5.5.3",
+    "image-to-base64": "^2.2.0",
+    "ra-data-simple-rest": "^3.19.11",
+    "react": "^17.0.2",
+    "react-admin": "^3.19.11",
+    "react-dom": "^17.0.2",
+    "react-infinite-scroll-component": "^6.1.0",
+    "react-redux": "^7.2.8",
+    "react-responsive-carousel": "^3.2.23",
+    "react-router": "^6.3.0",
+    "react-router-dom": "^6.3.0",
+    "react-slick": "^0.28.1",
+    "redux": "^4.1.2",
+    "redux-persist": "^6.0.0",
+    "redux-thunk": "^2.4.1",
+    "slick-carousel": "^1.8.1"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-react": "^1.0.7",
+    "vite": "^2.9.0"
+  }
+}
