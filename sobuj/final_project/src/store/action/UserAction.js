@@ -15,3 +15,8 @@ export const logout = () => {
       type: ActionType.LOGOUT
     };
 };
+
+export const newUserRegistration =(newUser)=>({
+    type: ActionType.registration,
+    payload: newUser
+});

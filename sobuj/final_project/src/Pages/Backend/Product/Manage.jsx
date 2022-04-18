@@ -12,13 +12,12 @@ import Button from '@mui/material/Button';
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 import { useDispatch, useSelector } from 'react-redux';
-
-import CreateCategory from './create';
-import UpdateCategory from './update';
+import { deleteProduct, getProductList, productDeleteAction } from '../../../store/action/ProductAction';
+import UpdateProduct from './Update';
+import CreateProductFromModal from './CreateProdModal';
 import { Grid } from '@material-ui/core';
 import BackendLayout from '../../../Layouts/Backend/Layouts';
 import { Navigate, useNavigate } from 'react-router-dom';
-import { loadCategories, deleteCategoryAction} from '../../../store/action/CategoryAction';
 
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
@@ -60,18 +59,7 @@ const StyledTableCell = styled(TableCell)(({ theme }) => ({
   ];
   
 const ManageProduct = () =>{
-    const dispatch = useDispatch();
-      
-    const navigate =useNavigate();
-   
 
-    const loggedInUser = useSelector((store) =>store.userStore);
-    const [userToken, setUserToken] = useState(null);
-
-    useEffect(() => {
-      setUserToken(loggedInUser.token.userInfo.token)
-    }, []);
-    
     //Update Procut
     const [selectUpdate, setSelectUpdate] = useState(null);
     const [open, setOpen] = React.useState(false);
@@ -81,15 +69,38 @@ const ManageProduct = () =>{
         setSelectUpdate = null
     };
 
-    const { categoryList } = useSelector((state) => state.prodCategories); // prodCategories is comming from RootReducer (prodCategories:CategoryReducer,)
+    const updateProduct = (product) => {
+      //alert("Update Product-"+ id)
+      setSelectUpdate(product);
+      setOpen(true);
+    };    
 
-    useEffect(() => {
-      dispatch(loadCategories());
-    }, []);
+      const { productList } = useSelector((store) => store.productList);
+      //console.log(productList, "===store");
+      // const [requestData, setRequestData] = useState();
+      const loggedInUser = useSelector((store) =>store.userStore);
+      const [userToken, setUserToken] = useState(null);
+  
+      useEffect(() => {
+        setUserToken(loggedInUser.token.userInfo.token)
+      }, []);
 
-    // DELETE CATEGORY
+      const dispatch = useDispatch();
+      useEffect(()=>{
+          // setRequestData(productList);
+          
+          fetch("http://127.0.0.1:8080/products")
+          .then((res) => res.json())
+          .then((json) => {
+              dispatch(getProductList(json));
+          });
+          
+      }, []);
+
+
+    // PRODUCT DELETE
     async function deleteSubmit(data) {
-      return fetch(`http://localhost:8080/category/${data.id}`, {
+      return fetch(`http://localhost:8080/products/${data.id}`, {
           method: "DELETE",
           headers: {
             "Content-Type": "application/json",
@@ -102,63 +113,86 @@ const ManageProduct = () =>{
     }
 
     const handleDelete = async (id)=>{
+          // const token = userInfo.token.userInfo.token;
           const deleteispatch = await deleteSubmit({
             userToken,
             id
           });
-          dispatch(deleteCategoryAction(deleteispatch));
+          dispatch(productDeleteAction(deleteispatch));
           window.location.reload();
+          // setRequestData(productList)
     }
-
-    const updateCategory = (id) =>{
-        console.log(id, '===== category id for update')
+      
+    const navigate =useNavigate();
+    const toCreateProduct = () =>{
+      navigate('/admin/create-product/');
     }
-
-
 
     return (
       <>
         <Grid container spacing={1}>
           {/* <Button variant="contained" color='secondary' onClick={toAdminDashboard}> Dashboard </Button>
             <Button sx={{ ml:"5px;" }} variant="contained" color='primary' onClick={handleOpen}> Add </Button> */}
-          
-          
-          {/* To Create Product by Modal */}
-          <CreateCategory />
-
+          <Button 
+          variant="contained" 
+          color="secondary"
+          sx={{ mt:2 }}
+          onClick={toCreateProduct} 
+          >Add Product</Button>
+         
+          {/* 
+            To Create Product by Modal
+            <CreateProductFromModal /> */}
           <TableContainer component={Paper}>
             <Table sx={{ minWidth: 700 }} aria-label="customized table">
               <TableHead>
                 <TableRow>
                   <StyledTableCell>Title</StyledTableCell>
-                  <StyledTableCell align="right">Description</StyledTableCell>
+                  <StyledTableCell align="right">Category</StyledTableCell>
+                  <StyledTableCell align="right">Price</StyledTableCell>
+                  <StyledTableCell align="right">Stock</StyledTableCell>
+                  <StyledTableCell align="right">Image</StyledTableCell>
                   <StyledTableCell align="right">Action</StyledTableCell>
                 </TableRow>
               </TableHead>
               <TableBody>
-                {categoryList.map((category) => {
+                {productList.map((product) => {
+                  let image = product.image;
                   return (
-                    <StyledTableRow key={category._id}>
+                    // <p  key={product._id} >{product.title}</p>
+
+                    <StyledTableRow key={product._id}>
                       <StyledTableCell component="th" scope="row">
-                        {category.name}
+                        {product.title}
                       </StyledTableCell>
                       <StyledTableCell align="right">
-                        {category.description}
+                        {product.category.name}
                       </StyledTableCell>
-                       
+                      <StyledTableCell align="right">
+                        {product.price}
+                      </StyledTableCell>
+                      <StyledTableCell align="right">
+                        {product.stock}
+                      </StyledTableCell>
+                      <StyledTableCell align="right">
+                        <img
+                          height={"100"}
+                          src={"http://127.0.0.1:8080" + image}
+                        />
+                      </StyledTableCell>
                       <StyledTableCell align="right">
                         <ButtonGroup disableElevation variant="contained">
                           <Button
                             variant="contained"
                             color="secondary"
-                            onClick={() => updateCategory(category._id)}
+                            onClick={() => updateProduct(product._id)}
                           >
                             <EditIcon />
                           </Button>
                           <Button
                             variant="contained"
                             color="error"
-                            onClick={() => handleDelete(category._id)}
+                            onClick={() => handleDelete(product._id)}
                           >
                             {" "}
                             <DeleteIcon />{" "}

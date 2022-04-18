@@ -37,6 +37,7 @@ const Product = () =>{
     }
 
     const { productList } = useSelector((store) => store.productList);
+    
     //console.log(productList, "===store");
 
    // Destructuring "categoryList" from CategoryReducer
@@ -48,6 +49,12 @@ const Product = () =>{
     const [loading, setLoading]=useState(false);
     let ComponentMounted = true;
 
+    const filterProduct = (cat) =>{
+        const updatedList = productList.filter((x)=>x.category._id === cat);
+        setFilter(updatedList);
+    }
+
+
     const dispatch = useDispatch();
     useEffect(()=>{
         fetch("http://127.0.0.1:8080/products")
@@ -55,6 +62,7 @@ const Product = () =>{
         .then((json) => {
             dispatch(getProductList(json));
             dispatch(loadCategories());
+            
         });
         if(ComponentMounted){
             setFilter(productList);
@@ -65,10 +73,6 @@ const Product = () =>{
     }, []);
 
 
-    const filterProduct = (cat) =>{
-        const updatedList = productList.filter((x)=>x.category._id === cat);
-        setFilter(updatedList);
-    }
 
  
 
@@ -126,7 +130,6 @@ const Product = () =>{
 
     return(
         <>
-        {/* <Navbar /> */}
         <Grid container sx={10} justifyContent="center">
             <Item>
                 
@@ -136,15 +139,15 @@ const Product = () =>{
                     return(
                     <ProductBlock product={product} key={product.id} />
                     );
-                })} */}
+                })} 
                  
                 <Stack spacing={2}> 
                     <Pagination count={10} color="secondary" />
-                </Stack>
+                </Stack>*/}
             </Item>
         </Grid>
         </>
     )
 }
-
+ 
 export default Product;

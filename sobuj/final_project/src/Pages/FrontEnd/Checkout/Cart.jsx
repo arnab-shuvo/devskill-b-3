@@ -15,11 +15,14 @@ import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import { maxHeight } from '@mui/system';
 import { useNavigate } from 'react-router-dom';
-import { loadCartItems, get_carts } from '../../../store/action/AddToCartAction';
+import { loadCartItems, get_carts, removeCartItem } from '../../../store/action/AddToCartAction';
 import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import Icon from '@mui/material/Icon';
 import { green } from '@mui/material/colors';
+import DeleteIcon from '@mui/icons-material/Delete';
+import { useState } from 'react';
+import FrontLayout from '../../../Layouts/FrontEnd/FrontLayout';
 
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
@@ -65,7 +68,7 @@ const styles = {
   wraperContainer: {
     backgroundSize: "cover",
     width: "100%",
-    minHeight: "900px",
+    // minHeight: "900px",
     backgroundSize: "cover",
     backgroundPosition: "center",
   },
@@ -91,22 +94,29 @@ const styles = {
 
 
 const CartDetail = () => {
+  
+const dispatch = useDispatch(); 
+
 const loggedInUser = useSelector((store) =>store.userStore);
+const [userToken, setUserToken] = useState(null);
 
 
 const navigate = useNavigate();
 const submitToCheckout = () =>{
-  navigate('/checkout');
+  navigate('/user/checkout');
 }
-
-const dispatch = useDispatch(); 
-// const {cartItems} = useSelector((store) =>store); 
 const { cart } = useSelector((store) => store.cartItems); 
-console.log(cart.products, '=== cart list...'); 
+// if(cart.status==='error'){
+//   console.log(cart.message, '=== cart list... error message'); 
+// }else{
+//   console.log(cart.products, "==== Showing carts Items from Cart page")
+// }
+
 
 useEffect(() => {
   if(loggedInUser.isAuthUser === true){
     const token = loggedInUser.token.userInfo.token;
+    setUserToken(loggedInUser.token.userInfo.token)
     dispatch(loadCartItems(token));
   }
 }, []);
@@ -114,15 +124,7 @@ useEffect(() => {
 
   return (
     <>
-    <ScrollToTop />
-     {cart?.products?.map((row) => (
-        <>
-          <li key={row._id}>{row.productId['title']}</li>
-        </>
-      ))
-    }
-   {/*    <Navbar /> 
-      <Services /> 
+   
       <Grid
         container
         style={styles.wraperContainer}
@@ -134,43 +136,95 @@ useEffect(() => {
             Cart Itmes
             </Typography>
         </Box>
-        <TableContainer component={Paper}>
-          <Table sx={{ minWidth: 700 }} aria-label="customized table">
-            <TableHead>
-              <TableRow>
-                <StyledTableCell>Items</StyledTableCell>
-                <StyledTableCell align="right">Price</StyledTableCell>
-                <StyledTableCell align="right">Quantity</StyledTableCell>
-                <StyledTableCell align="right">Sub-Total</StyledTableCell>
-                <StyledTableCell align="right">Action</StyledTableCell>
-              </TableRow>
-            </TableHead>
-            <TableBody>
-              {cartItems.map((row) => (
-                <StyledTableRow key={row.title}>
-                  <StyledTableCell component="th" scope="row">
-                    {row.title}
-                  </StyledTableCell>
-                  <StyledTableCell align="right">{row.title}</StyledTableCell>
-                  <StyledTableCell align="right">{row.price}</StyledTableCell>
-                  <StyledTableCell align="right">{row.quantity}</StyledTableCell>
-                  <StyledTableCell align="right">
-                    <Icon color="primary">add_circle</Icon>
-                    <Icon sx={{ color: green[500] }}>add_circle</Icon>
-                  </StyledTableCell>
-                </StyledTableRow>
-              ))}
-            </TableBody>
-          </Table>
-        </TableContainer>
-        <Button variant="contained" color='secondary' size="medium" onClick={submitToCheckout} >
-          checkout
-        </Button>
+        {
+          !cart.status==="error"  || cart.status===0 ?
+          (
+            <>
+                <Grid xs={12}>
+                  <TableContainer component={Paper}>
+                    <Table sx={{ minWidth: 700 }} aria-label="customized table">
+                      <TableHead>
+                        <TableRow>
+                          <StyledTableCell>Items</StyledTableCell>
+                          <StyledTableCell align="right">Price</StyledTableCell>
+                          <StyledTableCell align="right">Quantity</StyledTableCell>
+                          <StyledTableCell align="right">Sub-Total</StyledTableCell>
+                          <StyledTableCell align="right">Action</StyledTableCell>
+                          <StyledTableCell align="right">Delete</StyledTableCell>
+                        </TableRow>
+                      </TableHead>
+                      <TableBody>
+                      {cart?.products?.map((dataRow) => (
+                        
+                          <StyledTableRow key={dataRow._id}>
+                              <StyledTableCell component="th" scope="row" justifyContent="center" align='left' 
+                              style={{
+                                display:'flex',
+                                padding:0,
+                                margin:0,
+                                listStyle:'none',
+                                textAlign:'left',
+                              }}
+                              
+                              >
+                              <img
+                                height={"100"}
+                                src={"http://127.0.0.1:8080" + dataRow.productId['image']}
+                              />
+                              <Typography variant='inherit' align='left' ml={5} mt={5} justifyContent='center'>
+                                {dataRow.productId['title']}
+                              </Typography>
+                            </StyledTableCell>                          
+                            <StyledTableCell align="right">{dataRow.productId['price']}</StyledTableCell>
+                            <StyledTableCell align="right">{dataRow.quantity}</StyledTableCell>
+                            <StyledTableCell align="right">
+                              {dataRow.quantity * dataRow.productId['price']}
+                            </StyledTableCell>
+                            <StyledTableCell align="right">
+                              <Icon color="primary">add_circle</Icon>
+                              <Icon sx={{ color: green[500] }}>add_circle</Icon>
+                            </StyledTableCell>
+                            <StyledTableCell align="right">
+                                <DeleteIcon onClick={()=>dispatch(removeCartItem(dataRow.productId['_id'], userToken))}/>
+                            </StyledTableCell>
+                          </StyledTableRow>
+                        ))
+                      } 
+                        
+                      </TableBody>
+                    </Table>
+                  </TableContainer>
+                </Grid>
+                <Grid xs={12} style={{
+                  // display:'flex',
+                  maxHeight:'50px',
+                  padding:0,
+                  marginTop:'10px',
+                  listStyle:'none',
+                  textAlign:'center',
+                }}>
+                  <Button variant="contained" color='secondary' size="medium" onClick={submitToCheckout} >
+                    checkout
+                  </Button>
+                </Grid>
+                
 
+              </>
+          )
+       
+        
+        
+       :
+       (
+         <>
+           <h2>No cart data found</h2>
+         </>
+       )
+     }
       </Grid>
-       */}
+       {/*    */}
     </>
   )
 }
 
-export default CartDetail;
+export default FrontLayout(CartDetail)

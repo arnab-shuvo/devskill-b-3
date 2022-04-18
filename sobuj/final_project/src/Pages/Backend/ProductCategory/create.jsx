@@ -1,104 +1,183 @@
-import { Box, Button, Grid, TextField, Typography } from "@mui/material";
-import React, { useEffect } from "react";
-import { SubmitHandler, useForm } from "react-hook-form";
-import Title from "../../..";
-import Notification, { NotificationType } from "../../../../Notification";
-import { useUserDispatch } from "../../../../store/action-dispatchs";
-import { CreateProductCategory } from "../../../../utilis/API/Category";
-import { CategoryCreateDto } from "../../../../utilis/DTOs/Category";
+import * as React from 'react';
+import Backdrop from '@mui/material/Backdrop';
+import Box from '@mui/material/Box';
+import Modal from '@mui/material/Modal';
+import Fade from '@mui/material/Fade';
+import Button from '@mui/material/Button';
+import Typography from '@mui/material/Typography';
+import { Card, CardActionArea, CardContent, TextField } from '@mui/material';
+import { useState } from 'react';
+import { TextareaAutosize } from '@material-ui/core';
+import { useSelector } from 'react-redux';
+import { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
+import { addCategoryAction } from '../../../store/action/CategoryAction';
 
-type Inputs = {
-  name: string;
-  description: string;
+const style = {
+  position: 'absolute',
+  top: '50%',
+  left: '50%',
+  transform: 'translate(-50%, -50%)',
+  width: 400,
+  bgcolor: 'background.paper',
+  border: '2px solid #000',
+  boxShadow: 24,
+  p: 4,
 };
 
-const CategoryCreate = () => {
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-    reset,
-  } = useForm<Inputs>();
-
-  const { user, GetUserInfo } = useUserDispatch();
+export default function CreateCategory() {
+  const loggedInUser = useSelector((store) =>store.userStore);
+  const [userToken, setUserToken] = useState(null);
 
   useEffect(() => {
-    GetUserInfo();
+    setUserToken(loggedInUser.token.userInfo.token)
   }, []);
+  
+  const dispatch = useDispatch();
 
-  const onSubmit: SubmitHandler<Inputs> = async (data) => {
-    const category: CategoryCreateDto = {
-      name: data.name,
-      description: data.description,
-    };
+  const [openCreate, setOpenCreate] = React.useState(false);
+  const handleOpenCreate = () => setOpenCreate(true);
+  const handleCloseCreate = () => setOpenCreate(false);
 
-    try {
-      await CreateProductCategory(user.token ?? "", category);
-      Notification(NotificationType.success, "Product created successfully.");
-    } catch (error) {
-      Notification(NotificationType.error, "Product created failed.");
+  const [name, setName]=useState("");
+  const [category, setCategory]=useState("");
+  const [price, setPrice]=useState("");
+  const [stock, setStock]=useState("");
+  const [description, setDescription]=useState("");
+  const [image, setImage]=useState("");
+  const [error, setError]=useState(false);
+
+  // const addCategory = () =>{
+  //   if(name.length){ 
+  //       console.log(name , description );
+        
+  //       fetch("http://127.0.0.1:8080/category/", {
+  //           method: "POST",
+  //           headers: {
+  //               authorization: `bearer ${userToken}`,
+  //           },
+  //           body: JSON.stringify({
+  //               'name': name,
+  //               'description': description,
+  //           }),
+  //         })
+  //         .then((res) => res.json())
+  //         .then((json) => console.log(json));
+
+  //         handleCloseCreate()
+  //     }else{
+  //         setError(true);
+  //     }
+  // };
+  async function formSubmit(data) {
+    return fetch("http://localhost:8080/category", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "authorization": "bearer "+ data.userToken
+      },
+      body: JSON.stringify({
+            "name": data.name,
+            "description": data.description,
+        }),
+    })
+      .then((data) => data.json())
+      .then((json) => json)
+      .then((json) => console.log(json));
+  }
+
+const handleFormSubmit = async e =>{
+    if (e && e.preventDefault) { e.preventDefault();}
+    if(name.length){ 
+        const formDispatch = await formSubmit({
+            userToken,
+            name,
+        description,
+        });
+        dispatch(addCategoryAction(formDispatch));
+        handleCloseCreate()
+        window.location.reload();
+
+    }else{
+        setError(true);
     }
-    reset();
-  };
+  }
+
+
+
 
   return (
-    <React.Fragment>
-      <Title>Create Product Category</Title>
-      <Grid container justifyContent={"center"}>
-        <Box
-          sx={{
-            marginTop: 3,
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
-          }}
-        >
-          <Box
-            component="form"
-            noValidate
-            sx={{ mt: 1 }}
-            minWidth="400px"
-            onSubmit={handleSubmit(onSubmit)}
-          >
-            <TextField
-              margin="normal"
-              error={errors.name ? true : false}
-              fullWidth
-              label="Category Name"
-              autoComplete="name"
-              autoFocus
-              {...register("name", {
-                required: "Please provide category name",
-              })}
-            />
-            <Typography color={"red"}>{errors.name?.message}</Typography>
-            <TextField
-              margin="normal"
-              error={errors.description ? true : false}
-              fullWidth
-              label="Category Description"
-              autoComplete="description"
-              autoFocus
-              multiline
-              rows={4}
-              {...register("description", {
-                required: "Please provide description",
-              })}
-            />
-            <Typography color={"red"}>{errors.description?.message}</Typography>
-            <Button
-              type="submit"
-              fullWidth
-              variant="contained"
-              sx={{ mt: 3, mb: 2 }}
-            >
-              Create
-            </Button>
-          </Box>
-        </Box>
-      </Grid>
-    </React.Fragment>
-  );
-};
+    <div>
+      <Button 
+        variant="contained" 
+        color="secondary"
+        sx={{ mt:2 }}
+        onClick={handleOpenCreate} 
+        >Add Category</Button>
+      <Modal
+        aria-labelledby="transition-modal-title"
+        aria-describedby="transition-modal-description"
+        open={openCreate}
+        onClose={handleCloseCreate}
+        closeAfterTransition
+        BackdropComponent={Backdrop}
+        BackdropProps={{
+          timeout: 500,
+        }}
+      >
+        <Fade in={openCreate}>
+          <Box sx={style}>
+          <Card>
+              <CardActionArea>
+                  <CardContent>
+                      <Typography gutterBottom variant="h5" component="h2">
+                          Add New Category
+                      </Typography>
+                        <>
+                          <Box>
+                              <TextField sx={{ mt:2 }}
+                                  onChange={(e)=>setName(e.target.value)}
+                                  fullWidth
+                                      error={error}
+                                      id="outlined"
+                                      label="Category Name"                                          
+                                      helperText={error? "Must fill the task field!":""}
+                                      variant="outlined"
+                                  
+                                      value={name}
+                              />
+                              
+                              <Box>
+                                  <TextareaAutosize  
+                                      onChange={(e)=>setDescription(e.target.value)}
+                                      aria-label="minimum height"
+                                      minRows={3}
+                                      placeholder="Product Description"
+                                      style={{ width: "100%", padding:"5px", minHeight:'50px' }}
+                                      label="Category Description"                                          
+                                      helperText={error? "Must fill the task field!":""}
+                                      variant="outlined"
+                                      value={description}
+                                  />
+                              </Box>
+                              
+                          </Box>
+                              <Button sx={{ mt:5 }} onClick={()=>{handleFormSubmit()}} variant="contained" color="secondary">
+                                  Add Category
+                              </Button>
+                              <Button sx={{ mt:5, ml:10 }} onClick={()=>{handleCloseCreate()}} >
+                                  Close
+                              </Button>
+                          </>
+                        
 
-export default CategoryCreate;
+                  </CardContent>
+              </CardActionArea>
+                     
+            </Card>
+          </Box>
+        </Fade>
+      </Modal>
+    </div>
+  );
+}

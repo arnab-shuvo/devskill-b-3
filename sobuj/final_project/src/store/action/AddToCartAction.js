@@ -9,10 +9,37 @@ export const addCart = (cartProduct) =>({
 
 
 //Adding Cart Item
-export const delCart = (cartProduct) =>({
-    type: ActionType.DEL_FROM_CART,
-    payload: cartProduct
+export const removeCartAction = (cartID) =>({
+    type: ActionType.REMOVE_FROM_CART,
+    payload: cartID
 });
+export const removeCartItem = (prodID, userToken)=>{
+    // console.log(prodID, '----- Product ID from Cart Delte Action')
+    // console.log(userToken, '----- UserTOken from Cart Delte Action')
+    return function(dispatch){
+        axios
+        .get(`${"http://127.0.0.1:8080/cart"}`,{
+            method: "POST",
+            headers: {
+                "Content-type" : "application/json",
+                "Accept"       : "application/json",
+                "authorization": "bearer "+ userToken
+              },
+              body: JSON.stringify({
+                product: {
+                  id: prodID,
+                  quantity: 0,
+                },
+              }),
+        })
+        .then((response) =>{
+            console.log("response", response);
+            dispatch(removeCartAction(response.data));
+        })
+        .catch((error)=>console.log(error));
+    };
+}
+
 
 //Get Cart Items
 export const getCartItems = (cartItems) =>({

@@ -28,39 +28,31 @@ export const loadProducts = () =>{
     };
 };
 
-const productDeleted = (id) =>({
-    type: ActionType.deleteProduct,
+export const addProductAction = (addProduct) =>({
+    type:ActionType.ADD_NEW_PRODUCT,
+    payload:addProduct
 });
 
-const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7Il9pZCI6IjYyNDdlYTQ5OTgwNjJjNDg0NDgxZmRkOSIsImVtYWlsIjoicmFpaGFuLnNhYnVqQHlhaG9vLmNvbSJ9LCJpYXQiOjE2NDk1NjY0ODYsImV4cCI6MTY0OTczOTI4Nn0.gHOTWrdIentkxTGmBnKhfXMsTDIr5ntPNO7jjBJmUkA";
+export const productDeleteAction = (delProduct) =>({
+    type: ActionType.deleteProduct,
+    payload: delProduct
+});
 
-export const deleteProduct = (id) =>{
-    return function(dispatch){
-        // axios
-        // .delete(`${"http://127.0.0.1:8080/products"}/${id}`)
-        // .then((response) =>{
-        //     dispatch(productDeleted());
-        //     dispatch(getProductList());
-        // })
-        // .catch((error)=>console.log(error));
 
-        axios.post(`http://10.0.1.14:8000/products/${id}`, {
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': 'Bearer '+token
-            },      
-        })      
-        .then((response) => {
-            console.log('response',response)
-            dispatch(productDeleted());
-            dispatch(getProducts(response.data));
-        })
-        .catch((error) => {
-            alert('error',error.response)
-            dispatch(productDeleted())
-
-        })
-    // console.log('----cheers---------',data)
-    };
-};
+// export const deleteProduct = (id, token) =>{
+//     // console.log(token, '==== delete action')
+//     return function(dispatch){
+//         axios
+//         .post(`http://10.0.1.14:8000/products/${id}`, {
+//             headers: {
+//                 'Content-Type': 'application/json',
+//                 'authorization': 'bearer '+token
+//             },      
+//         })
+//         .then((response) =>{
+//             dispatch(productDeleteAction(response.data));
+//         })
+//         .catch((error)=>console.log(error));
+//     };
+// };
 

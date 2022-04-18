@@ -84,7 +84,7 @@ const ProductBlock = ({product}) =>{
                         onClick={()=>{toDetail(_id)}}
                         startIcon={<RemoveRedEyeIcon />}
                         ></Button>
-                        
+{/*                         
                         <Button 
                         variant="contained" 
                         color="info"
@@ -92,7 +92,7 @@ const ProductBlock = ({product}) =>{
                         //onClick={()=>{updateProd(product)}}
                         startIcon={<AddShoppingCartIcon />}
                         > </Button>
-                        
+                         */}
                         <Button 
                         variant="contained" 
                         color="error"

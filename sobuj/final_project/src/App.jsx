@@ -14,12 +14,23 @@ import FrontDashboard from './Pages/FrontEnd/FrontDashboard';
 
 /* Backend (Admin panel) Components or pages */
 import Dashboard from './Pages/Backend/Dashboard';
-import ProductCreate from './Pages/Backend/Product/Create';
+
+import CreateCategory from './Pages/Backend/ProductCategory/create';
+import UpdateCategory from './Pages/Backend/ProductCategory/update';
+import ManageCategory from './Pages/Backend/ProductCategory/index';
+
+
+import CreateProduct from './Pages/Backend/Product/Create';
 import ProductView from './Pages/Backend/Product/View';
-import ProductUpdate from './Pages/Backend/Product/Update';
-import ManageProduct from './Pages/Backend/Product/Admin';
+import UpdateProduct from './Pages/Backend/Product/Update';
+import ManageProduct from './Pages/Backend/Product/Manage';
+
+import ManageOrders from './Pages/Backend/Orders/index';
+import UpdateOrder from './Pages/Backend/Orders/update';
+
 import Category from './Pages/FrontEnd/Product/Category';
 import CartDetail from './Pages/FrontEnd/Checkout/Cart';
+import Checkout from './Pages/FrontEnd/Checkout/Checkout';
 // import useToken from './Components/useToken';
 
 
@@ -51,15 +62,25 @@ function App() {
 
           {/* Order & Checkout and Cart */}
           <Route path='/user/home/' element={<FrontDashboard />} />
+          <Route path='/user/orders/' element={<FrontDashboard />} />
           <Route path='/user/cart/' element={<CartDetail />} />
+          <Route path='/user/checkout/' element={<Checkout />} />
+          <Route path='/user/my-orders/' element={<MyOrders />} />
 
           {/* Admin Panel Links */}
           <Route path='/admin/' element={<Dashboard />}  />
-
-          <Route path='/add-product/' element={<ProductCreate />}  />
-          <Route path='/view-product/' element={<ProductView />}  />
-          <Route path='/edit-product/' element={<ProductUpdate />}  />
-          <Route path='/manage-product/' element={<ManageProduct />}  />
+          {/* PRODUCT CATEGORIES */}
+          <Route path='/admin/create-category/' element={<CreateCategory />}  />
+          <Route path='/admin/edit-category/' element={<UpdateCategory />}  />
+          <Route path='/admin/manage-category/' element={<ManageCategory />}  />
+          {/* PRODUCTs */}
+          <Route path='/admin/create-product/' element={<CreateProduct />}  />
+          <Route path='/admin/view-product/' element={<ProductView />}  />
+          <Route path='/admin/edit-product/' element={<UpdateProduct />}  />
+          <Route path='/admin/manage-product/' element={<ManageProduct />}  />
+          {/* ORDER MANAGEMENT */}
+          <Route path='/admin/edit-product/' element={<UpdateOrder />}  />
+          <Route path='/admin/manage-product/' element={<ManageOrders />}  />
 
       </Routes>
     

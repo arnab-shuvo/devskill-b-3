@@ -72,6 +72,7 @@ export default function PrimarySearchAppBar() {
     >
       <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
       <MenuItem onClick={handleMenuClose}>My account</MenuItem>
+      <MenuItem onClick={handleMenuClose}>My Orders</MenuItem>
     </Menu>
   );
 
@@ -128,9 +129,7 @@ export default function PrimarySearchAppBar() {
               <li>
                 <Link to={`/all-products`}>All Products</Link>
               </li>
-              <li>
-                <Link to={`/category`}>Categories</Link>
-              </li>
+              
             </ul>
           </Nav>
 

@@ -72,8 +72,6 @@ export default function Login() {
     }else if(user.userInfo.role === 'user'){
       navigate('/user/home')
     }
-       
-    
   }
   
 

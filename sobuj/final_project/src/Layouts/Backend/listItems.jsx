@@ -14,7 +14,7 @@ import { NavLink, useNavigate } from "react-router-dom";
 import { connect } from "react-redux";
 import { Divider } from "@material-ui/core";
 import { useDispatch } from "react-redux";
-
+import TuneIcon from '@material-ui/icons/Tune';
 
 const SideNavbarAdmin = () => {
   
@@ -40,17 +40,26 @@ const SideNavbarAdmin = () => {
           </ListItemButton>
         </NavLink>
 
-        <NavLink to={"/manage-product"}>
+        <NavLink to={"/admin/manage-category"}>
           <ListItemButton>
             <ListItemIcon>
-              <ShoppingCartIcon />
+              <TuneIcon />
+            </ListItemIcon>
+              Manage Categories
+          </ListItemButton>
+        </NavLink>
+
+        <NavLink to={"/admin/manage-product"}>
+          <ListItemButton>
+            <ListItemIcon>
+              <TuneIcon />
             </ListItemIcon>
             Manage Products
             <ListItemText />
           </ListItemButton>
         </NavLink>
 
-        <NavLink to={"/manage-product"}>
+        <NavLink to={"/admin/manage-orders"}>
           <ListItemButton>
             <ListItemIcon>
               <ShoppingCartIcon />
@@ -59,7 +68,7 @@ const SideNavbarAdmin = () => {
           </ListItemButton>
         </NavLink>
 
-        <NavLink to={"/manage-product"}>
+        <NavLink to={"/admin/manage-users"}>
           <ListItemButton>
             <ListItemIcon>
               <PeopleIcon />
@@ -67,24 +76,7 @@ const SideNavbarAdmin = () => {
             <ListItemText primary="Users" />
           </ListItemButton>
         </NavLink>
-
-        <NavLink to={"/manage-product"}>
-          <ListItemButton>
-            <ListItemIcon>
-              <BarChartIcon />
-            </ListItemIcon>
-            <ListItemText primary="Reports" />
-          </ListItemButton>
-        </NavLink>
-
-        <NavLink to={"/manage-product"}>
-          <ListItemButton>
-            <ListItemIcon>
-              <LayersIcon />
-            </ListItemIcon>
-            <ListItemText primary="Integrations" />
-          </ListItemButton>
-        </NavLink>
+ 
                         
         <Divider sx={{ my: 1 }} />
         

@@ -2,6 +2,7 @@ import ActionType from "../ActionType";
 
 const initialState = {
     categoryList:[],
+    newCategory:[],
     loading: true
 }
 
@@ -13,7 +14,9 @@ const CategoryReducer = (state = initialState, action) =>{
                 categoryList:action.payload,
                 loading:false,
             }
-          
+        case ActionType.ADD_NEW_CATEGORY:
+            return{...state, newProduct: action.payload}
+                
         default:
             return state;
     }

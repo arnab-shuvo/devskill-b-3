@@ -4,6 +4,7 @@ const initialState = {
     productList: [],
     allProduct:[],
     productDetail:[],
+    newProduct:[],
 }
 
 const productReducer = (state = initialState, action) =>{
@@ -16,6 +17,9 @@ const productReducer = (state = initialState, action) =>{
             
         case ActionType.getProductDetail:
             return{...state, productDetail: action.payload}
+
+        case ActionType.ADD_NEW_PRODUCT:
+            return{...state, newProduct: action.payload}
             
         case ActionType.deleteProduct:
             return{...state}

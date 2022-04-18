@@ -5,6 +5,7 @@ import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useNavigate } from "react-router-dom"; 
 import { loadCategories } from '../../../store/action/CategoryAction';
+import FrontLayout from "../../../Layouts/FrontEnd/FrontLayout";
 
 const Category = () => {
   const dispatch = useDispatch();
@@ -31,4 +32,4 @@ const Category = () => {
   );
 };
 
-export default Category
+export default FrontLayout(Category)

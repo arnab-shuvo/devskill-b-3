@@ -15,6 +15,7 @@ import NavbarMui from "../../../Components/NavbarMui";
 import { useDispatch, useSelector } from "react-redux";
 import { getProductDetail } from "../../../store/action/ProductAction";
 import { addCart, delCart } from "../../../store/action/AddToCartAction";
+import FrontLayout from "../../../Layouts/FrontEnd/FrontLayout";
 
 const useStyles = makeStyles(() => ({
   root: {
@@ -101,7 +102,7 @@ const ProductDetail = () => {
   };
 
   const toCartDetail = () => {
-    navigate(`/`);
+    navigate(`/user/cart`);
   };
 
   const loading = () => {
@@ -174,4 +175,4 @@ const ProductDetail = () => {
   );
 };
 
-export default ProductDetail;
+export default FrontLayout(ProductDetail)

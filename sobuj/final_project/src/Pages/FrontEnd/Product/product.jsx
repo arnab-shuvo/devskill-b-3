@@ -16,6 +16,7 @@ import { loadCategories } from '../../../store/action/CategoryAction';
 import { Button, ButtonGroup } from '@material-ui/core';
 import { Link, useNavigate } from 'react-router-dom';
 import { useState } from 'react';
+import FrontLayout from '../../../Layouts/FrontEnd/FrontLayout';
 
 const Item = styled(Paper)(({ theme }) => ({
     backgroundColor: 'transparent',
@@ -67,8 +68,7 @@ const Product = () =>{
 
     return(
         <>
-        {/* <Navbar /> */}
-        <Grid container sx={10} justifyContent="center">
+         <Grid container sx={10} justifyContent="center">
             <Item>
             <ButtonGroup disableElevation variant="contained" size="small" >
                 <Button color='secondary' onClick={toProduct} style={{ fontSize:"13px;", borderRadius:"5px" }}>All</Button>
@@ -92,4 +92,4 @@ const Product = () =>{
     )
 }
 
-export default Product;
+export default FrontLayout(Product)

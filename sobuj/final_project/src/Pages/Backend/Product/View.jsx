@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import BackendLayout from '../../../Layouts/Backend/Layouts';
 
 const ProductView =()=>{
     
@@ -7,4 +8,4 @@ const ProductView =()=>{
     </>
 
 }
-export default ProductView;
+export default BackendLayout(ProductView);

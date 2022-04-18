@@ -13,6 +13,9 @@ import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { useNavigate } from "react-router-dom"; 
+import { newUserRegistration } from '../store/action/UserAction';
+import { useDispatch } from 'react-redux';
+import { useState } from 'react';
 
 function Copyright(props) {
  
@@ -50,6 +53,52 @@ export default function SignUp() {
     });
   };
 
+    
+  const dispatch = useDispatch();
+
+  const [lastname, setLastname]=useState("");
+  const [firstname, setFirstname]=useState("");
+  const [username, setUsername]=useState("");
+  const [email, setEmail]=useState("");
+  const [password, setPassword]=useState("");
+
+  const [error, setError]=useState(false);
+
+  async function formSubmit(userData) {
+    return fetch("http://localhost:8080/signup", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        // "authorization": "bearer "+ data.userToken
+      },
+      body: JSON.stringify(userData),
+    })
+      .then((data) => data.json())
+      .then((json) => json)
+      .then((json) => console.log(json));
+  }
+
+const handleFormSubmit = async e =>{
+    if (e && e.preventDefault) { e.preventDefault();}
+    if(firstname.length && username.length && email.length && password.length){ 
+        const formDispatch = await formSubmit({
+            email, 
+            firstname, 
+            lastname,
+            username,
+            password,
+        });
+        dispatch(newUserRegistration(formDispatch));
+        navigate('/login');
+
+    }else{
+        setError(true);
+    }
+  }
+
+
+
+
   return (
     <ThemeProvider theme={theme}>
       <Container component="main" maxWidth="xs">
@@ -70,37 +119,63 @@ export default function SignUp() {
           </Typography>
           <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 3 }}>
             <Grid container spacing={2}>
+
               <Grid item xs={12} sm={6}>
-                <TextField
-                  autoComplete="given-name"
-                  name="firstName"
-                  required
-                  fullWidth
-                  id="firstName"
-                  label="First Name"
-                  autoFocus
+                <TextField sx={{ mt:2 }}
+                    onChange={(e)=>setFirstname(e.target.value)}
+                    fullWidth
+                    error={error}
+                    id="firstname"
+                    label="First Name" 
+                    helperText={error? "Firstname is required!":""}
+                    variant="outlined"
+                    value={firstname}
                 />
               </Grid>
               <Grid item xs={12} sm={6}>
+                <TextField sx={{ mt:2 }}
+                    onChange={(e)=>setLastname(e.target.value)}
+                    fullWidth
+                    // error={error}
+                    id="lastname"
+                    label="Last Name" 
+                    // helperText={error? "Lastname is required!":""}
+                    variant="outlined"
+                    value={lastname}
+                />
+              </Grid>
+
+              <Grid item xs={12} >
                 <TextField
+                  name="username"
                   required
                   fullWidth
-                  id="lastName"
-                  label="Last Name"
-                  name="lastName"
-                  autoComplete="family-name"
+                  id="username"
+                  label="Username"
+                  autoFocus
+                  autoComplete="username"
+                  helperText={error? "Username is required!":""}
+                  onChange={(e)=>setUsername(e.target.value)}
+                  value={username}
+                  variant="outlined"
                 />
               </Grid>
               <Grid item xs={12}>
                 <TextField
                   required
                   fullWidth
+                  type="email"
                   id="email"
                   label="Email Address"
                   name="email"
-                  autoComplete="email"
+                  autoComplete="email-address"
+                  helperText={error? "Email Address is required!":""}
+                  onChange={(e)=>setEmail(e.target.value)}
+                  value={email}
+                  variant="outlined"
                 />
               </Grid>
+               
               <Grid item xs={12}>
                 <TextField
                   required
@@ -110,6 +185,11 @@ export default function SignUp() {
                   type="password"
                   id="password"
                   autoComplete="new-password"
+                  
+                  helperText={error? "Password is required!":""}
+                  onChange={(e)=>setPassword(e.target.value)}
+                  value={password}
+                  variant="outlined"
                 />
               </Grid>
               <Grid item xs={12}>
@@ -124,6 +204,7 @@ export default function SignUp() {
               fullWidth
               variant="contained"
               sx={{ mt: 3, mb: 2 }}
+              onClick={handleFormSubmit}
             >
               Sign Up
             </Button>

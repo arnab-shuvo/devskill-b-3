@@ -50,10 +50,16 @@ export default function Navbar() {
 
   var cartLength;
   if(loggedInUser.isAuthUser === true ){
-    cartLength = cart.products.length;
+    if (!cart.status==="error" || cart.status===0){
+      cartLength = cart.products.length;
+      console.log(cartLength, '===== cartLength in Cart');
+    }else{
+      cartLength = 0;
+      console.log(cartLength, '===== No items in Cart');
+    }
   }else{
-    cartLength = cart.length;
-    console.log(cartLength, '===== No items in Cart');
+    cartLength = cart.length; // will found zero (0)
+    console.log(cartLength, '===== User not logged in');
   }
   
   useEffect(() => {
@@ -112,6 +118,12 @@ export default function Navbar() {
   const handleMobileMenuOpen = (event) => {
     setMobileMoreAnchorEl(event.currentTarget);
   };
+  const toProfile=()=>{
+    navigate('/user/home');
+  }
+  const toOrders=()=>{
+    navigate('/user/orders');
+  }
 
   const menuId = 'primary-search-account-menu';
   const renderMenu = (
@@ -128,7 +140,8 @@ export default function Navbar() {
         (loggedInUser.isAuthUser===true) ?
         (
           <span>
-            <MenuItem onClick={toAccount}>My Account</MenuItem>
+              <MenuItem onClick={toProfile}>Profile</MenuItem>
+              <MenuItem onClick={toOrders}>My Orders</MenuItem>
               <MenuItem onClick={toLogout}>Logout</MenuItem>
           </span>
               
@@ -200,7 +213,7 @@ export default function Navbar() {
               :
               (
                 <> 
-                    Public Area
+                    {/* Public Area */}
                 </>
               )
             }
