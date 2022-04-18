@@ -1,8 +1,10 @@
-import { Button } from "@mui/material";
+import { Button, IconButton } from "@mui/material";
 import React, { useState } from "react";
 import { user_login } from "../../../store/thunks/user_thunks";
 import { useDispatch, useSelector } from "react-redux";
 import { Navigate, useLocation, useNavigate } from "react-router-dom";
+import { FcGoogle } from "react-icons/fc";
+import { AiFillGithub } from "react-icons/ai";
 import "./login_styles.css";
 import { owner_login } from "../../../store/thunks/owner_thunk";
 const Login = () => {
@@ -56,6 +58,18 @@ const Login = () => {
           <Button fullWidth variant="contained" color="primary" type="submit">
             Login
           </Button>
+          <div className="oauth-section">
+            <p>Login with</p>
+            <div className="oauth-option-container">
+              <IconButton className="icon-button">
+                <FcGoogle />
+              </IconButton>
+              <p>or</p>
+              <IconButton className="icon-button">
+                <AiFillGithub />
+              </IconButton>
+            </div>
+          </div>
           {location.pathname == "/login" && (
             <p onClick={() => navigate("/signup")}>Dont have an account?</p>
           )}

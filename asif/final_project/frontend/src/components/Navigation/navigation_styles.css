@@ -3,7 +3,7 @@
   width: 100%;
   max-width: 1200px;
   margin: 0 auto;
-  background-color: rgb(178, 120, 255);
+  background-color: black;
   display: flex;
   justify-content: space-around;
   align-items: center;
@@ -11,9 +11,14 @@
   font-weight: 600;
 }
 .logo-container {
-  padding: 1em;
   font-size: larger;
   cursor: pointer;
+}
+.logo-container > img {
+  width: 4em;
+  height: 4em;
+  border-radius: 1em;
+  object-fit: contain;
 }
 
 .navlinks {

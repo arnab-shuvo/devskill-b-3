@@ -1,6 +1,8 @@
-import { Button } from "@mui/material";
+import { Button, IconButton } from "@mui/material";
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
+import { FcGoogle } from "react-icons/fc";
+import { AiFillGithub } from "react-icons/ai";
 import { useNavigate } from "react-router-dom";
 import { user_signup } from "../../../store/thunks/user_thunks";
 import FileBase from "react-file-base64";
@@ -83,6 +85,18 @@ const Signup = () => {
         <Button type="submit" color="primary" variant="contained">
           Signup
         </Button>
+        <div className="oauth-section">
+          <p>Signup with</p>
+          <div className="oauth-option-container">
+            <IconButton className="icon-button">
+              <FcGoogle />
+            </IconButton>
+            <p>or</p>
+            <IconButton className="icon-button">
+              <AiFillGithub />
+            </IconButton>
+          </div>
+        </div>
         <p onClick={() => navigate("/login")}>Already have an account?</p>
       </form>
     </div>

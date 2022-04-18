@@ -5,7 +5,7 @@
 }
 
 .login-form {
- width: 300px;
+  width: 300px;
   margin: auto;
   display: flex;
   flex-direction: column;
@@ -31,4 +31,13 @@
   border: none;
   outline: none;
   border-bottom: 1px solid grey;
+}
+
+.oauth-option-container {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+}
+.oauth-option-container > .icon-button > svg {
+  font-size: 2.5rem;
 }

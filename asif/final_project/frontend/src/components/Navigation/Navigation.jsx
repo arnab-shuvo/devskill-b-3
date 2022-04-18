@@ -20,7 +20,10 @@ const Navigation = () => {
           owner_reducer.token ? navigate("/owner-dashboard") : navigate("/")
         }
       >
-        Logo
+        <img
+          alt={"null"}
+          src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRj71d6DhZSx0tIzdNZG_zPWnc2t665OQWyUpCXZkOlF2HTVmOtaRseLolWnPIe1ZKoQOo&usqp=CAU"
+        />
       </div>
 
       <div className={`navlinks`}>
