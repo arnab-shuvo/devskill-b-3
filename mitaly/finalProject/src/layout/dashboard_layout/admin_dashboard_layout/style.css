@@ -1,0 +1,17 @@
+.admin_body-dashboard__container{
+    background: #18ADAB;
+    padding: 35px;
+}
+.admin_body-dashboard__container button:hover{
+    cursor: pointer;
+}
+.admin_body-dashboard{
+    background: #FFFFFF;
+    box-shadow: #0E0C0D;
+    border-radius: 25px;
+    height: 90vh;
+}
+.admin__main{
+    display: grid;
+    grid-template-columns: 125px auto;
+}

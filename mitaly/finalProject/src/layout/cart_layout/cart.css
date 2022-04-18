@@ -1,0 +1,21 @@
+.cart{
+    background: #18ADAB;
+    padding: 32px;
+}
+.cart_in{
+    background: white;
+    padding: 18px;
+    box-shadow: #0E0C0D;
+    border-radius: 25px;
+    height: 90vh;
+}
+.cart_product_List{
+    display: flex;
+    padding: 18px;
+    background: #18ADAB;
+    border-radius: 18px;
+}
+.cart_product_List_img{
+    width: 300px;
+    height: 150px;
+}

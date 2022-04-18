@@ -1,0 +1,220 @@
+ul{
+    list-style: none;
+}
+.body-dashboard__container{
+    background: #18ADAB;
+    padding: 35px;
+}
+.body-dashboard{
+    background: #FFFFFF;
+    box-shadow: #0E0C0D;
+    border-radius: 25px;
+}
+/*-------Header---------------*/
+.main-header{
+    padding: 16px;
+}
+.main-header div{
+    border-radius: 25px;
+    width: 14px;
+    height: 14px;
+}
+.green{
+    background: #28CD41;
+    display: inline-block; 
+}
+.blue{
+    background: #FFCC00;
+    display: inline-block;
+}
+.red{
+    background: #FF3B30;
+    display: inline-block;
+}
+.main{
+    
+}
+
+/*---------------HeaderEnds-------------*/
+
+/*--------Side Navbar starts--------*/
+.side-nav-bar{
+    position: relative; 
+    display: inline-block;
+    width: 125px;
+    height:100vh;
+}
+
+.icon li{
+    padding: 16px;
+}
+.icon img{
+    width: 20px;
+    height: 27px;
+}
+/*.login-icon{
+    position: absolute;
+    bottom: 0;
+}*/
+.login-icon li{
+    padding: 8px 0;
+}
+.login-icon img{
+    width: 35px;
+    height: 35px;
+}
+.login-icon .logout-icon{
+    width: 30px;
+    height: 30px;
+}
+/*--------Side Navbar Ends--------*/
+
+/*--------Main Container Starts--------*/
+.book-bash-ui{
+    /*position: fixed;*/
+    display: inline-block;
+    width: 90%;
+    background:white; 
+    vertical-align: top;
+}
+.main-container{
+    display: inline-block;
+    width: 75%;
+    vertical-align: top;
+}
+.second-header{
+    vertical-align: middle;
+}
+.second-header h2{
+    display: inline-block;
+    font-family: 'Brandon Text';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 40px;
+    line-height: 56px;
+    /* identical to box height */
+    color: #1C1C1C;
+    padding: 16px;
+}
+.second-header input{
+    display: inline-block;
+    width: 340px;
+    height: 60px;  
+    background: #F7F7F7;
+    border-radius: 10px;
+    padding: 16px;
+}
+.user-status{
+    display: inline-block;
+    vertical-align: middle;
+    text-align: center;
+    float: right;
+}
+.user-status h3{
+    display: inline-block;
+    font-family: 'Brandon Text';
+    font-style: normal;
+    font-weight: 390;
+    font-size: 18px;
+    /* identical to box height */
+    color: #1C1C1C;
+    margin: 0;
+}
+.user-status ul{
+    display: inline-block;
+
+}
+.user-status li{
+    display: inline-block;
+}
+.user-status img{
+    width: 60px;
+    height: 60px;
+    border: 3px solid #FFFFFF;
+    
+}
+.inner-container>div{
+    display: inline-block;
+    vertical-align: top;
+}
+.save-book-lists{
+    display: inline-block;
+    width: 70%;
+   
+}
+.save-book-lists>div{
+    border-radius: 0 25px 25px 0;
+}
+.save-book-list{
+    padding: 8px;
+    background: #F0F4FF;
+}
+.save-book-list img{
+    display: inline-block;
+    border-radius: 30px;
+    width: 150px;
+    height: 150px;
+}
+.save-book-list>div{
+    display: inline-block;
+}
+.save-book-list__container{
+    width: 70%;
+}
+
+
+.top-10 li{
+  display: inline-block;
+}
+.top-10 img{
+    width: 212px;
+    height: 328px;
+    border-radius: 30px;
+}
+
+
+.popular-categories li{
+    
+    box-shadow: 4px 4px 20px rgba(13, 39, 107, 0.06);
+    border-radius: 35px;
+    width: 43px;
+}
+.popular-categories .view-all__button{
+    background: #E75C62;
+    box-shadow: 0px 4px 10px rgba(231, 92, 98, 0.1);
+    border-radius: 35px;
+}
+.recommendations-lists{
+    display: inline-block;
+    vertical-align: top;
+    width: 20%;
+    background: #F0F4FF;
+    padding: 22px;;
+    border-radius: 25px 0 0 25px;
+}
+.recommendations-lists a{
+    display: block;
+    background: white;
+    text-decoration: none;
+    border-radius: 39.3455px;
+}
+.recommendations-lists a img{
+    transform: rotate(4.52deg);
+    width: 78px;
+    height: 78px;
+    display: inline-block;
+}
+.recommendations__title{
+    display: inline-block;
+}
+.recommendations-lists p{
+    font-family: 'Brandon Text';
+    font-style: normal;
+    font-weight: 390;
+    font-size: 16px;
+    line-height: 22px;
+
+    color: #1C1C1C;
+
+    transform: rotate(4.5);
+}

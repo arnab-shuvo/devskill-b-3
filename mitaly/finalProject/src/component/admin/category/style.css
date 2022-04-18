@@ -1,0 +1,39 @@
+button:hover{
+    background: #18ADAB;
+    cursor: pointer;
+}
+.admin_category{
+    border-radius: 18px;
+    background:#F0F4FF;
+    padding: 16px;
+    margin: 8px;
+}
+.admin_category__button{
+    border-radius: 18px;
+    padding: 8px;
+    width: 50%;
+    background: white;
+}
+.admin_category__list{
+    background: white;
+    border-radius: 18px;
+    padding: 16px;
+    margin: 8px;
+}
+.admin_category__list h3{
+    font-weight: bold;
+    font-size: 16px;
+}
+.admin_category__list--button {
+    display: flex;
+}
+.admin_category__list--button button{
+    border-radius: 18px;
+    padding: 8px;
+    width: 180px;
+    background:#F0F4FF;
+}
+.admin_category__list--button button:hover{
+    background: #18ADAB;
+    cursor: pointer;
+}

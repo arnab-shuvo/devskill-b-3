@@ -1,0 +1,35 @@
+.admin-header{
+    display: flex;
+    padding: 8px;
+}
+
+.green{
+    background: #28CD41;
+    border-radius: 25px;
+    width: 14px;
+    height: 14px; 
+    margin: 4px; 
+}
+.blue{
+    background: #FFCC00;
+    border-radius: 25px;
+    width: 14px;
+    height: 14px;
+    margin: 4px; 
+}
+.red{
+    background: #FF3B30;
+    border-radius: 25px;
+    width: 14px;
+    height: 14px;
+    margin: 4px; 
+}
+.user{
+    float: right;
+}
+.user_h2{
+    display: inline-block;
+    margin: 0;
+    font-size: 16px;
+    font-weight: 100;
+}

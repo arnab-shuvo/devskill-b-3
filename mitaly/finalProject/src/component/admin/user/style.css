@@ -1,0 +1,27 @@
+.category{
+    border-radius: 18px 0 0 18px;
+    background: blue;
+    padding: 16px;
+}
+.category__button{
+    border-radius: 18px;
+    padding: 8px;
+    width: 100%;
+}
+.category__list{
+    background: red;
+    border-radius: 18px;
+    padding: 16px;
+    margin: 8px;
+}
+.category__list h3{
+    font-weight: bold;
+    font-size: 16px;
+}
+.category__list--button {
+    display: flex;
+}
+.category__list--button button{
+    border-radius: 18px;
+    padding: 8px;
+}

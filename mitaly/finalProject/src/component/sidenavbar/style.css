@@ -1,0 +1,17 @@
+.admin_side-nav-bar{
+    position: relative;
+}
+.main-body{
+    height: 82vh;
+    overflow: auto;
+    padding: 8px;
+}
+.admin_dashboard--button{
+   margin: 0;
+   padding: 0;
+   border: 0; 
+}
+.admin__main{
+    display: grid;
+    grid-template-columns: 125px auto;
+}
