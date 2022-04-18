@@ -1,38 +1,15 @@
 import * as React from 'react';
-import Typography from '@mui/material/Typography';
+import { Grid, Typography, Button } from '@material-ui/core';
+
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import ListItemText from '@mui/material/ListItemText';
-import { Button, Grid } from '@material-ui/core';
 import FrontLayout from '../../../Layouts/FrontEnd/FrontLayout';
 import { checkoutAction } from '../../../store/action/OrderAction';
 import { loadCartItems, get_carts, removeCartItem } from '../../../store/action/AddToCartAction';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-
-const products = [
-  {
-    name: 'Product 1',
-    desc: 'A nice thing',
-    price: '$9.99',
-  },
-  {
-    name: 'Product 2',
-    desc: 'Another thing',
-    price: '$3.45',
-  },
-  {
-    name: 'Product 3',
-    desc: 'Something else',
-    price: '$6.51',
-  },
-  {
-    name: 'Product 4',
-    desc: 'Best thing of all',
-    price: '$14.11',
-  },
-  { name: 'Shipping', desc: '', price: 'Free' },
-];
+import { useNavigate } from 'react-router-dom';
 
 // const addresses = ['1 MUI Drive', 'Reactville', 'Anytown', '99999', 'USA'];
 // const payments = [
@@ -46,25 +23,31 @@ const products = [
 
 const Checkout = () => {
 
-  
+  const dispatch = useDispatch(); 
+  const navigate = useNavigate();
+
+const loggedInUser = useSelector((store) =>store.userStore);
+const { cart } = useSelector((store) => store.cartItems); 
+
     // Checkout Cart
     async function checkoutSubmit(orderData) {
-      return fetch(`http://localhost:8080/order/checkout`, {
-          method: "POST",
+      //console.log(orderData, "----orderData")
+      return fetch("http://localhost:8080/order/checkout", {
+          method: "GET",
           headers: {
             "Content-Type": "application/json",
-            "authorization": "bearer "+ orderData.userToken
+            "authorization": "bearer "+ orderData.token
           },
         })
         .then((data) => data.json())
         .then((json) => json)
-        .then((json) => console.log(json));
+        .then((json) => console.log(json, '---=== Checkout Confirmed'));
     }
 
     const confirmOrder = async (id)=>{
+          let token=loggedInUser.token.userInfo.token;
           const checkoutDispatch = await checkoutSubmit({
-            userToken,
-            id
+            token,
           });
           dispatch(checkoutAction(checkoutDispatch));
           // window.location.reload();
@@ -83,19 +66,20 @@ const Checkout = () => {
           </Grid>
           <Grid xs={12}>
             <List disablePadding>
-              {products.map((product) => (
-                <ListItem key={product.name} sx={{ py: 1, px: 0 }}>
-                  <ListItemText primary={product.name} secondary={product.desc} />
-                  <Typography variant="body2">{product.price}</Typography>
+            {cart?.products?.map((dataRow) => (
+                <>
+                <ListItem key={dataRow.productId['title']} sx={{ py: 1, px: 0 }}>
+                  <ListItemText primary={dataRow.productId['title']} secondary={dataRow.productId['_id']} />
+                  <Typography variant="body2">{dataRow.productId['price']}</Typography>
                 </ListItem>
+
+               
+                </>
+                
+            
               ))}
 
-              <ListItem sx={{ py: 1, px: 0 }}>
-                <ListItemText primary="Total" />
-                <Typography variant="subtitle1" sx={{ fontWeight: 700 }}>
-                  $34.06
-                </Typography>
-              </ListItem>
+              
             </List>
           </Grid>
           <Grid>

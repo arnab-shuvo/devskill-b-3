@@ -45,21 +45,21 @@ export default function Navbar() {
   const { cart } = useSelector((store) => store.cartItems); 
   const loggedInUser = useSelector((store) =>store.userStore);
   
-  console.log(cart, '=== cart list...'); 
+  //console.log(cart, '=== cart list...'); 
     //const [cartLength, setCartLength] = useState('0'); 
 
   var cartLength;
   if(loggedInUser.isAuthUser === true ){
     if (!cart.status==="error" || cart.status===0){
       cartLength = cart.products.length;
-      console.log(cartLength, '===== cartLength in Cart');
+      //console.log(cartLength, '===== cartLength in Cart');
     }else{
       cartLength = 0;
-      console.log(cartLength, '===== No items in Cart');
+      //console.log(cartLength, '===== No items in Cart');
     }
   }else{
     cartLength = cart.length; // will found zero (0)
-    console.log(cartLength, '===== User not logged in');
+    //console.log(cartLength, '===== User not logged in');
   }
   
   useEffect(() => {

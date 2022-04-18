@@ -32,7 +32,7 @@ import Category from './Pages/FrontEnd/Product/Category';
 import CartDetail from './Pages/FrontEnd/Checkout/Cart';
 import Checkout from './Pages/FrontEnd/Checkout/Checkout';
 // import useToken from './Components/useToken';
-
+import MyOrders from './Pages/FrontEnd/Checkout/Orders';
 
 function App() {
 

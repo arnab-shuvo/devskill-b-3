@@ -2,6 +2,7 @@ import ActionType from "../ActionType";
 
 const initialState ={
     checkout:[],
+    orders:[],
 }
 
 const orderReducer = (state = initialState, action)=>{
@@ -9,7 +10,9 @@ const orderReducer = (state = initialState, action)=>{
         case ActionType.CHECKOUT:
             return{...state, checkout:action.payload}
              
-
+        case ActionType.CHECKOUT:
+            return{...state, orders:action.payload}
+            
             default:
                 return state;
     }

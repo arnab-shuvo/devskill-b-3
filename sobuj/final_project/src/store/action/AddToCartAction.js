@@ -18,7 +18,7 @@ export const removeCartItem = (prodID, userToken)=>{
     // console.log(userToken, '----- UserTOken from Cart Delte Action')
     return function(dispatch){
         axios
-        .get(`${"http://127.0.0.1:8080/cart"}`,{
+        .post(`${"http://127.0.0.1:8080/cart"}`,{
             method: "POST",
             headers: {
                 "Content-type" : "application/json",
@@ -57,7 +57,7 @@ export const loadCartItems = (token) =>{ // Dispatcher
             },
         })
         .then((response) =>{
-            console.log("response", response);
+            // console.log("response", response);
             dispatch(getCartItems(response.data));
         })
         .catch((error)=>console.log(error));

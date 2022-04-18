@@ -28,7 +28,7 @@ const RootReducer = combineReducers({
 
     cartData:cartReducer,
     cartItems:cartReducer,
-    checkoutData:orderReducer,
+    myOrders:orderReducer,
 
     addCategory:CategoryReducer,
 });
