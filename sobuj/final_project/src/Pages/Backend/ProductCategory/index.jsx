@@ -102,12 +102,14 @@ const ManageProduct = () =>{
     }
 
     const handleDelete = async (id)=>{
+      if(window.confirm("Are you sure about to delete the category?")){
           const deleteispatch = await deleteSubmit({
             userToken,
             id
           });
           dispatch(deleteCategoryAction(deleteispatch));
           window.location.reload();
+        }
     }
 
     const updateCategory = (id) =>{

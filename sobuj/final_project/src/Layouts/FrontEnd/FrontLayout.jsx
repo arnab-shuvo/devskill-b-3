@@ -4,10 +4,11 @@ import { styled } from "@mui/material/styles";
 import Paper from "@mui/material/Paper";
 import Grid from "@mui/material/Grid";
 //Custom Components
-import Footer from "../../Components/Footer";
+import Footer from "../../Components/Frontend/Footer";
 import ScrollToTop from "../../Components/ScrollToTop";
 import Navbar from "../../Components/Navbar";
 import { Link, Typography } from "@material-ui/core";
+import { lightBlue } from "@material-ui/core/colors";
 
 
 const styles = {
@@ -36,6 +37,9 @@ const styles = {
     backgroundColor: "#a43f49",
     margin: "10px auto",
   },
+  leftSideBar:{
+    backgroundColor:"#e2f7fac8",
+  }
 };
 
 const AvatersCustom = styled(Paper)(({ theme }) => ({
@@ -51,39 +55,44 @@ const AvatersCustom = styled(Paper)(({ theme }) => ({
   textAlign: "center",
   backgroundColor: "rgba(0, 0, 0, 0.2)",
 }));
-function Copyright() {
-    return (
-      <Typography variant="body2" color="text.secondary" align="center">
-        {'Copyright © '}
-        <Link color="inherit" href="https://isyecom">
-          ISY Ecom
-        </Link>{' '}
-        {new Date().getFullYear()}
-        {'.'}
-      </Typography>
-    );
-  }
+
 
 const FrontLayout = (PageComponent) => {
     return function WithPage({ ...props }) {
         return (
-            <>
+          <Grid>
               <ScrollToTop />
               <Navbar />
-              
-                <Grid
-                    container
-                    style={styles.wraperContainer}
-                    sx={{ flexGrow: 1 }}
-                    justifyContent="center"
-                >
+              <Grid container item>
+                {/* <Grid xs={2} style={styles.leftSideBar}>
+                    <p>a jsldf</p>
+                    <p>a jsldf</p>
+                    <p>a jsldf</p>
+                    <p>a jsldf</p>
+                    <p>a jsldf</p>
+                    <p>a jsldf</p>
+                    <p>a jsldf</p>
+                    <p>a jsldf</p>
+                    <p>a jsldf</p>
+                </Grid> */}
+                {/* <Grid xs={10}> */}
+                  <Grid
+                      container
+                      style={styles.wraperContainer}
+                      sx={{ flexGrow: 1 }}
+                      justifyContent="center"
+                  >
                     {/* <!-- Called The Component Parameter --> */}
                         <PageComponent />   
                     {/* <!-- Called The Component Parameter --> */} 
                 </Grid>
-                <Copyright />
+                
+                {/* </Grid> */}
+              </Grid>
+              
+              
               <Footer />
-            </>
+            </Grid>
           );
     };
 //   const [showLoader, setShowLoader] = useState(true);

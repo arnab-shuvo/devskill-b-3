@@ -113,6 +113,7 @@ const ManageProduct = () =>{
     }
 
     const handleDelete = async (id)=>{
+      if(window.confirm("Are you sure about to delete the product")){
           // const token = userInfo.token.userInfo.token;
           const deleteispatch = await deleteSubmit({
             userToken,
@@ -121,6 +122,7 @@ const ManageProduct = () =>{
           dispatch(productDeleteAction(deleteispatch));
           window.location.reload();
           // setRequestData(productList)
+      }
     }
       
     const navigate =useNavigate();

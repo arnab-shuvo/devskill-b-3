@@ -16,6 +16,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { getProductDetail } from "../../../store/action/ProductAction";
 import { addCart, delCart } from "../../../store/action/AddToCartAction";
 import FrontLayout from "../../../Layouts/FrontEnd/FrontLayout";
+import { Stack } from "@mui/material";
 
 const useStyles = makeStyles(() => ({
   root: {
@@ -122,8 +123,6 @@ const ProductDetail = () => {
   };
   return (
     <>
-      <Navbar />
- 
       <Grid container item sx={{ mt: 5 }} xs={12} justify="center">
         <Grid item xs={6} md={4} sm={4} justify="center">
           <div className="product-image-wrapper" justify="right">
@@ -150,6 +149,10 @@ const ProductDetail = () => {
           <Typography sx={{ mt: 10 }} variant="h4" gutterBottom component="div">
             $ {price}
           </Typography>
+
+          <Stack spacing={1}>
+            <Rating name="half-rating" defaultValue={2.5} precision={0.5} />
+          </Stack>
 
           <Button
             variant="contained"

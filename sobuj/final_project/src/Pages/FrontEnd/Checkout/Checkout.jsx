@@ -57,8 +57,8 @@ const { cart } = useSelector((store) => store.cartItems);
 
   return (
     <>
-    <Grid container  style={{textAlign:"center", display:"flex"}} xs={12}>
-        <Grid xs={8} justifyContent="center" style={{textAlign:"center"}}>
+    <Grid container  style={{textAlign:"center", display:"flex", backgroundColor:"pink"}} xs={12}>
+        <Grid xs={8} justifyContent="center" style={{textAlign:"center", backgroundColor:"#eee", padding:"5rem"}}>
           <Grid xs={12}  style={{textAlign:"center"}}>
             <Typography variant="h6" gutterBottom>
               Order summary
@@ -72,14 +72,8 @@ const { cart } = useSelector((store) => store.cartItems);
                   <ListItemText primary={dataRow.productId['title']} secondary={dataRow.productId['_id']} />
                   <Typography variant="body2">{dataRow.productId['price']}</Typography>
                 </ListItem>
-
-               
                 </>
-                
-            
               ))}
-
-              
             </List>
           </Grid>
           <Grid>
@@ -87,35 +81,37 @@ const { cart } = useSelector((store) => store.cartItems);
                 Confirm Order
               </Button>
           </Grid>
-        
-          {/* <Grid container spacing={2}>
+        </Grid>
+        <Grid xs={4} container spacing={2}>
             <Grid item xs={12} sm={6}>
               <Typography variant="h6" gutterBottom sx={{ mt: 2 }}>
                 Shipping
               </Typography>
               <Typography gutterBottom>John Smith</Typography>
-              <Typography gutterBottom>{addresses.join(', ')}</Typography>
+              <Typography gutterBottom></Typography>
+              {/* {addresses.join(', ')} */}
             </Grid>
             <Grid item container direction="column" xs={12} sm={6}>
               <Typography variant="h6" gutterBottom sx={{ mt: 2 }}>
                 Payment details
               </Typography>
               <Grid container>
-                {payments.map((payment) => (
-                  <React.Fragment key={payment.name}>
+                {/* {payments.map((payment) => ( */}
+                  <React.Fragment >
+                    {/* key={payment.name} */}
                     <Grid item xs={6}>
-                      <Typography gutterBottom>{payment.name}</Typography>
+                      <Typography gutterBottom>Card Payment</Typography>
+                      {/* {payment.name} */}
                     </Grid>
                     <Grid item xs={6}>
-                      <Typography gutterBottom>{payment.detail}</Typography>
+                      <Typography gutterBottom>Payment on 19/04/2022</Typography>
+                      {/* {payment.detail} */}
                     </Grid>
                   </React.Fragment>
-                ))}
+                {/* ))} */}
               </Grid>
             </Grid>
-          </Grid> */}
-
-        </Grid>
+          </Grid>
     </Grid>
       
     </>

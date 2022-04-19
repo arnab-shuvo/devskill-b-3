@@ -10,17 +10,18 @@ import Product from "../Product/index";
 
 import Recommend from "../../../Components/Recommend";
 import Testimonials from "../../../Components/Testimonials";
-import Footer from "../../../Components/Footer";
+import Footer from "../../../Components/Frontend/Footer";
 import ScrollToTop from "../../../Components/ScrollToTop";
 import Navbar from "../../../Components/Navbar";
 import Hero from "../../../Components/Hero";
 import Services from "../../../Components/Services";
+import Brands from "../../../Components/Frontend/Brands";
 
 
 const styles = {
   wraperContainer: {
     backgroundSize: "cover",
-    width: "100%",
+    width: "90%",
     minHeight: "900px",
     backgroundSize: "cover",
     backgroundPosition: "center",
@@ -70,17 +71,21 @@ const Home = () => {
       <Hero />
       <Services />
 
-      <Grid
-        container
-        style={styles.wraperContainer}
-        sx={{ flexGrow: 1 }}
-        justifyContent="center"
-      >
-         <Preloader />
-         
-         <Product />
+      
+      <Grid container>
+        <Grid
+          container
+          style={styles.wraperContainer}
+          sx={{ flexGrow: 1 }}
+          justifyContent="center"
+        >
+          <Preloader />
+          
+          <Product />
+        </Grid>
       </Grid>
-
+      
+      <Brands />
       <Recommend />
       <Testimonials />
       <Footer />

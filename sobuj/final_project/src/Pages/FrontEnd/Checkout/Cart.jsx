@@ -7,7 +7,7 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
-import { Button, Grid } from '@material-ui/core';
+import { Button, Grid, IconButton } from '@material-ui/core';
 import Services from '../../../Components/Services';
 import Navbar from '../../../Components/Navbar';
 import ScrollToTop from '../../../Components/ScrollToTop';
@@ -23,7 +23,8 @@ import { green } from '@mui/material/colors';
 import DeleteIcon from '@mui/icons-material/Delete';
 import { useState } from 'react';
 import FrontLayout from '../../../Layouts/FrontEnd/FrontLayout';
-
+import IndeterminateCheckBoxIcon from '@mui/icons-material/IndeterminateCheckBox'; 
+import AddBoxIcon from '@mui/icons-material/AddBox';
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -90,7 +91,24 @@ const styles = {
     backgroundColor: "#a43f49",
     margin: "10px auto",
   },
+  iconStyle:{
+    padding:0,
+    margin:0,
+    },
+    
 };
+
+const StyledButton = styled(Button)`
+  background-color: #9c27b0;
+  color: #fff;
+  padding: 6px 12px;
+  &:hover {
+    background-color: #4b0b57;
+  }
+  &:focus {
+    background-color: #920909;
+  }
+`;
 
 
 const CartDetail = () => {
@@ -121,7 +139,12 @@ useEffect(() => {
   }
 }, []);
 
-
+const handleDeleteBtn=(prodId)=>{
+  if(window.confirm("Are you sure about to delete this item?")){
+    dispatch(removeCartItem(prodId, loggedInUser.token.userInfo.token));
+  }
+  
+}
   return (
     <>
    
@@ -140,7 +163,7 @@ useEffect(() => {
           !cart.status==="error"  || cart.status===0 ?
           (
             <>
-                <Grid xs={12}>
+                <Grid xs={10} style={{ marginTop:"-10rem", marginBottom:"0", }}>
                   <TableContainer component={Paper}>
                     <Table sx={{ minWidth: 700 }} aria-label="customized table">
                       <TableHead>
@@ -165,7 +188,6 @@ useEffect(() => {
                                 listStyle:'none',
                                 textAlign:'left',
                               }}
-                              
                               >
                               <img
                                 height={"100"}
@@ -175,17 +197,32 @@ useEffect(() => {
                                 {dataRow.productId['title']}
                               </Typography>
                             </StyledTableCell>                          
-                            <StyledTableCell align="right">{dataRow.productId['price']}</StyledTableCell>
+                            <StyledTableCell align="right">$ {dataRow.productId['price']}</StyledTableCell>
                             <StyledTableCell align="right">{dataRow.quantity}</StyledTableCell>
+
                             <StyledTableCell align="right">
-                              {dataRow.quantity * dataRow.productId['price']}
+                              $ {dataRow.quantity * dataRow.productId['price']}
                             </StyledTableCell>
+
                             <StyledTableCell align="right">
-                              <Icon color="primary">add_circle</Icon>
-                              <Icon sx={{ color: green[500] }}>add_circle</Icon>
+                              <IconButton color="secondary" aria-label="add an alarm">
+                                <IndeterminateCheckBoxIcon />
+                              </IconButton>
+                              1
+                              <IconButton color="secondary" aria-label="add an alarm">
+                                  <AddBoxIcon />
+                              </IconButton>
                             </StyledTableCell>
+
                             <StyledTableCell align="right">
-                                <DeleteIcon onClick={()=>dispatch(removeCartItem(dataRow.productId['_id'], userToken))}/>
+                              <StyledButton> 
+                                <DeleteIcon style={{
+                                    cursor:"pointer",
+                                  }}
+                                  onClick={()=>handleDeleteBtn(
+                                    dataRow.productId['_id']
+                                    )}/>
+                              </StyledButton>
                             </StyledTableCell>
                           </StyledTableRow>
                         ))
