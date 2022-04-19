@@ -16,7 +16,6 @@ import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
 import { makeStyles } from '@material-ui/core/styles';
 import { addProductAction } from '../../../store/action/ProductAction';
-import ImageUploading from 'react-images-uploading';
 
 const style = {
   position: 'absolute',
@@ -53,7 +52,7 @@ const CreateProduct =()=> {
       setUserToken(loggedInUser.token.userInfo.token)
 
     }, []);
-
+    
         
     const [title, setTitle]=useState("");
     const [category, setCategory]=useState("");
@@ -62,24 +61,6 @@ const CreateProduct =()=> {
     const [description, setDescription]=useState("");
     const [image, setImage]=useState("");
     const [error, setError]=useState(false);
-
-
-
-    const [images, setImages] = React.useState([]);
-    const maxNumber = 69;
-  
-    const onChangeImage = (imageList, addUpdateIndex) => {
-      // data for submit
-      console.log(imageList, addUpdateIndex , '====== ImageList, AddUpdateIndex');
-      setImages(imageList);
-      console.log(images, '=====Images after onchange')
-  
-      console.log(imageList[0].data_url, '====== The First Image DataURL Base64 Code...')
-      //Setting the First Image's Base64  Code to the State (image)
-      setImage(imageList[0].data_url);
-    };
-
-    
 
 
 async function formSubmit(data) {
@@ -170,7 +151,17 @@ const toManageProduct = () =>{
                     
                         value={title}
                 />
-                
+                {/* <TextField sx={{ mt:2 }}
+                    onChange={(e)=>setCategory(e.target.value)}
+                    fullWidth
+                        error={error}
+                        id="outlined"
+                        label="Product Category"                                          
+                        helperText={error? "Must fill the task field!":""}
+                        variant="outlined"
+                    
+                        value={category}
+                />  */}
                 <FormControl className={classes.formControl} error>
                     <InputLabel id="demo-simple-select-error-label">Select Product Category</InputLabel>
                     <Select
@@ -198,6 +189,7 @@ const toManageProduct = () =>{
                         label="Price"                                          
                         helperText={error? "Must fill the task field!":""}
                         variant="outlined"
+                    
                         value={price}
                 /> 
                 <TextField sx={{ mt:2}}
@@ -211,7 +203,35 @@ const toManageProduct = () =>{
                         value={stock}
                 /> 
                     
-             
+                {/* <Box sx={{ mt:2, mb:2, lineHeight:4, border:"1px solid #ccc", borderRadius:"5px" }}>
+                <input
+                accept="image/*"
+                onChange={(e)=>setImage(e.target.value)}
+                style={{ display: 'none' }}
+                id="raised-button-file"
+                multiple
+                type="file"
+                
+                /> 
+                <label htmlFor="raised-button-file">
+                <Button variant="raised" component="span" >
+                    Image Upload
+                </Button>
+                </label> 
+                </Box> */}
+                <Box>
+                    <TextareaAutosize  
+                        onChange={(e)=>setImage(e.target.value)}
+                        aria-label="minimum height"
+                        minRows={3}
+                        placeholder="Image BASE64"
+                        style={{ width: "100%", minHeight:"100px" }}
+                        label="Image BASE64 CODE"                                          
+                        helperText={error? "Must fill the task field!":""}
+                        variant="outlined"
+                        value={image}
+                    />
+                </Box>
                 <Box>
                     <TextareaAutosize  
                         onChange={(e)=>setDescription(e.target.value)}
@@ -226,47 +246,6 @@ const toManageProduct = () =>{
                     />
                 </Box>
                 
-                <Box>
-                  <ImageUploading
-                    multiple
-                    value={images}
-                    onChange={onChangeImage}
-                    maxNumber={maxNumber}
-                    dataURLKey="data_url"
-                  >
-                    {({
-                      imageList,
-                      onImageUpload,
-                      onImageRemoveAll,
-                      onImageUpdate,
-                      onImageRemove,
-                      isDragging,
-                      dragProps,
-                    }) => (
-                      // write your building UI
-                      <div className="upload__image-wrapper">
-                        <button
-                          style={isDragging ? { color: 'red' } : undefined}
-                          onClick={onImageUpload}
-                          {...dragProps}
-                        >
-                          Click or Drop here
-                        </button>
-                        &nbsp;
-                        <button onClick={onImageRemoveAll}>Remove all images</button>
-                        {imageList.map((image, index) => (
-                          <div key={index} className="image-item">
-                            <img src={image['data_url']} alt="" width="100" />
-                            <div className="image-item__btn-wrapper">
-                              <button onClick={() => onImageUpdate(index)}>Update</button>
-                              <button onClick={() => onImageRemove(index)}>Remove</button>
-                            </div>
-                          </div>
-                        ))}
-                      </div>
-                    )}
-                  </ImageUploading>
-                </Box>
             </Box>
             </Grid>
 
