@@ -37,7 +37,7 @@ const Product = () =>{
     }
 
     const { productList } = useSelector((store) => store.productList);
-    console.log(productList, "===store");
+    // console.log(productList, "===store");
 
 
     const [data, setData] = useState([]);

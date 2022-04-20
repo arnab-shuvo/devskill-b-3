@@ -8,33 +8,32 @@ import ListItemText from '@mui/material/ListItemText';
 
 import { useSelector, useDispatch } from 'react-redux';
 import { NavLink, useNavigate } from 'react-router-dom';
-import { getMyOrders } from '../../../store/action/OrderAction';
+import { getMyOrders, loadOrders } from '../../../store/action/OrderAction';
+
+
 
 const MyOrders = () =>{
+
   const dispatch = useDispatch(); 
   const navigate = useNavigate();
 
 const loggedInUser = useSelector((store) =>store.userStore);
 const { cart } = useSelector((store) => store.cartItems); 
-const { myOrders } = useSelector((store) => store.myOrders); 
-console.log(myOrders, '=====MyOrders from order page');
-useEffect(()=>{
-      if(loggedInUser.isAuthUser === true){
-        fetch(`http://localhost:8080/order/my-order`, {
-          method: "GET",
-          headers: {
-            "Content-Type": "application/json",
-            "authorization": "bearer "+ loggedInUser.token.userInfo.token
-          },
-        })
-        .then((data) => data.json())
-        .then((json) => json)
-        .then((json) => console.log(json, "==== OrderList"))
-        .then((json) => dispatch(getMyOrders(json)));
-      }
-}, []);
-    
 
+// orders[] from OrderReducer
+// getAllOrders from root reducer
+const { orders } = useSelector((state) => state.getAllOrders); 
+console.log(orders, '=====MyOrders from order page');
+
+
+useEffect(() => {
+  dispatch(loadOrders(loggedInUser.token.userInfo.token));
+}, []);
+ 
+    
+// const getNumberOfItem=()=>{
+  
+// }
     return(
         <>
         <Grid container  style={{textAlign:"center", display:"flex"}} xs={12}>
@@ -45,21 +44,22 @@ useEffect(()=>{
               </Typography>
             </Grid>
             <Grid xs={12}  style={{textAlign:"center"}}>
-                {getMyOrders.length>0} ?
-                (
+                {/* {orderList}? 
+                ( */}
                   <List disablePadding>
-                  {myOrders.map((dataRow) => (
+                  {orders.map((dataRow) => (
                     <NavLink to={"/"}> 
                         <ListItem key={"Order ID: " + dataRow._id} sx={{ py: 1, px: 0 }}>
-                        <ListItemText primary={"Order Placed On: "+ dataRow.date} secondary={" Item Quantity: " + dataRow.products['length'] } />
-                          {/* <Typography variant="body2">{dataRow.productId['price']}</Typography> */}
+                        <ListItemText primary={"Placed On: "+ dataRow.date} secondary={" Item Quantity: " } />
+                        <Typography variant="body2">{dataRow._id}</Typography>
+                          {/*+ getNumberOfItem()  <Typography variant="body2">{dataRow.productId['price']}</Typography> */}
                         </ListItem>
                     </NavLink> 
                   ))}
                   </List>
-                ):(
+                {/* ):(
                   <Typography variant="h2">No Order Found</Typography>
-                )
+                ) */}
                   
                    
             </Grid>

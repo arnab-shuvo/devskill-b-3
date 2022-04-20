@@ -1,5 +1,8 @@
 import * as React from 'react';
 import { styled } from '@mui/material/styles';
+import './Styles/CartStyles.css';
+import '../../../../node_modules/bootstrap/dist/css/bootstrap.min.css';
+import '../../../../node_modules/bootstrap/dist/js/bootstrap.min.js';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell, { tableCellClasses } from '@mui/material/TableCell';
@@ -14,12 +17,10 @@ import ScrollToTop from '../../../Components/ScrollToTop';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import { maxHeight } from '@mui/system';
-import { useNavigate } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 import { loadCartItems, get_carts, removeCartItem } from '../../../store/action/AddToCartAction';
 import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import Icon from '@mui/material/Icon';
-import { green } from '@mui/material/colors';
 import DeleteIcon from '@mui/icons-material/Delete';
 import { useState } from 'react';
 import FrontLayout from '../../../Layouts/FrontEnd/FrontLayout';
@@ -45,25 +46,7 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
     border: 0,
   },
 }));
-
-function createData(
-  name: string,
-  calories: number,
-  fat: number,
-  carbs: number,
-  protein: number,
-) {
-  return { name, calories, fat, carbs, protein };
-}
-
-const rows = [
-  createData('Frozen yoghurt', 159, 6.0, 24, 4.0),
-  createData('Ice cream sandwich', 237, 9.0, 37, 4.3),
-  createData('Eclair', 262, 16.0, 24, 6.0),
-  createData('Cupcake', 305, 3.7, 67, 4.3),
-  createData('Gingerbread', 356, 16.0, 49, 3.9),
-];
-
+ 
 
 const styles = {
   wraperContainer: {
@@ -99,14 +82,14 @@ const styles = {
 };
 
 const StyledButton = styled(Button)`
-  background-color: #9c27b0;
-  color: #fff;
-  padding: 6px 12px;
+  /* background-color: #9c27b0; */
+  color: #aa0c0c;
+  /* padding: 2px; */
   &:hover {
-    background-color: #4b0b57;
+    color: #965909;
   }
   &:focus {
-    background-color: #920909;
+   color: #f0a865;
   }
 `;
 
@@ -123,11 +106,14 @@ const navigate = useNavigate();
 const submitToCheckout = () =>{
   navigate('/user/checkout');
 }
+const toHome =()=>{
+  navigate('/');
+}
 const { cart } = useSelector((store) => store.cartItems); 
 // if(cart.status==='error'){
 //   console.log(cart.message, '=== cart list... error message'); 
 // }else{
-//   console.log(cart.products, "==== Showing carts Items from Cart page")
+console.log(cart, "==== Showing carts Items from Cart page")
 // }
 
 
@@ -136,6 +122,9 @@ useEffect(() => {
     const token = loggedInUser.token.userInfo.token;
     setUserToken(loggedInUser.token.userInfo.token)
     dispatch(loadCartItems(token));
+  }else{
+    alert('please login first');
+    navigate('/login');
   }
 }, []);
 
@@ -143,125 +132,147 @@ const handleDeleteBtn=(prodId)=>{
   if(window.confirm("Are you sure about to delete this item?")){
     dispatch(removeCartItem(prodId, loggedInUser.token.userInfo.token));
   }
-  
 }
+const get_total_price = () => {
+  let totalPrice = 0;
+  cart?.products?.map((cartData) => (totalPrice += cartData.productId['price']));
+  return totalPrice;
+};
+
+const calculateTotalPrice = () =>{
+  let shipping = 0;
+  let couponDiscount = 0;
+  let cartTotalPrice = get_total_price();
+
+  let calculatedPrice = (cartTotalPrice + shipping) - couponDiscount;
+  return calculatedPrice;
+}
+
   return (
-    <>
-   
-      <Grid
-        container
-        style={styles.wraperContainer}
-        sx={{ flexGrow: 1 }}
-        justifyContent="center"
-      >
-        <Box sx={{ width: '100%', textAlign:"center", mt:5, maxHeight:"100px" }}>
-            <Typography variant="h3" gutterBottom component="div">
-            Cart Itmes
-            </Typography>
-        </Box>
-        {
+      <div class="cartWrapper">
+        <div class="row wrapperHead">
+          <h2>Shopping Cart</h2>  
+          <hr align="center" />
+        </div> 
+        <div class="card">
+        <div class="row">
+          <div class="col-md-8 cart">
+            <div class="title">
+              <div class="row">
+                <div class="col">
+                  <h4>
+                    <b>Cart detail</b>
+                  </h4>
+                </div>
+                 
+              </div>
+            </div>
+          {
           !cart.status==="error"  || cart.status===0 ?
-          (
+          (  
             <>
-                <Grid xs={10} style={{ marginTop:"-10rem", marginBottom:"0", }}>
-                  <TableContainer component={Paper}>
-                    <Table sx={{ minWidth: 700 }} aria-label="customized table">
-                      <TableHead>
-                        <TableRow>
-                          <StyledTableCell>Items</StyledTableCell>
-                          <StyledTableCell align="right">Price</StyledTableCell>
-                          <StyledTableCell align="right">Quantity</StyledTableCell>
-                          <StyledTableCell align="right">Sub-Total</StyledTableCell>
-                          <StyledTableCell align="right">Action</StyledTableCell>
-                          <StyledTableCell align="right">Delete</StyledTableCell>
-                        </TableRow>
-                      </TableHead>
-                      <TableBody>
-                      {cart?.products?.map((dataRow) => (
-                        
-                          <StyledTableRow key={dataRow._id}>
-                              <StyledTableCell component="th" scope="row" justifyContent="center" align='left' 
-                              style={{
-                                display:'flex',
-                                padding:0,
-                                margin:0,
-                                listStyle:'none',
-                                textAlign:'left',
-                              }}
-                              >
-                              <img
-                                height={"100"}
-                                src={"http://127.0.0.1:8080" + dataRow.productId['image']}
-                              />
-                              <Typography variant='inherit' align='left' ml={5} mt={5} justifyContent='center'>
-                                {dataRow.productId['title']}
-                              </Typography>
-                            </StyledTableCell>                          
-                            <StyledTableCell align="right">$ {dataRow.productId['price']}</StyledTableCell>
-                            <StyledTableCell align="right">{dataRow.quantity}</StyledTableCell>
-
-                            <StyledTableCell align="right">
-                              $ {dataRow.quantity * dataRow.productId['price']}
-                            </StyledTableCell>
-
-                            <StyledTableCell align="right">
-                              <IconButton color="secondary" aria-label="add an alarm">
-                                <IndeterminateCheckBoxIcon />
-                              </IconButton>
-                              1
-                              <IconButton color="secondary" aria-label="add an alarm">
-                                  <AddBoxIcon />
-                              </IconButton>
-                            </StyledTableCell>
-
-                            <StyledTableCell align="right">
-                              <StyledButton> 
-                                <DeleteIcon style={{
-                                    cursor:"pointer",
-                                  }}
-                                  onClick={()=>handleDeleteBtn(
-                                    dataRow.productId['_id']
-                                    )}/>
-                              </StyledButton>
-                            </StyledTableCell>
-                          </StyledTableRow>
-                        ))
-                      } 
-                        
-                      </TableBody>
-                    </Table>
-                  </TableContainer>
-                </Grid>
-                <Grid xs={12} style={{
-                  // display:'flex',
-                  maxHeight:'50px',
-                  padding:0,
-                  marginTop:'10px',
-                  listStyle:'none',
-                  textAlign:'center',
-                }}>
-                  <Button variant="contained" color='secondary' size="medium" onClick={submitToCheckout} >
-                    checkout
-                  </Button>
-                </Grid>
-                
-
-              </>
+            {cart?.products?.map((dataRow) => (
+                <div class="row border-top border-bottom" key={dataRow._id}>
+                  <div class="row main align-items-center">
+                    <div class="col-2">
+                    <img
+                      height={"100"}
+                      src={"http://127.0.0.1:8080" + dataRow.productId['image']}
+                    />
+                    </div>
+                    <div class="col-4">
+                      <div class="row text-muted itemHeading">{dataRow.productId.category['name']}</div>
+                      <div class="row itemName">{dataRow.productId['title']}</div>
+                    </div>
+                    <div className="col">
+                      Qty: {dataRow.quantity}
+                    </div>
+                    <div class="col-2">
+                      {" "}  
+                      <IconButton color="primary" aria-label="add an alarm">
+                          <IndeterminateCheckBoxIcon />
+                      </IconButton>
+                        <a href="#" class="border">
+                          {dataRow.quantity}
+                        </a>
+                      <IconButton color="primary" aria-label="add an alarm">
+                          <AddBoxIcon />
+                      </IconButton>
+                    </div>
+                    <div class="col">
+                      $ {dataRow.productId['price']}
+                    </div>
+                    <div class="col">
+                        <StyledButton> 
+                          <DeleteIcon style={{
+                              cursor:"pointer", fontSize:"1.5rem"}}
+                            onClick={()=>handleDeleteBtn(
+                              dataRow.productId['_id']
+                              )}/>
+                        </StyledButton>
+                    </div>
+                  </div>
+                </div>
+              ))
+            }
+            </>
+          ):(
+            <div class="emptyCart">
+              <h4>No items found in the cart!</h4>
+            </div>
           )
-       
-        
-        
-       :
-       (
-         <>
-           <h2>No cart data found</h2>
-         </>
-       )
-     }
-      </Grid>
-       {/*    */}
-    </>
-  )
+          }  
+             
+            <div class="back-to-shop">
+               <Button variant="outlined" onClick={toHome}>Back to Shop</Button>
+             </div>
+          </div>
+          <div class="col-md-4 summary">
+            <div>
+              <h5>
+                <b>Summary</b>
+              </h5>
+            </div>
+            <hr />
+            
+            <form>
+            <div class="row">
+              <div class="col" style={{ textAlign:"left", paddingLeft:"15px", textTransform:"uppercase", fontWeight:"500" }}>
+               Total Item - {cart?.products?.length}
+              </div>
+              <div class="col text-right">$ 
+              {get_total_price()}
+              </div>
+            </div>
+              <p>SHIPPING</p>{" "}
+              <select>
+                <option class="text-muted">
+                  Free-Delivery- $0.00
+                </option>
+              </select>
+              <p>GIVE CODE</p> 
+              <input id="code" placeholder="Enter your code" />
+            </form>
+            <div
+              class="row"
+              style={{
+                bordeTop: " 1px solid rgba(0,0,0,.1)",
+                padding: "2vh 0",
+              }}
+            >
+              <div class="col"><h5>TOTAL PRICE</h5> </div>
+              <div class="col text-right"><h5>$ {calculateTotalPrice()}</h5></div>
+            </div>{" "}
+            <Button variant="contained" color='secondary' size="medium" onClick={submitToCheckout} >
+                checkout
+            </Button>
+          </div>
+        </div>
+      </div>
+      </div>
+
+      
+  );
 }
 
 export default FrontLayout(CartDetail)

@@ -15,7 +15,7 @@ const styles = {
   wraperContainer: {
     backgroundSize: "cover",
     width: "100%",
-    minHeight: "900px",
+    minHeight: "700px",
     backgroundSize: "cover",
     backgroundPosition: "center",
   },

@@ -13,7 +13,7 @@ const productReducer = (state = initialState, action) =>{
             return{...state, productList: action.payload}
         
         case ActionType.getLoadProducts:
-            return{...state, allProduct: action.payload}
+            return{...state, allProduct: action.payload} 
             
         case ActionType.getProductDetail:
             return{...state, productDetail: action.payload}

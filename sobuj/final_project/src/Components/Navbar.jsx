@@ -45,7 +45,7 @@ export default function Navbar() {
   const { cart } = useSelector((store) => store.cartItems); 
   const loggedInUser = useSelector((store) =>store.userStore);
   
-  //console.log(cart, '=== cart list...'); 
+  console.log(cart, '=== cart list...'); 
     //const [cartLength, setCartLength] = useState('0'); 
 
   var cartLength;
@@ -122,7 +122,7 @@ export default function Navbar() {
     navigate('/user/home');
   }
   const toOrders=()=>{
-    navigate('/user/orders');
+    navigate('/user/my-orders');
   }
 
   const menuId = 'primary-search-account-menu';

@@ -62,7 +62,7 @@ function App() {
 
           {/* Order & Checkout and Cart */}
           <Route path='/user/home/' element={<FrontDashboard />} />
-          <Route path='/user/orders/' element={<FrontDashboard />} />
+          {/* <Route path='/user/orders/' element={<MyOrders />} /> */}
           <Route path='/user/cart/' element={<CartDetail />} />
           <Route path='/user/checkout/' element={<Checkout />} />
           <Route path='/user/my-orders/' element={<MyOrders />} />
