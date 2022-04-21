@@ -3,7 +3,8 @@ import ActionType from "../ActionType";
 const initialState ={
     checkout:[],
     orders:[],
-    // getAllOrders:[],
+    manageOrders:[],
+    updateOrder:[],
 }
 
 const orderReducer = (state = initialState, action)=>{
@@ -13,6 +14,12 @@ const orderReducer = (state = initialState, action)=>{
 
         case ActionType.CHECKOUT:
             return{...state, checkoutDone:true, checkout: action.payload}
+             
+        case ActionType.GET_ALL_ORDER_ADMIN:
+            return{...state, manageOrders: action.payload}
+             
+        case ActionType.UPDATE_ORDER:
+            return{...state, updateOrders: action.payload}
              
         case ActionType.MY_ORDERS:
             return{...state, orders: action.payload}

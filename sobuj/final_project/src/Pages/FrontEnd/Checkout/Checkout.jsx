@@ -73,7 +73,7 @@ const { cart } = useSelector((store) => store.cartItems);
           });
           dispatch(checkoutAction(checkoutDispatch));
           // window.location.reload();
-          navigate('/user/my-orders')
+          navigate('/user/dashboard')
     }
 
 

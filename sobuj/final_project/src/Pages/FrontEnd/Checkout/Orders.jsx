@@ -18,6 +18,7 @@ const MyOrders = () =>{
   const navigate = useNavigate();
 
 const loggedInUser = useSelector((store) =>store.userStore);
+console.log(loggedInUser,'-===== user information order page')
 const { cart } = useSelector((store) => store.cartItems); 
 
 // orders[] from OrderReducer
@@ -37,6 +38,9 @@ useEffect(() => {
     return(
         <>
         <Grid container  style={{textAlign:"center", display:"flex"}} xs={12}>
+          <Grid xs={4}>
+            
+          </Grid>
           <Grid xs={8} justifyContent="center" style={{textAlign:"center"}}>
             <Grid xs={12}  style={{textAlign:"center"}}>
               <Typography variant="h4" gutterBottom>

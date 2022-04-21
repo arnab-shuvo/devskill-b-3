@@ -3,6 +3,8 @@ import ActionType from "../ActionType";
 const initialState = {
     token:null,
     newRegistration:[],
+    myInfo:[],
+    userList:[],
 }
 
 const userReducer = (state = initialState, action) =>{
@@ -12,6 +14,12 @@ const userReducer = (state = initialState, action) =>{
         
         case ActionType.registration:
             return{...state, newRegistration: action.payload}
+        
+        case ActionType.MY_INFO:
+            return{...state, myInfo: action.payload}
+        
+        case ActionType.USER_LIST:
+            return{...state, userList: action.payload}
         
         case ActionType.LOGOUT:
             localStorage.removeItem("user");

@@ -70,7 +70,7 @@ export default function Login() {
     if(user.userInfo.role === 'admin'){
       navigate('/admin');
     }else if(user.userInfo.role === 'user'){
-      navigate('/user/home')
+      navigate('/user/dashboard')
     }
   }
   

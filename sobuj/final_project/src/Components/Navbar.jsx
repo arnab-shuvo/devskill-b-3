@@ -45,7 +45,7 @@ export default function Navbar() {
   const { cart } = useSelector((store) => store.cartItems); 
   const loggedInUser = useSelector((store) =>store.userStore);
   
-  console.log(cart, '=== cart list...'); 
+  //console.log(cart, '=== cart list...'); 
     //const [cartLength, setCartLength] = useState('0'); 
 
   var cartLength;
@@ -81,14 +81,15 @@ export default function Navbar() {
       navigate(`/signup/`);
   }
   
-  const toAccount = () =>{
-      navigate(`/user/home/`);
-  }
-  
   const  toCartDetail = () =>{
       navigate(`/user/cart/`);
   }
-  
+  const toProfile=()=>{
+    navigate('/user/dashboard');
+  }
+  const toOrders=()=>{
+    navigate('/user/my-orders');
+  }
   const toLogout = () =>{
     localStorage.clear();
     dispatch(logout()); //Not working...
@@ -118,12 +119,7 @@ export default function Navbar() {
   const handleMobileMenuOpen = (event) => {
     setMobileMoreAnchorEl(event.currentTarget);
   };
-  const toProfile=()=>{
-    navigate('/user/home');
-  }
-  const toOrders=()=>{
-    navigate('/user/my-orders');
-  }
+
 
   const menuId = 'primary-search-account-menu';
   const renderMenu = (

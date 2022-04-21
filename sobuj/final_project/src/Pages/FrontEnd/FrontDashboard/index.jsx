@@ -1,18 +1,209 @@
+import { Avatar, Button, Divider, Grid, List, ListItem, ListItemText, Typography } from '@material-ui/core';
+import { Stack } from '@mui/material';
 import React from 'react'
-import { Link } from 'react-router-dom';
+import { useEffect } from 'react';
+import { useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
+import { Link, Navigate, NavLink, useNavigate } from 'react-router-dom';
 import Navbar from '../../../Components/Navbar';
 import FrontLayout from '../../../Layouts/FrontEnd/FrontLayout';
+import { loadOrders } from '../../../store/action/OrderAction';
+import { loadMyInfo } from '../../../store/action/UserAction';
 import './styles.css';
 
-const FrontDashboard = () => {
-  return (
+const style = {
+  width: '100%',
+  maxWidth: 360,
+  bgcolor: 'background.paper',
+};
 
-    <div className='wrapper'>
-         <h2>This is Dashboard, which is showing after login </h2>
+
+
+const FrontUserDashboard = () => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const loggedInUser = useSelector((store) =>store.userStore);
+
+  const { myInfo } = useSelector((store) => store.userDetailInfo);
+  //console.log(myInfo, 'My INformation on user Dashboard')
+  useEffect(()=>{
+    if(loggedInUser.isAuthUser === true){
+      dispatch(loadMyInfo(loggedInUser.token.userInfo.token));
+    }else{
+      alert('please login first');
+      navigate('/login');
+    }
+
+  },[])
+
+  const updateInfo = () =>{
+
+  }
+
+  const { orders } = useSelector((state) => state.getAllOrders); 
+  console.log(orders, '=====MyOrders from User Dashboard');
+
+  useEffect(() => {
+    if(loggedInUser.isAuthUser === true){
+        dispatch(loadOrders(loggedInUser.token.userInfo.token));
+    }else{
+      alert('please login first');
+      navigate('/login');
+    }
+  }, []);
+  
+
+
+  const toAccount = () =>{
+    navigate('/user/dashboard');
+  }
+  const toOrders = () =>{
+    navigate('/user/my-orders')
+  }
+
+  
+  const getTotalPrice = (index) => {
+    let totalPrice = 0;
+    orders[index].products?.map((orderData) => (totalPrice += orderData.productId['price']));
+    return totalPrice;
+  };
  
-    </div>
-  )
+  return (
+    // <div className='wrapper'>
+    <Grid container className="wrapper">
+      {myInfo ? (
+        <>
+          <Grid md={2} xs={2} sm={2} className="cardStyle">
+            <List sx={style} component="nav" aria-label="mailbox folders">
+              <ListItem button onClick={toAccount}>
+                <ListItemText primary="My Account" />
+              </ListItem>
+              <Divider />
+              <ListItem button divider onClick={toOrders}>
+                <ListItemText primary="My Orders" />
+              </ListItem>
+            </List>
+          </Grid>
+
+          <Grid md={7} xs={10} sm={5} className="cardStyle myOrderContainer">
+            <h3>My Orders</h3>
+            <hr />
+            <Grid container>
+              <Grid xs={12} style={{ textAlign: "center" }}>
+                <List disablePadding>
+                  {orders.map((dataRow, index) => (
+                    <NavLink
+                      to={"/"}
+                      style={{
+                        boder: "1px solid #3d0303",
+                        borderRadius: "10px",
+                        boxShadow: "0 6px 20px 0 rgba(0, 0, 0, 0.19)",
+                      }}
+                    >
+                      <ListItem
+                        key={"Order ID: " + dataRow._id}
+                        sx={{ py: 1, px: 0 }}
+                        style={{
+                          backgroundColor: "#4081be",
+                          fontWeight: "bold",
+                          fontSize: "1.2rem",
+                          color: "white",
+                        }}
+                      >
+                        <ListItemText primary={"Order ID:" + dataRow._id} />
+
+                        <ListItemText primary={"Placed On: " + dataRow.date} />
+                        {dataRow.status === 0 ? (
+                          <Button class="pendingOrder" disabled>
+                            Pending
+                          </Button>
+                        ) : (
+                          <Button class="confirmedOrder" disabled style={{ background:"green", color:"white", border:"2px #ccc", padding:"5px 15px"  }}>
+                          Order Placed
+                        </Button>
+                        )}
+                      </ListItem>
+                      <Stack
+                        direction="row"
+                        spacing={2}
+                        class="avatarRow"
+                        style={{
+                          padding: "20px",
+                          display: " flex",
+                          justifyContent: "space-evenly",
+                          overflow: "auto",
+                        }}
+                      >
+                        {/* {getProductAvatarImages(dataRow.indexOf('products'))} */}
+                        {dataRow.products.map((dataSpcs) => (
+                          <>
+                            <Avatar
+                              style={{ border: "2px solid #85166d" }}
+                              alt={dataSpcs.productId["title"]}
+                              src={
+                                "http://127.0.0.1:8080" +
+                                dataSpcs.productId["image"]
+                              }
+                            />
+                            {dataSpcs.productId["title"].substr(0, 30) + "..."}
+                          </>
+                        ))}
+                      </Stack>
+                      <Stack
+                        direction="row"
+                        spacing={2}
+                        class="avatarRow"
+                        style={{
+                          padding: "20px",
+                          display: " flex",
+                          justifyContent: "space-between",
+                        }}
+                      >
+                        <Typography variant="h5">
+                          Item Quantity: {dataRow.products.length}
+                        </Typography>
+                        <Typography variant="h5">
+                          Total Price: ${getTotalPrice(index)}
+                        </Typography>
+                      </Stack>
+                      <hr />
+                    </NavLink>
+                  ))}
+                </List>
+              </Grid>
+            </Grid>
+          </Grid>
+
+          <Grid md={3} xs={10} sm={5} className="cardStyle">
+            {/* <h2>{myInfo.firstname}&nbsp;{myInfo.lastname}</h2>
+                <p>Phone: {myInfo.phone}</p>
+                <p>Email: {myInfo.email}</p>
+                <span>
+                  <p style={{ fontWeight:"bold" }}>Address:</p>
+                  <p>{myInfo.address['city']}</p>
+                  <p>{myInfo.address['zip']}</p>
+                </span>  */}
+
+            <Button
+              variant="outlined"
+              color="primary"
+              size="medium"
+              onClick={updateInfo}
+            >
+              Update Information
+            </Button>
+          </Grid>
+        </>
+      ) : (
+        <>
+          <h2>No user logged in!</h2>
+        </>
+      )}
+    </Grid>
+
+    // </div>
+  );
 }
 
-export default FrontLayout(FrontDashboard)
+export default FrontLayout(FrontUserDashboard)
 

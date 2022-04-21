@@ -17,7 +17,9 @@ export const persistedReducer = persistReducer(persistConfig, userReducer);
 const RootReducer = combineReducers({
     userStore: persistedReducer,
     newUser:userReducer,
-
+    userDetailInfo:userReducer,
+    userList:userReducer,
+    
     productList: productReducer,
     allProduct: productReducer,
     productDetail: productReducer,
@@ -30,6 +32,8 @@ const RootReducer = combineReducers({
     cartItems:cartReducer,
     orders: orderReducer,
     getAllOrders:orderReducer,
+    manageOrders:orderReducer,
+    updateOrders:orderReducer,
 
     addCategory:CategoryReducer,
 });

@@ -47,28 +47,6 @@ export default function CreateCategory() {
   const [image, setImage]=useState("");
   const [error, setError]=useState(false);
 
-  // const addCategory = () =>{
-  //   if(name.length){ 
-  //       console.log(name , description );
-        
-  //       fetch("http://127.0.0.1:8080/category/", {
-  //           method: "POST",
-  //           headers: {
-  //               authorization: `bearer ${userToken}`,
-  //           },
-  //           body: JSON.stringify({
-  //               'name': name,
-  //               'description': description,
-  //           }),
-  //         })
-  //         .then((res) => res.json())
-  //         .then((json) => console.log(json));
-
-  //         handleCloseCreate()
-  //     }else{
-  //         setError(true);
-  //     }
-  // };
   async function formSubmit(data) {
     return fetch("http://localhost:8080/category", {
       method: "POST",

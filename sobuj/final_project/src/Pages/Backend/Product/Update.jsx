@@ -36,7 +36,7 @@ const UpdateProduct=({product, openModal, handleClose})=> {
     if(title.length){ 
         alert(title + ', ' + category + ', ' + price + ', '+ description );
         fetch(`http://127.0.0.1:8080/products/${product._id}`,{
-            method:"PUT",
+            method:"PATCH",
             body:JSON.stringify(
                 {
                     title: title,

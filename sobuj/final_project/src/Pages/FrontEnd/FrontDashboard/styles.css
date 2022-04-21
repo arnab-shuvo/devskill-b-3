@@ -1,3 +1,42 @@
 .wrapper {
     padding: 20px;
+    display: flex;
+    justify-content: space-between;
 }
+.cardStyle{
+    width: 80% !important;
+    /* background-color: #fcfafa; */
+    padding: 20px;
+    /* margin: auto; */
+    box-shadow: 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    border-radius: 1rem;
+    border: transparent
+}    
+.myOrderContainer{
+    background-color: transparent;
+    box-shadow: none;
+}
+.myOrderContainer h3{
+    text-transform: uppercase;
+}
+.pendingOrder{
+    color:rgb(240, 224, 10);
+    font-weight: bold;
+    padding: 5px;
+    border-radius: 10px;
+    border:3px solid rgb(62, 9, 133);
+    box-shadow: 0 6px 20px 0 rgba(207, 11, 11, 0.19);
+}
+.confirmedOrder{
+    color:rgb(255, 255, 255);
+    font-weight: bold;
+    padding: 5px;
+    border-radius: 10px;
+    border:3px solid rgb(62, 9, 133);
+    box-shadow: 0 6px 20px 0 rgba(207, 11, 11, 0.19);
+}
+.avatarRow{
+    padding: 20px;
+    display: flex;
+    justify-content: space-evenly;
+} 
