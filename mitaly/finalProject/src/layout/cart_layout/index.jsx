@@ -17,17 +17,21 @@ const Cart=()=>{
         }
           work();  
     }, []);
-    console.log(cart,"cart");
+   
 
 const checkoutCart=async()=>{
-const checkout = await checkoutCartAPI(token);
-console.log(checkout,'checkout');
-navigate('/AdminDashboard')
+    const checkout = await checkoutCartAPI(token);
+    navigate('/AdminDashboard')
 }
 
 return(
     <>
-    { cart === null ? <h2>hi i am cart</h2>
+    { cart === null || cart?.err?.name=== "JsonWebTokenError" || cart?.status === 'error' ? 
+    <>
+        <h2>hi i am cart</h2>
+        {navigate('/')}
+    </>
+
     : 
     <>
         <div className='cart'>

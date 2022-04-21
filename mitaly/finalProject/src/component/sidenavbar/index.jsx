@@ -9,7 +9,7 @@ import cv5 from '../../assets/images/13.png';
 import cv6 from '../../assets/images/9.png';
 import cv7 from '../../assets/images/1.png';
 import {useDispatch} from 'react-redux';
-const SideNavbar=()=>{
+const SideNavbar=({setState})=>{
     const navigate=useNavigate();
     const dispatch=useDispatch();
     const logout=()=>{
@@ -31,10 +31,11 @@ const SideNavbar=()=>{
                         </button>
                     </li>
                     <li><button onClick={()=>navigate('/AdminDashboard')} className='admin_dashboard--button' ><img src={cv1}/></button></li>
-                    <li><button className='admin_dashboard--button' ><img src={cv2}/></button></li>
-                    <li><button className='admin_dashboard--button' ><img src={cv3}/></button></li>
-                    <li><button className='admin_dashboard--button' ><img src={cv4}/></button></li>
-                    <li><button className='admin_dashboard--button' ><img src={cv5}/></button></li>
+                    <li><button onClick={()=>setState('userInfo')} className='admin_dashboard--button' ><img src={cv2}/></button></li>
+                    <li><button onClick={()=>setState('category')} className='admin_dashboard--button' ><img src={cv3}/></button></li>
+                    <li><button onClick={()=>setState('order')} className='admin_dashboard--button' ><img src={cv4}/></button></li>
+                    <li><button onClick={()=>setState('user')} className='admin_dashboard--button' ><img src={cv5}/></button></li>
+                    <li><button onClick={()=>setState('product')} className='admin_dashboard--button' ><img src={cv5}/></button></li>
                 </ul>
             </div>
             <div className='login-icon'>

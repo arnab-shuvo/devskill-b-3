@@ -2,7 +2,6 @@ import axios from 'axios';
 import {header} from './api';
 /* Get All Products */
 export const getProducts= async ()=>{
-
     try{
         const {data}=await axios.get('http://localhost:8080/products');
         return data;
@@ -26,13 +25,11 @@ export const getProduct=async (productId)=>{
 /* Add new product
 Dependency: Required Admin User account */
 export const createProduct= async(productData,TOKEN)=>{
+    header(TOKEN);
     try{
         const {data}=await axios.post(
-            'https://fakestoreapi.com/products',
+            'http://localhost:8080/products',
             {
-                headers: {
-                    authorization: `bearer ${TOKEN}`,  
-                },
                 ...productData,
             }  
             );
@@ -45,13 +42,11 @@ export const createProduct= async(productData,TOKEN)=>{
 /* Edit Product 
 Dependency: Required Admin User account */
 export const updateProduct=async(productId,productData,TOKEN)=>{
+    header(TOKEN);
     try{
         const {data}=await axios.put(
             `http://localhost:8080/products/${productId}`,
                 {
-                    headers: {
-                        authorization: `bearer ${TOKEN}`,  
-                    },
                     ...productData,
                 }    
             );
@@ -64,14 +59,10 @@ export const updateProduct=async(productId,productData,TOKEN)=>{
 /* Delete Product 
 Dependency: Required Admin User account */
 export const deleteProduct= async(productId,TOKEN)=>{
+    header(TOKEN);
     try{
         const {data}=await axios.delete(
             `http://localhost:8080/products/${productId}`,
-                {
-                    headers: {
-                        authorization: `bearer ${TOKEN}`,  
-                    },
-                }
             );
         return data.id;
     }catch (error) {
