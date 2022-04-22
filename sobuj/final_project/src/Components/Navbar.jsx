@@ -35,18 +35,10 @@ export default function Navbar() {
   // prodCategories is comming from RootReducer (prodCategories:CategoryReducer,)
   const { categoryList } = useSelector((state) => state.prodCategories); 
   
-
-   // Destructuring saved "cartItemsData" from CartReducer
-   // cartItems is coming from RootReducer (cartItems:cartReducer,)
-  const cartItemsData = useSelector((store) =>store.cartItems); // Getting Cart Items
-   
-  // const [token, setToken] = useState(null);
-   
   const { cart } = useSelector((store) => store.cartItems); 
   const loggedInUser = useSelector((store) =>store.userStore);
   
-  //console.log(cart, '=== cart list...'); 
-    //const [cartLength, setCartLength] = useState('0'); 
+  console.log(cart, '=== cart list...');
 
   var cartLength;
   if(loggedInUser.isAuthUser === true ){
@@ -55,17 +47,15 @@ export default function Navbar() {
       //console.log(cartLength, '===== cartLength in Cart');
     }else{
       cartLength = 0;
-      //console.log(cartLength, '===== No items in Cart');
     }
   }else{
     cartLength = cart.length; // will found zero (0)
-    //console.log(cartLength, '===== User not logged in');
   }
   
   useEffect(() => {
     if(loggedInUser.isAuthUser === true){
-          //setCartLength(cart.products.length);
           dispatch(loadCartItems(loggedInUser.token.userInfo.token));
+          
       };
   }, []);
 
@@ -250,9 +240,7 @@ export default function Navbar() {
         
 
         <div className={classes.search}>
-            <div className={classes.searchIcon}>
-              <SearchIcon />
-            </div>
+            
             <InputBase
               placeholder="Search…"
               classes={{
@@ -261,6 +249,9 @@ export default function Navbar() {
               }}
               inputProps={{ 'aria-label': 'search' }}
             />
+            <div className={classes.searchIcon}>
+              <SearchIcon />
+            </div>
         </div>
 
           <div className={classes.sectionDesktop}>

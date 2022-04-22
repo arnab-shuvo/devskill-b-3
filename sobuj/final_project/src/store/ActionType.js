@@ -5,6 +5,7 @@ const ActionType = {
     getProductDetail: 'GET-PRODUCT-DETAIL',
     deleteProduct:'DELETE-PRODUCT',
     ADD_NEW_PRODUCT:'ADD-NEW-PRODUCT',
+    UPDATE_PRODUCT:'UPDATE-PRODUCT',
 
     setToken: 'SET-TOKEN',
     unSetToken: 'UN-SET-TOKEN',

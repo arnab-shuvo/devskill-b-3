@@ -7,38 +7,46 @@ export const addCart = (cartProduct) =>({
     payload: cartProduct
 });
 
+//Modify Cart Items
+export const modifyCartAction = (modifyCart) =>({
+    type: ActionType.UPDATE_CART,
+    payload: modifyCart
+});
 
-//Adding Cart Item
+
+
+//Remove Cart Item
 export const removeCartAction = (cartID) =>({
     type: ActionType.REMOVE_FROM_CART,
     payload: cartID
 });
-export const removeCartItem = (prodID, userToken)=>{
-    // console.log(prodID, '----- Product ID from Cart Delte Action')
-    // console.log(userToken, '----- UserTOken from Cart Delte Action')
-    return function(dispatch){
-        axios
-        .post(`${"http://127.0.0.1:8080/cart"}`,{
-            method: "POST",
-            headers: {
-                "Content-type" : "application/json",
-                "Accept"       : "application/json",
-                "authorization": "bearer "+ userToken
-              },
-              body: JSON.stringify({
-                product: {
-                  id: prodID,
-                  quantity: 0,
-                },
-              }),
-        })
-        .then((response) =>{
-            console.log("response", response);
-            dispatch(removeCartAction(response.data));
-        })
-        .catch((error)=>console.log(error));
-    };
-}
+
+// export const removeCartItem = (prodID, userToken)=>{
+//     // console.log(prodID, '----- Product ID from Cart Delte Action')
+//     // console.log(userToken, '----- UserTOken from Cart Delte Action')
+//     return function(dispatch){
+//         axios
+//         .post(`${"http://127.0.0.1:8080/cart"}`,{
+//             method: "POST",
+//             headers: {
+//                 "Content-type" : "application/json",
+//                 "Accept"       : "application/json",
+//                 "authorization": "bearer "+ userToken
+//               },
+//               body: JSON.stringify({
+//                 product: {
+//                   id: prodID,
+//                   quantity: 0,
+//                 },
+//               }),
+//         })
+//         .then((response) =>{
+//             console.log("response", response);
+//             dispatch(removeCartAction(response.data));
+//         })
+//         .catch((error)=>console.log(error));
+//     };
+// }
 
 
 //Get Cart Items

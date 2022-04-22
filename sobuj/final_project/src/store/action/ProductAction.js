@@ -37,22 +37,8 @@ export const productDeleteAction = (delProduct) =>({
     type: ActionType.deleteProduct,
     payload: delProduct
 });
-
-
-// export const deleteProduct = (id, token) =>{
-//     // console.log(token, '==== delete action')
-//     return function(dispatch){
-//         axios
-//         .post(`http://10.0.1.14:8000/products/${id}`, {
-//             headers: {
-//                 'Content-Type': 'application/json',
-//                 'authorization': 'bearer '+token
-//             },      
-//         })
-//         .then((response) =>{
-//             dispatch(productDeleteAction(response.data));
-//         })
-//         .catch((error)=>console.log(error));
-//     };
-// };
-
+ 
+export const productUpdateAction = (updateProduct) =>({
+    type:ActionType.UPDATE_PRODUCT,
+    payload: updateProduct
+});

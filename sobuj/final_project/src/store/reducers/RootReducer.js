@@ -24,12 +24,14 @@ const RootReducer = combineReducers({
     allProduct: productReducer,
     productDetail: productReducer,
     newProduct: productReducer,
+    updateProduct:productReducer,
 
     prodCategories:CategoryReducer,
     token:userReducer,
 
     cartData:cartReducer,
     cartItems:cartReducer,
+    
     orders: orderReducer,
     getAllOrders:orderReducer,
     manageOrders:orderReducer,

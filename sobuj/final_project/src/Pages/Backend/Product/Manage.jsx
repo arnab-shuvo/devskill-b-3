@@ -69,10 +69,11 @@ const ManageProduct = () =>{
         setSelectUpdate = null
     };
 
-    const updateProduct = (product) => {
+    const updateProduct = (id) => {
       //alert("Update Product-"+ id)
-      setSelectUpdate(product);
-      setOpen(true);
+      // setSelectUpdate(product);
+      // setOpen(true);
+      navigate(`/admin/edit-product/${id}`)
     };    
 
       const { productList } = useSelector((store) => store.productList);
@@ -98,7 +99,7 @@ const ManageProduct = () =>{
       }, []);
 
 
-    // PRODUCT DELETE
+    // PRODUCT DELETE 
     async function deleteSubmit(data) {
       return fetch(`http://localhost:8080/products/${data.id}`, {
           method: "DELETE",

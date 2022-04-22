@@ -28,20 +28,21 @@ export const useStyles = makeStyles((theme) => ({
       },
       marginRight: theme.spacing(2),
       marginLeft: 0,
-      width: '100%',
+      // width: '100%',
+      minWidth:'400px',
       [theme.breakpoints.up('sm')]: {
         marginLeft: theme.spacing(3),
         width: 'auto',
       },
+      display:'flex',
+      justifyContent:'space-between',
     },
     searchIcon: {
       padding: theme.spacing(0, 2),
       height: '100%',
-      position: 'absolute',
+      position: 'relative',
       pointerEvents: 'none',
-      display: 'flex',
-      alignItems: 'center',
-      justifyContent: 'center',
+      marginTop:'10px'
     },
     inputRoot: {
       color: 'inherit',
@@ -51,7 +52,8 @@ export const useStyles = makeStyles((theme) => ({
       // vertical padding + font size from searchIcon
       paddingLeft: `calc(1em + ${theme.spacing(4)}px)`,
       transition: theme.transitions.create('width'),
-      width: '100%',
+      // width: '90%',
+      minWidth:'360px',
       [theme.breakpoints.up('md')]: {
         width: '20ch',
       },

@@ -18,7 +18,7 @@ import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import { maxHeight } from '@mui/system';
 import { NavLink, useNavigate } from 'react-router-dom';
-import { loadCartItems, get_carts, removeCartItem } from '../../../store/action/AddToCartAction';
+import { loadCartItems, get_carts, modifyCartAction, removeCartAction } from '../../../store/action/AddToCartAction';
 import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import DeleteIcon from '@mui/icons-material/Delete';
@@ -99,7 +99,6 @@ const CartDetail = () => {
 const dispatch = useDispatch(); 
 
 const loggedInUser = useSelector((store) =>store.userStore);
-const [userToken, setUserToken] = useState(null);
 
 
 const navigate = useNavigate();
@@ -119,23 +118,81 @@ console.log(cart, "==== Showing carts Items from Cart page")
 
 useEffect(() => {
   if(loggedInUser.isAuthUser === true){
-    const token = loggedInUser.token.userInfo.token;
-    setUserToken(loggedInUser.token.userInfo.token)
-    dispatch(loadCartItems(token));
+    dispatch(loadCartItems(loggedInUser.token.userInfo.token));
   }else{
     alert('please login first');
     navigate('/login');
   }
 }, []);
 
-const handleDeleteBtn=(prodId)=>{
-  if(window.confirm("Are you sure about to delete this item?")){
-    dispatch(removeCartItem(prodId, loggedInUser.token.userInfo.token));
-  }
+
+
+async function actionSubmit(dataSubmit) {
+  console.log(dataSubmit.userToken, '==== token from async function');
+
+  return fetch("http://localhost:8080/cart", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      "authorization": "bearer "+ dataSubmit.userToken
+    },
+    body: JSON.stringify({
+        product: {
+          id: dataSubmit.prodId,
+          quantity: dataSubmit.quantity,
+        },
+      }),
+  })
+    .then((data) => data.json())
+    .then((json) => json)
+    .then((json) => console.log(json));
 }
+
+const handleDeleteBtn = async (prodId)=>{
+  let userToken = loggedInUser.token.userInfo.token;
+      if(window.confirm("Are you sure about to delete this item?")){
+        let quantity = 0;
+        const actionDispatch = await actionSubmit({
+            userToken,
+            prodId,
+            quantity,
+        });
+        dispatch(modifyCartAction(actionDispatch));
+        window.location.reload();
+      }
+}
+
+const handleIncreaseBtn = async (prodId, existingQty)=>{
+  let userToken = loggedInUser.token.userInfo.token;
+
+        let quantity = existingQty + 1;
+        const actionDispatch = await actionSubmit({
+            userToken,
+            prodId,
+            quantity,
+        });
+        dispatch(modifyCartAction(actionDispatch));
+        window.location.reload();
+}
+
+const handleDecreaseBtn = async (prodId, existingQty)=>{
+      let userToken = loggedInUser.token.userInfo.token;
+        let quantity = existingQty - 1;
+        const actionDispatch = await actionSubmit({
+            userToken,
+            prodId,
+            quantity,
+        });
+        dispatch(modifyCartAction(actionDispatch));
+        window.location.reload();
+}
+
+
 const get_total_price = () => {
   let totalPrice = 0;
-  cart?.products?.map((cartData) => (totalPrice += cartData.productId['price']));
+  cart?.products?.map((cartData) => (
+    totalPrice += (cartData.productId['price'] * cartData.quantity))
+    );
   return totalPrice;
 };
 
@@ -189,18 +246,26 @@ const calculateTotalPrice = () =>{
                     </div>
                     <div class="col-2">
                       {" "}  
-                      <IconButton color="primary" aria-label="add an alarm">
+                      <IconButton color="primary" aria-label="add an alarm"
+                      onClick={()=>handleDecreaseBtn(
+                        dataRow.productId['_id'], dataRow.quantity
+                        )}
+                      >
                           <IndeterminateCheckBoxIcon />
                       </IconButton>
                         <a href="#" class="border">
                           {dataRow.quantity}
                         </a>
-                      <IconButton color="primary" aria-label="add an alarm">
+                      <IconButton color="primary" aria-label="add an alarm" 
+                      onClick={()=>handleIncreaseBtn(
+                        dataRow.productId['_id'], dataRow.quantity
+                        )}
+                      >
                           <AddBoxIcon />
                       </IconButton>
                     </div>
                     <div class="col">
-                      $ {dataRow.productId['price']}
+                      $ {dataRow.productId['price'] * dataRow.quantity}
                     </div>
                     <div class="col">
                         <StyledButton> 

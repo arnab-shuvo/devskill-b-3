@@ -165,16 +165,18 @@ const BackendLayout = (PageComponent) => {
                       flexGrow: 1,
                       height: '100vh',
                       overflow: 'auto',
+                      border:'5px solid blue',
+                      padding:0,
                   }}
                   >
-                  <Toolbar />
-                  <Container maxWidth="lg" sx={{ mt: 2, mb: 2 }}>
-                      {/* <!-- Called The Component Parameter --> */}
-                          <PageComponent />   
-                      {/* <!-- Called The Component Parameter --> */}
-                      
-                      <Copyright sx={{ pt: 4 }} />
-                  </Container>
+                    <Toolbar />
+                    <Container maxWidth="lg" sx={{ mt: 2, mb: 2 }} style={{width:'100%'}}>
+                        {/* <!-- Called The Component Parameter --> */}
+                            <PageComponent />   
+                        {/* <!-- Called The Component Parameter --> */}
+                        
+                        <Copyright sx={{ pt: 4 }} />
+                    </Container>
                   </Box>
               </Box>
               </ThemeProvider>
