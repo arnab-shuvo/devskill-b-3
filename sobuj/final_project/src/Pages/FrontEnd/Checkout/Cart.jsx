@@ -108,11 +108,11 @@ const submitToCheckout = () =>{
 const toHome =()=>{
   navigate('/');
 }
-const { cart } = useSelector((store) => store.cartItems); 
-// if(cart.status==='error'){
-//   console.log(cart.message, '=== cart list... error message'); 
+const { loadCart } = useSelector((store) => store.cartItems); 
+// if(loadCart.status==='error'){
+//   console.log(loadCart.message, '=== cart list... error message'); 
 // }else{
-console.log(cart, "==== Showing carts Items from Cart page")
+console.log(loadCart, "==== Showing carts Items from Cart page")
 // }
 
 
@@ -128,7 +128,7 @@ useEffect(() => {
 
 
 async function actionSubmit(dataSubmit) {
-  console.log(dataSubmit.userToken, '==== token from async function');
+  // console.log(dataSubmit.userToken, '==== token from async function');
 
   return fetch("http://localhost:8080/cart", {
     method: "POST",
@@ -145,7 +145,7 @@ async function actionSubmit(dataSubmit) {
   })
     .then((data) => data.json())
     .then((json) => json)
-    .then((json) => console.log(json));
+    .then((json) => console.log(json, '===Cart Updated Successfully- CartActionSubmit'));
 }
 
 const handleDeleteBtn = async (prodId)=>{
@@ -158,7 +158,8 @@ const handleDeleteBtn = async (prodId)=>{
             quantity,
         });
         dispatch(modifyCartAction(actionDispatch));
-        window.location.reload();
+        dispatch(loadCartItems(loggedInUser.token.userInfo.token));
+        // window.location.reload();
       }
 }
 
@@ -172,7 +173,8 @@ const handleIncreaseBtn = async (prodId, existingQty)=>{
             quantity,
         });
         dispatch(modifyCartAction(actionDispatch));
-        window.location.reload();
+        dispatch(loadCartItems(loggedInUser.token.userInfo.token));
+        // window.location.reload();
 }
 
 const handleDecreaseBtn = async (prodId, existingQty)=>{
@@ -184,13 +186,14 @@ const handleDecreaseBtn = async (prodId, existingQty)=>{
             quantity,
         });
         dispatch(modifyCartAction(actionDispatch));
-        window.location.reload();
+        dispatch(loadCartItems(loggedInUser.token.userInfo.token));
+        // window.location.reload();
 }
 
 
 const get_total_price = () => {
   let totalPrice = 0;
-  cart?.products?.map((cartData) => (
+  loadCart?.products?.map((cartData) => (
     totalPrice += (cartData.productId['price'] * cartData.quantity))
     );
   return totalPrice;
@@ -225,10 +228,10 @@ const calculateTotalPrice = () =>{
               </div>
             </div>
           {
-          !cart.status==="error"  || cart.status===0 ?
+          !loadCart.status==="error"  || loadCart.status===0 ?
           (  
             <>
-            {cart?.products?.map((dataRow) => (
+            {loadCart?.products?.map((dataRow) => (
                 <div class="row border-top border-bottom" key={dataRow._id}>
                   <div class="row main align-items-center">
                     <div class="col-2">
@@ -303,7 +306,7 @@ const calculateTotalPrice = () =>{
             <form>
             <div class="row">
               <div class="col" style={{ textAlign:"left", paddingLeft:"15px", textTransform:"uppercase", fontWeight:"500" }}>
-               Total Item - {cart?.products?.length}
+               Total Item - {loadCart?.products?.length}
               </div>
               <div class="col text-right">$ 
               {get_total_price()}

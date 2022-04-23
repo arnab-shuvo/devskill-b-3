@@ -21,41 +21,13 @@ export const removeCartAction = (cartID) =>({
     payload: cartID
 });
 
-// export const removeCartItem = (prodID, userToken)=>{
-//     // console.log(prodID, '----- Product ID from Cart Delte Action')
-//     // console.log(userToken, '----- UserTOken from Cart Delte Action')
-//     return function(dispatch){
-//         axios
-//         .post(`${"http://127.0.0.1:8080/cart"}`,{
-//             method: "POST",
-//             headers: {
-//                 "Content-type" : "application/json",
-//                 "Accept"       : "application/json",
-//                 "authorization": "bearer "+ userToken
-//               },
-//               body: JSON.stringify({
-//                 product: {
-//                   id: prodID,
-//                   quantity: 0,
-//                 },
-//               }),
-//         })
-//         .then((response) =>{
-//             console.log("response", response);
-//             dispatch(removeCartAction(response.data));
-//         })
-//         .catch((error)=>console.log(error));
-//     };
-// }
-
-
 //Get Cart Items
 export const getCartItems = (cartItems) =>({
     type: ActionType.GET_CART_ITEMS,
     payload: cartItems
 })
-export const loadCartItems = (token) =>{ // Dispatcher
-    //console.log(token, '=== token form Action Page')
+
+export const loadCartItems = (token) =>{ 
     return function(dispatch){
         axios
         .get(`${"http://127.0.0.1:8080/cart"}`,{
@@ -65,8 +37,7 @@ export const loadCartItems = (token) =>{ // Dispatcher
             },
         })
         .then((response) =>{
-            // console.log("response", response);
-            dispatch(getCartItems(response.data));
+           dispatch(getCartItems(response.data));
         })
         .catch((error)=>console.log(error));
     };

@@ -35,21 +35,21 @@ export default function Navbar() {
   // prodCategories is comming from RootReducer (prodCategories:CategoryReducer,)
   const { categoryList } = useSelector((state) => state.prodCategories); 
   
-  const { cart } = useSelector((store) => store.cartItems); 
+  const { loadCart } = useSelector((store) => store.cartItems); 
   const loggedInUser = useSelector((store) =>store.userStore);
   
-  console.log(cart, '=== cart list...');
+  console.log(loadCart, '===Navbar- cart list...');
 
   var cartLength;
   if(loggedInUser.isAuthUser === true ){
-    if (!cart.status==="error" || cart.status===0){
-      cartLength = cart.products.length;
+    if (!loadCart.status==="error" || loadCart.status===0){
+      cartLength = loadCart.products.length;
       //console.log(cartLength, '===== cartLength in Cart');
     }else{
       cartLength = 0;
     }
   }else{
-    cartLength = cart.length; // will found zero (0)
+    cartLength = loadCart.length; // will found zero (0)
   }
   
   useEffect(() => {
