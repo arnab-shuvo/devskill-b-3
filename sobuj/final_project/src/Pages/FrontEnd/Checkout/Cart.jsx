@@ -159,7 +159,6 @@ const handleDeleteBtn = async (prodId)=>{
         });
         dispatch(modifyCartAction(actionDispatch));
         dispatch(loadCartItems(loggedInUser.token.userInfo.token));
-        // window.location.reload();
       }
 }
 

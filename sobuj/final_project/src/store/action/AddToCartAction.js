@@ -14,7 +14,6 @@ export const modifyCartAction = (modifyCart) =>({
 });
 
 
-
 //Remove Cart Item
 export const removeCartAction = (cartID) =>({
     type: ActionType.REMOVE_FROM_CART,

@@ -237,7 +237,6 @@ export default function Navbar() {
             
           
         </div>
-        
 
         <div className={classes.search}>
             
@@ -257,7 +256,7 @@ export default function Navbar() {
           <div className={classes.sectionDesktop}>
             <IconButton aria-label="show 17 new notifications" color="inherit"  onClick={toCartDetail}>
               <Badge 
-                badgeContent={ cartLength === 0 ? ("0") : cartLength }
+                badgeContent={ cartLength === 0 ? ("0") : cartLength } 
                 color="secondary">
                 <AddShoppingCartIcon /> 
               </Badge>
