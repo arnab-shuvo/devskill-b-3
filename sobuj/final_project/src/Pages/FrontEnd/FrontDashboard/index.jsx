@@ -23,12 +23,17 @@ const FrontUserDashboard = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const loggedInUser = useSelector((store) =>store.userStore);
+  console.log(loggedInUser, "==== LoggedUser from Dashboard")
+  const { myInfo } = useSelector((store) => store.userStore);
+  // console.log(myInfo, '=====myInfo from User Dashboard');
 
-  const { myInfo } = useSelector((store) => store.userDetailInfo);
-  //console.log(myInfo, 'My INformation on user Dashboard')
+  const { orders } = useSelector((state) => state.getAllOrders); 
+  // console.log(orders, '=====MyOrders from User Dashboard');
+
   useEffect(()=>{
-    if(loggedInUser.isAuthUser === true){
+    if(!loggedInUser.token===null || loggedInUser.isAuthUser === true){
       dispatch(loadMyInfo(loggedInUser.token.userInfo.token));
+      dispatch(loadOrders(loggedInUser.token.userInfo.token));
     }else{
       alert('please login first');
       navigate('/login');
@@ -40,27 +45,20 @@ const FrontUserDashboard = () => {
 
   }
 
-  const { orders } = useSelector((state) => state.getAllOrders); 
-  console.log(orders, '=====MyOrders from User Dashboard');
-
-  useEffect(() => {
-    if(loggedInUser.isAuthUser === true){
-        dispatch(loadOrders(loggedInUser.token.userInfo.token));
-    }else{
-      alert('please login first');
-      navigate('/login');
-    }
-  }, []);
+  // useEffect(() => {
+  //   if(loggedInUser.isAuthUser === true){
+        
+  //   }else{
+  //     alert('please login first');
+  //     navigate('/login');
+  //   }
+  // }, []);
   
 
 
   const toAccount = () =>{
     navigate('/user/dashboard');
-  }
-  const toOrders = () =>{
-    navigate('/user/my-orders')
-  }
-
+  } 
   
   const getTotalPrice = (index) => {
     let totalPrice = 0;
@@ -71,7 +69,7 @@ const FrontUserDashboard = () => {
   return (
     // <div className='wrapper'>
     <Grid container className="wrapper">
-      {myInfo ? (
+      {myInfo.length!==0 ? (
         <>
           <Grid md={2} xs={2} sm={2} className="cardStyle">
             <List sx={style} component="nav" aria-label="mailbox folders">
@@ -79,9 +77,7 @@ const FrontUserDashboard = () => {
                 <ListItemText primary="My Account" />
               </ListItem>
               <Divider />
-              <ListItem button divider onClick={toOrders}>
-                <ListItemText primary="My Orders" />
-              </ListItem>
+              
             </List>
           </Grid>
 
@@ -175,14 +171,14 @@ const FrontUserDashboard = () => {
           </Grid>
 
           <Grid md={3} xs={10} sm={5} className="cardStyle">
-            {/* <h2>{myInfo.firstname}&nbsp;{myInfo.lastname}</h2>
+            <h2>{myInfo.firstname}&nbsp;{myInfo.lastname}</h2>
                 <p>Phone: {myInfo.phone}</p>
                 <p>Email: {myInfo.email}</p>
                 <span>
                   <p style={{ fontWeight:"bold" }}>Address:</p>
                   <p>{myInfo.address['city']}</p>
                   <p>{myInfo.address['zip']}</p>
-                </span>  */}
+                </span> 
 
             <Button
               variant="outlined"

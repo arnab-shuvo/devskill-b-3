@@ -17,7 +17,7 @@ export const persistedReducer = persistReducer(persistConfig, userReducer);
 const RootReducer = combineReducers({
     userStore: persistedReducer,
     newUser:userReducer,
-    userDetailInfo:userReducer,
+    // userDetailInfo:userReducer,
     userList:userReducer,
     
     productList: productReducer,

@@ -34,11 +34,11 @@ export default function Navbar() {
   // Destructuring "categoryList" from CategoryReducer
   // prodCategories is comming from RootReducer (prodCategories:CategoryReducer,)
   const { categoryList } = useSelector((state) => state.prodCategories); 
-  
+  const { myInfo } = useSelector((store) => store.userStore);
   const { loadCart } = useSelector((store) => store.cartItems); 
   const loggedInUser = useSelector((store) =>store.userStore);
   
-  console.log(loadCart, '===Navbar- cart list...');
+  console.log(myInfo, '===Navbar- myInfo...');
 
   var cartLength;
   if(loggedInUser.isAuthUser === true ){
@@ -127,7 +127,6 @@ export default function Navbar() {
         (
           <span>
               <MenuItem onClick={toProfile}>Profile</MenuItem>
-              <MenuItem onClick={toOrders}>My Orders</MenuItem>
               <MenuItem onClick={toLogout}>Logout</MenuItem>
           </span>
               
@@ -174,7 +173,7 @@ export default function Navbar() {
         >
           <AccountCircle />
         </IconButton>
-        <p>Profile</p>
+        <p onClick={toProfile}>Profile</p>
       </MenuItem>
     </Menu>
   );
@@ -191,8 +190,8 @@ export default function Navbar() {
               (loggedInUser.isAuthUser===true) ? 
               (
                 <>
-                 <NavSliceTop>
-                    {loggedInUser.token.userInfo.user}
+                 <NavSliceTop style={{ paddingRight:"30px" }}>
+                    {myInfo.firstname} &nbsp; {myInfo.lastname}
                   </NavSliceTop>
                 </>
               )
