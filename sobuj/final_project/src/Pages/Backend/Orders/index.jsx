@@ -164,10 +164,8 @@ const handleApproveOrder = async (orderId) =>{
         dispatch(editOrder(formDispatch));
         // handleCloseCreate()
         window.location.reload();
-
   }
-
-    
+  
   
   return (
     <>

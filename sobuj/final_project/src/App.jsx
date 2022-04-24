@@ -38,6 +38,7 @@ import CartDetail from './Pages/FrontEnd/Checkout/Cart';
 import Checkout from './Pages/FrontEnd/Checkout/Checkout';
 // import useToken from './Components/useToken';
 import MyOrders from './Pages/FrontEnd/Checkout/Orders';
+import OrderDetail from './Components/Backend/OrderDetail';
 
 function App() {
 
@@ -86,6 +87,7 @@ function App() {
           {/* ORDER MANAGEMENT */}
           <Route path='/admin/edit-order/:id' element={<UpdateOrder />}  />
           <Route path='/admin/manage-orders/' element={<ManageOrders />}  />
+          <Route path='/admin/order-details/:id' element={<OrderDetail />}  />
           {/* ORDER MANAGEMENT */}
           <Route path='/admin/edit-user/:id' element={<UpdateUser />}  />
           <Route path='/admin/manage-users/' element={<ManageUsers />}  />

@@ -40,3 +40,6 @@
     display: flex;
     justify-content: space-evenly;
 } 
+.MuiFormHelperText-root{
+    color: rgba(243, 29, 29, 0.76) !important;
+}

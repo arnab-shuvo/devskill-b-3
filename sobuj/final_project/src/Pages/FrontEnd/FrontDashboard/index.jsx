@@ -10,6 +10,7 @@ import FrontLayout from '../../../Layouts/FrontEnd/FrontLayout';
 import { loadOrders } from '../../../store/action/OrderAction';
 import { loadMyInfo } from '../../../store/action/UserAction';
 import './styles.css';
+import UpdateProfile from './UpdateProfile';
 
 const style = {
   width: '100%',
@@ -23,7 +24,8 @@ const FrontUserDashboard = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const loggedInUser = useSelector((store) =>store.userStore);
-  console.log(loggedInUser, "==== LoggedUser from Dashboard")
+  // console.log(loggedInUser, "==== LoggedUser from Dashboard")
+
   const { myInfo } = useSelector((store) => store.userStore);
   // console.log(myInfo, '=====myInfo from User Dashboard');
 
@@ -32,28 +34,17 @@ const FrontUserDashboard = () => {
 
   useEffect(()=>{
     if(!loggedInUser.token===null || loggedInUser.isAuthUser === true){
-      dispatch(loadMyInfo(loggedInUser.token.userInfo.token));
+      let userToken = loggedInUser.token.userInfo.token;
+      // console.log(userToken, '=================token');
+      dispatch(loadMyInfo(userToken));
       dispatch(loadOrders(loggedInUser.token.userInfo.token));
     }else{
       alert('please login first');
       navigate('/login');
     }
-
   },[])
 
-  const updateInfo = () =>{
 
-  }
-
-  // useEffect(() => {
-  //   if(loggedInUser.isAuthUser === true){
-        
-  //   }else{
-  //     alert('please login first');
-  //     navigate('/login');
-  //   }
-  // }, []);
-  
 
 
   const toAccount = () =>{
@@ -68,7 +59,10 @@ const FrontUserDashboard = () => {
  
   return (
     // <div className='wrapper'>
+    
     <Grid container className="wrapper">
+      
+
       {myInfo.length!==0 ? (
         <>
           <Grid md={2} xs={2} sm={2} className="cardStyle">
@@ -172,22 +166,19 @@ const FrontUserDashboard = () => {
 
           <Grid md={3} xs={10} sm={5} className="cardStyle">
             <h2>{myInfo.firstname}&nbsp;{myInfo.lastname}</h2>
+                <p>username: {myInfo.username}</p>
                 <p>Phone: {myInfo.phone}</p>
                 <p>Email: {myInfo.email}</p>
                 <span>
                   <p style={{ fontWeight:"bold" }}>Address:</p>
                   <p>{myInfo.address['city']}</p>
+                  <p>{myInfo.address['street']}</p>
                   <p>{myInfo.address['zip']}</p>
+                  <p>{myInfo.address['lat']} {myInfo.address['long']}</p>
                 </span> 
-
-            <Button
-              variant="outlined"
-              color="primary"
-              size="medium"
-              onClick={updateInfo}
-            >
-              Update Information
-            </Button>
+          
+              {/* Update User Information in a Modal Form */}
+             <UpdateProfile />
           </Grid>
         </>
       ) : (

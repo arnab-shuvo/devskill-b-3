@@ -35,6 +35,7 @@ const RootReducer = combineReducers({
     orders: orderReducer,
     getAllOrders:orderReducer,
     manageOrders:orderReducer,
+    orderDetail:orderReducer,
     updateOrders:orderReducer,
 
     addCategory:CategoryReducer,

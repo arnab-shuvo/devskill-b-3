@@ -57,6 +57,29 @@ export const loadAllOrderAdmin = (userToken) =>{
     };
 };
 
+//User or Admin Panel Action
+const getOrderDetail = (orderDetail) =>({
+    type: ActionType.GET_ORDER_DETAIL,
+    payload: orderDetail,
+});
+
+export const loadOrderDetail = (id, userToken) =>{
+    return function(dispatch){
+        axios
+        .get(`${"http://127.0.0.1:8080/order/"+ id }`,{
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json",
+                "authorization": "bearer "+ userToken
+            },
+        })
+        .then((response) =>{
+            dispatch(getOrderDetail(response.data));
+        })
+        .catch((error)=>console.log(error));
+    };
+};
+
 
 
 

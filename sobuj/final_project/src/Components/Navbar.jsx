@@ -38,7 +38,7 @@ export default function Navbar() {
   const { loadCart } = useSelector((store) => store.cartItems); 
   const loggedInUser = useSelector((store) =>store.userStore);
   
-  console.log(myInfo, '===Navbar- myInfo...');
+  // console.log(loggedInUser, '===Navbar- loggedInUser...');
 
   var cartLength;
   if(loggedInUser.isAuthUser === true ){
