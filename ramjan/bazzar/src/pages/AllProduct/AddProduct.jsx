@@ -2,6 +2,7 @@ import { Button, Grid, MenuItem, TextField, Typography } from '@mui/material';
 import MuiAppBar from '@mui/material/AppBar';
 import { styled, useTheme } from '@mui/material/styles';
 import React, { useEffect, useState } from 'react';
+import ImageUploading from 'react-images-uploading';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router';
 import AdminDrawer from '../../components/AdminDrawer/Index';
@@ -95,6 +96,7 @@ export default function AddProduct() {
   const { products } = store;
   const dispatch = useDispatch()
   const navigate = useNavigate()
+ 
 
   // const handleInputImage = (e) => {
   //   const filePath = e.target.files[0].name;
@@ -118,10 +120,13 @@ export default function AddProduct() {
     price:'',
     description: '',
     stock:'',
-    image:'',
+    // images:'',
     categoryID :''
   })
+  const [images, setImages] = useState([]);
+  const maxNumber = 69;
 
+ 
   
   useEffect(() => {
     dispatch(getProductListAction())
@@ -161,14 +166,14 @@ useEffect(() => {
 const submitToAddProduct = async (e) => {
   e.preventDefault();
   
-  console.log(addNewProduct)
+
   
   const newData = {
     title       :   addNewProduct.title,
     price       :   +addNewProduct.price,
     description :   addNewProduct.description,
     stock       :   +addNewProduct.stock,
-    image       :   addNewProduct.image,
+    image       :   images,
     category    : {
                 _id   : addNewProduct.categoryID,
     }  
@@ -193,7 +198,11 @@ const submitToAddProduct = async (e) => {
 }
 
 
-
+const onChange = (imageList, addUpdateIndex) => {
+  // data for submit
+  console.log(imageList[0].data_url, addUpdateIndex, 'image data after converting ------------>');
+  setImages(imageList[0].data_url);
+};
   
 
   return (
@@ -254,7 +263,7 @@ const submitToAddProduct = async (e) => {
             name='stock'
           />
                
-          <TextField
+          {/* <TextField
             label='Image'
             style={styles.marginY}
             type='text'
@@ -264,7 +273,50 @@ const submitToAddProduct = async (e) => {
             onChange={handleInputChange}
             // onChange={handleInputImage}
             name='image'
-                /> 
+          />  */}
+                
+      <div className="App">
+      <ImageUploading
+        multiple
+        value={images}
+        onChange={onChange}
+        maxNumber={maxNumber}
+        dataURLKey="data_url"
+        name='image'
+      >
+        {({
+          imageList,
+          onImageUpload,
+          onImageRemoveAll,
+          onImageUpdate,
+          onImageRemove,
+          isDragging,
+          dragProps,
+        }) => (
+          // write your building UI
+          <div className="upload__image-wrapper">
+            <button
+              style={isDragging ? { color: 'red' } : undefined}
+              onClick={onImageUpload}
+              {...dragProps}
+            >
+              Click or Drop here
+            </button>
+            &nbsp;
+            <button onClick={onImageRemoveAll}>Remove all images</button>
+           
+              <div  className="image-item">
+                <img src={images} alt="" width="100" />
+                <div className="image-item__btn-wrapper">
+                  <button onClick={() => onImageUpdate(index)}>Update</button>
+                  <button onClick={() => onImageRemove(index)}>Remove</button>
+                </div>
+              </div>
+           
+          </div>
+        )}
+      </ImageUploading>
+    </div>
                 
           <TextField
             label='Seleect Category'

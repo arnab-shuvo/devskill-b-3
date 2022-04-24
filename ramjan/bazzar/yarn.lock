@@ -1726,6 +1726,11 @@ react-final-form@^6.5.7:
   dependencies:
     "@babel/runtime" "^7.15.4"
 
+react-images-uploading@^3.1.5:
+  version "3.1.5"
+  resolved "https://registry.yarnpkg.com/react-images-uploading/-/react-images-uploading-3.1.5.tgz#e185a2e000bdec0b3d70c80fdba052cb4738a55b"
+  integrity sha512-ApLtQIbij9ECmSFNbgZognR72rlW4GlrTZyTwV+hTRW1qVQtbOWx8mCMlJ6HAkEgVe3XNHpEv72xnlCx8X4pLw==
+
 react-infinite-scroll-component@^6.1.0:
   version "6.1.0"
   resolved "https://registry.yarnpkg.com/react-infinite-scroll-component/-/react-infinite-scroll-component-6.1.0.tgz#7e511e7aa0f728ac3e51f64a38a6079ac522407f"

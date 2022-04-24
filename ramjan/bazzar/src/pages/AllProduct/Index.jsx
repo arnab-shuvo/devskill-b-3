@@ -95,7 +95,7 @@ export default function AllProduct() {
   };
 
   const deleteProduct = async (id) => {
-   
+    confirm()
     let result = await fetch(`http://localhost:8080/products/${id}`, {
       method: "delete",
       headers: {
@@ -106,7 +106,6 @@ export default function AllProduct() {
     });
     
     result = await result.json();
-    console.log(result);
     getListAfterDelete()
     navigate('/allproduct');   
   }
