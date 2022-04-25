@@ -16,7 +16,7 @@ import RemoveRedEyeIcon from '@mui/icons-material/RemoveRedEye';
 import CheckBoxIcon from '@mui/icons-material/CheckBox';
 // import CreateCategory from './create';
 import UpdateCategory from './update';
-import { Grid } from '@material-ui/core';
+import { Grid, Typography } from '@material-ui/core';
 import BackendLayout from '../../../Layouts/Backend/Layouts';
 import { Navigate, useNavigate } from 'react-router-dom';
 import { loadAllOrderAdmin, loadAllOrdersAdmin, loadOrders, updateOrderAction, editOrder } from '../../../store/action/OrderAction';
@@ -113,32 +113,7 @@ const ManageOrders =()=>{
       return totalPrice;
     };
     
-    const viewOrder = () =>{
-      
-    }
-
-  //  //Update Order
-  //  const [selectUpdate, setSelectUpdate] = useState(null);
-  //  const [open, setOpen] = React.useState(false);
-  //  const handleOpen = () => setOpen(true);
-  //  const handleClose = () => {
-  //      setOpen(false)
-  //      setSelectUpdate = null
-  //  };
-
-     
-  // const [openCreate, setOpenCreate] = React.useState(false);
-  // const handleOpenCreate = () => setOpenCreate(true);
-  // const handleCloseCreate = () => setOpenCreate(false);
-
-  //  const handleUpdateOrder = (orderId) => {
-    // setSelectUpdate(orderId);
-    // setOpenCreate(true);
-    // console.log(openCreate, '===open Create')
-    
-  // };  
-
-  
+       
   async function approvalSubmit(data) {
     return fetch(`http://localhost:8080/order/${data.orderId}`, {
       method: "PATCH",
@@ -166,18 +141,20 @@ const handleApproveOrder = async (orderId) =>{
         window.location.reload();
   }
   
-  
+  const toViewOrder = (id) =>{
+    navigate(`/admin/order-details/${id}`)
+  }
   return (
     <>
      
      <Grid container spacing={1}>
-          {/* <Button variant="contained" color='secondary' onClick={toAdminDashboard}> Dashboard </Button>
-            <Button sx={{ ml:"5px;" }} variant="contained" color='primary' onClick={handleOpen}> Add </Button> */}
-          
-          
-          {/* To Create Product by Modal */}
-          {/* <CreateCategory /> */}
-          <UpdateOrder />
+         
+          {/* <UpdateOrder /> */}
+          <Grid xs={12}>
+              <Typography mt={5} variant='h4' align="center">
+                  Manage Orders
+              </Typography>
+          </Grid>
 
           <TableContainer component={Paper}>
             <Table sx={{ minWidth: 700 }} aria-label="customized table">
@@ -206,27 +183,37 @@ const handleApproveOrder = async (orderId) =>{
                        
                       </StyledTableCell>
                       <StyledTableCell align="right">
-                          {dataRow.status === 0 ? (
-                              <Button class="pendingOrder" disabled style={{ color:"#114e80" }}>
-                                Pending
-                              </Button>
-                            ) : (
-                              <Button class="confirmedOrder" disabled style={{ background:"green", color:"white", border:"2px #ccc", padding:"5px 15px"  }}>
-                                Order Placed
-                              </Button>
-                            )}
+                          {
+                            dataRow.status===0 && (
+                                <Typography variant='h6' style={{ color:'#044888', border:"1px dotted #044888", padding:"5px", borderRadius:"5px" }} >Order Pending...</Typography>
+                            )
+                          }
+                          {
+                            dataRow.status===1 && (
+                                <Typography variant='h6' style={{ color:'green', border:"1px dotted green", padding:"5px", borderRadius:"5px" }} >Order Placed</Typography>
+                            )
+                          }
+                         
+
+                          {    
+                              dataRow.status===2 && (
+                                  <Typography variant='h6' style={{ color:'red', border:"1px dotted red", padding:"5px", borderRadius:"5px" }} >Order Cancelled</Typography>
+                              )
+                          }
                       </StyledTableCell>
                        
                       <StyledTableCell align="right">
                         <ButtonGroup disableElevation variant="contained">
+                           
                           <Button
-                            variant="contained"
-                            color="primary"
-                            onClick={() => viewOrder(dataRow._id)}
-                          >
-                            <RemoveRedEyeIcon />
+                              variant="contained"
+                              color="primary"
+                              target="_blank"
+                              onClick={() => toViewOrder(dataRow._id, )}
+                            >
+                              <RemoveRedEyeIcon />
                           </Button>
-                          <Button
+                          {/* <Button
                             variant="contained"
                             color="secondary"
                             onClick={() => handleApproveOrder(dataRow._id)}
@@ -240,7 +227,7 @@ const handleApproveOrder = async (orderId) =>{
                           >
                             {" "}
                             <DeleteIcon />{" "}
-                          </Button>
+                          </Button> */}
                         </ButtonGroup>
                       </StyledTableCell>
                     </StyledTableRow>

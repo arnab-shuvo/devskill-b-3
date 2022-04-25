@@ -14,7 +14,7 @@ import { useDispatch } from 'react-redux';
 import { NavLink, useNavigate } from 'react-router-dom';
 import OrderDetail from './OrderDetail';
 import RemoveRedEyeIcon from '@mui/icons-material/RemoveRedEye';
-import { Button } from '@material-ui/core';
+import { Button, Typography } from '@material-ui/core';
 
 // Generate Order Data
 function createData(id, date, name, shipTo, paymentMethod, amount) {
@@ -111,16 +111,24 @@ export default function Orders() {
               <TableCell>{dataRow.userId.firstname + ' ' + dataRow.userId.lastname}</TableCell>
               <TableCell>{dataRow.products.length}</TableCell>
               <TableCell>{`$${getTotalPrice(index)}`}</TableCell>
-              <TableCell align="right">
-                  {dataRow.status === 0 ? (
-                      <h6 class="" style={{ background:"transparent", color:"#114e80", border:"1px solid #114e80", borderRadius:"5px", padding:"5px"}}>
-                        Pending
-                      </h6>
-                    ) : (
-                      <h6 class="" style={{ background:"transparent", color:"Green", border:"1px solid green", borderRadius:"5px", padding:"5px" }}>
-                        Order Placed
-                      </h6>
-                    )}
+              <TableCell align="center">
+                {
+                  dataRow.status===0 && (
+                      <Typography variant='h6' style={{ color:'#044888', border:"1px dotted #044888", padding:"5px", borderRadius:"5px" }} >Order Pending...</Typography>
+                  )
+                }
+                {
+                  dataRow.status===1 && (
+                      <Typography variant='h6' style={{ color:'green', border:"1px dotted green", padding:"5px", borderRadius:"5px" }} >Order Placed</Typography>
+                  )
+                }
+                
+
+                {    
+                    dataRow.status===2 && (
+                        <Typography variant='h6' style={{ color:'red', border:"1px dotted red", padding:"5px", borderRadius:"5px" }} >Order Cancelled</Typography>
+                    )
+                }
               </TableCell>
               <TableCell>
                 {/* popup order detail info */}

@@ -6,7 +6,7 @@ import ListItem from '@mui/material/ListItem';
 import ListItemText from '@mui/material/ListItemText';
 import FrontLayout from '../../../Layouts/FrontEnd/FrontLayout';
 import { checkoutAction } from '../../../store/action/OrderAction';
-import { loadCartItems, get_carts, removeCartItem, addCart } from '../../../store/action/AddToCartAction';
+import { loadCartItems, get_carts, removeCartItem, addCart, modifyCartAction } from '../../../store/action/AddToCartAction';
 import { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
@@ -44,12 +44,17 @@ const Checkout = () => {
   const navigate = useNavigate();
 // const [cart, setCart] = useState();
 const loggedInUser = useSelector((store) =>store.userStore);
-const { cart } = useSelector((store) => store.cartItems); 
+const { loadCart } = useSelector((store) => store.cartItems); 
 
-// useEffect(()=>{
-//   setCart (cartsItem);
-//   console.log(cart, '===== cart cart cart')
-// }, [])
+
+useEffect(() => {
+  if(loggedInUser.isAuthUser === true){
+    dispatch(loadCartItems(loggedInUser.token.userInfo.token));
+  }else{
+    alert('please login first');
+    navigate('/login');
+  }
+}, []);
 
     // Checkout Cart
     async function checkoutSubmit(orderData) {
@@ -76,10 +81,11 @@ const { cart } = useSelector((store) => store.cartItems);
           navigate('/user/dashboard')
     }
 
-
     const get_total_price = () => {
       let totalPrice = 0;
-      cart?.products?.map((cartData) => (totalPrice += cartData.productId['price']));
+      loadCart?.products?.map((cartData) => (
+        totalPrice += (cartData.productId['price'] * cartData.quantity))
+        );
       return totalPrice;
     };
     
@@ -87,54 +93,74 @@ const { cart } = useSelector((store) => store.cartItems);
       let shipping = 0;
       let couponDiscount = 0;
       let cartTotalPrice = get_total_price();
+    
       let calculatedPrice = (cartTotalPrice + shipping) - couponDiscount;
       return calculatedPrice;
     }
 
-    // const handleDeleteBtn=(prodId)=>{
-    //   let token = loggedInUser.token.userInfo.token;
-    //   if(window.confirm("Are you sure about to delete this item?")){
-         
-    //   }
-    // }
+   
+async function actionSubmit(dataSubmit) {
+  // console.log(dataSubmit.userToken, '==== token from async function');
 
-    async function delCartProduct(cartData) {
-      console.log(cartData.token, " ====token data............")
-      return fetch("http://localhost:8080/cart", {
-        method: "POST",
-        headers: {
-          "Content-type" : "application/json",
-          "Accept"       : "application/json",
-          "authorization": "bearer "+ cartData.token
+  return fetch("http://localhost:8080/cart", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      "authorization": "bearer "+ dataSubmit.userToken
+    },
+    body: JSON.stringify({
+        product: {
+          id: dataSubmit.prodId,
+          quantity: dataSubmit.quantity,
         },
-        body: JSON.stringify({
-          product: {
-            id: cartData.prodID,
-            quantity: cartData.remQtyTo,
-          },
-        }),
-      })
-        .then((res) => res.json())
-        .then((json) => json)
-        .then((json) => console.log(json));
-    }
-  
-    const handleDeleteBtn = async (id) => {
-     
-      if(window.confirm("Are you sure about to delete this item?")){
+      }),
+  })
+    .then((data) => data.json())
+    .then((json) => json)
+    .then((json) => console.log(json, '===Cart Updated Successfully- CartActionSubmit'));
+}
 
-        const token = loggedInUser.token.userInfo.token;
-        let prodID = id;
-        let remQtyTo = 0;
-        const cartDataDispatch = await delCartProduct({
-          prodID,
-          remQtyTo,
-          token,
+const handleDeleteBtn = async (prodId)=>{
+  let userToken = loggedInUser.token.userInfo.token;
+      if(window.confirm("Are you sure about to delete this item?")){
+        let quantity = 0;
+        const actionDispatch = await actionSubmit({
+            userToken,
+            prodId,
+            quantity,
         });
-        dispatch(addCart(cartDataDispatch));
-        //window.reload();
+        dispatch(modifyCartAction(actionDispatch));
+        dispatch(loadCartItems(loggedInUser.token.userInfo.token));
       }
-    };
+}
+
+const handleIncreaseBtn = async (prodId, existingQty)=>{
+  let userToken = loggedInUser.token.userInfo.token;
+
+        let quantity = existingQty + 1;
+        const actionDispatch = await actionSubmit({
+            userToken,
+            prodId,
+            quantity,
+        });
+        dispatch(modifyCartAction(actionDispatch));
+        dispatch(loadCartItems(loggedInUser.token.userInfo.token));
+        // window.location.reload();
+}
+
+const handleDecreaseBtn = async (prodId, existingQty)=>{
+      let userToken = loggedInUser.token.userInfo.token;
+        let quantity = existingQty - 1;
+        const actionDispatch = await actionSubmit({
+            userToken,
+            prodId,
+            quantity,
+        });
+        dispatch(modifyCartAction(actionDispatch));
+        dispatch(loadCartItems(loggedInUser.token.userInfo.token));
+        // window.location.reload();
+}
+
     
   return (
     <>
@@ -215,7 +241,7 @@ const { cart } = useSelector((store) => store.cartItems);
         </h5>
         <div class="row" style={{ borderTop:"1px solid #dbd5db", padding:'5px', fontSize:"1.5rem" }}>
           <div class="col" style={{ textAlign:"left", paddingLeft:"15px", textTransform:"uppercase", fontWeight:"500" }}>
-            Total Item - {cart?.products?.length}
+            Total Item - {loadCart?.products?.length}
           </div>
           <div class="col text-right">$ 
           {get_total_price()}
@@ -225,10 +251,10 @@ const { cart } = useSelector((store) => store.cartItems);
       <hr />
       <div className='checkOutSummaryBody'>
       {
-          !cart.status==="error"  || cart.status===0 ?
+          !loadCart.status==="error"  || loadCart.status===0 ?
           (  
             <>
-            {cart?.products?.map((dataRow) => (
+            {loadCart?.products?.map((dataRow) => (
                 <div class="row border-bottom" key={dataRow._id} style={{ padding:"5px" }}>
                   <div class="row main align-items-center">
                     <div class="col-2">
@@ -257,18 +283,23 @@ const { cart } = useSelector((store) => store.cartItems);
                         </div>
                         <div class="col-5">
                           {" "}  
-                          <IconButton color="primary" aria-label="add an alarm">
+                          <IconButton color="primary" aria-label="add an alarm" onClick={()=>handleDecreaseBtn(
+                        dataRow.productId['_id'], dataRow.quantity
+                        )}
+                      >
                               <IndeterminateCheckBoxIcon />
                           </IconButton>
                             <a href="#" class="border">
                               {dataRow.quantity}
                             </a>
-                          <IconButton color="primary" aria-label="add an alarm">
+                          <IconButton color="primary" aria-label="add an alarm" onClick={()=>handleIncreaseBtn(
+                        dataRow.productId['_id'], dataRow.quantity
+                        )}>
                               <AddBoxIcon />
                           </IconButton>
                         </div>
                         <div class="col">
-                          $ {dataRow.productId['price']}
+                          $ {dataRow.productId['price'] * dataRow.quantity}
                         </div>
                         
                   </div>
@@ -285,7 +316,7 @@ const { cart } = useSelector((store) => store.cartItems);
         <form>
         <div class="row">
           <div class="col" style={{ textAlign:"left", paddingLeft:"15px", textTransform:"uppercase", fontWeight:"500" }}>
-            Total Item - {cart?.products?.length}
+            Total Item - {loadCart?.products?.length}
           </div>
           <div class="col text-right">$ 
           {get_total_price()}

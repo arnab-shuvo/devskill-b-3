@@ -38,7 +38,7 @@ const Product = () =>{
 
     const { productList } = useSelector((store) => store.productList);
     
-    //console.log(productList, "===store");
+    console.log(productList, "===FrontEnd Product Page");
 
    // Destructuring "categoryList" from CategoryReducer
    const { categoryList } = useSelector((state) => state.prodCategories); // prodCategories is comming from RootReducer (prodCategories:CategoryReducer,)

@@ -15,7 +15,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { deleteProduct, getProductList, productDeleteAction } from '../../../store/action/ProductAction';
 import UpdateProduct from './Update';
 import CreateProductFromModal from './CreateProdModal';
-import { Grid } from '@material-ui/core';
+import { Grid, Typography } from '@material-ui/core';
 import BackendLayout from '../../../Layouts/Backend/Layouts';
 import { Navigate, useNavigate } from 'react-router-dom';
 
@@ -70,15 +70,11 @@ const ManageProduct = () =>{
     };
 
     const updateProduct = (id) => {
-      //alert("Update Product-"+ id)
-      // setSelectUpdate(product);
-      // setOpen(true);
       navigate(`/admin/edit-product/${id}`)
     };    
 
       const { productList } = useSelector((store) => store.productList);
-      //console.log(productList, "===store");
-      // const [requestData, setRequestData] = useState();
+      console.log(productList, "===store");
       const loggedInUser = useSelector((store) =>store.userStore);
       const [userToken, setUserToken] = useState(null);
   
@@ -170,6 +166,7 @@ const ManageProduct = () =>{
                       </StyledTableCell>
                       <StyledTableCell align="right">
                         {product.category.name}
+                        <Typography variant='body2' style={{ fontSize:"1rem", color:"darkgray" }}>{product.category._id}</Typography>
                       </StyledTableCell>
                       <StyledTableCell align="right">
                         {product.price}

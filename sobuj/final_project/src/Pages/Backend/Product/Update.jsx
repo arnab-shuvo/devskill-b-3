@@ -71,27 +71,28 @@ const UpdateProduct=()=> {
     const [title, setTitle]=useState(productDetail.title);
     // const [category, setCategory]=useState(productDetail.category['_id']);
     const [category, setCategory]=useState("");
+    const [categoryName, setCategoryName]=useState("");
     const [price, setPrice]=useState(productDetail.price);
     const [stock, setStock]=useState(productDetail.stock);
     const [description, setDescription]=useState(productDetail.description);
-    const [image, setImage]=useState(productDetail.image);
+    // const [image, setImage]=useState(productDetail.image);
     const [error, setError]=useState(false);
+    // const [image, setImage]=useState(null);
 
 
-
-    const [images, setImages] = React.useState([]);
-    const maxNumber = 69;
+    // const [images, setImages] = React.useState([]);
+    // const maxNumber = 1;
   
-    const onChangeImage = (imageList, addUpdateIndex) => {
-      // data for submit
-      console.log(imageList, addUpdateIndex , '====== ImageList, AddUpdateIndex');
-      setImages(imageList);
-      console.log(images, '=====Images after onchange')
+    // const onChangeImage = (imageList, addUpdateIndex) => {
+    //   // data for submit
+    //   console.log(imageList, addUpdateIndex , '====== ImageList, AddUpdateIndex');
+    //   setImages(imageList);
+    //   console.log(images, '=====Images after onchange')
   
-      console.log(imageList[0].data_url, '====== The First Image DataURL Base64 Code...')
-      //Setting the First Image's Base64  Code to the State (image)
-      setImage(imageList[0].data_url);
-    };
+    //   console.log(imageList[0].data_url, '====== The First Image DataURL Base64 Code...')
+    //   //Setting the First Image's Base64  Code to the State (image)
+    //   setImage(imageList[0].data_url);
+    // };
 
     
 
@@ -108,10 +109,11 @@ async function formSubmit(data) {
             "title": data.title,
             "price": data.convrtPrice,
             "description": data.description,
-            "image": data.image,
+            // "image": data.image,
             "stock": data.convrtStock,
             "category": {
-                    "_id": data.category
+                    "_id": data.category,
+                    "name": data.category
                 }
         }),
     })
@@ -131,7 +133,7 @@ const handleFormSubmit = async e =>{
         title,
         convrtPrice,
         description,
-        image,
+        // image,
         convrtStock,
         category
         });
@@ -238,7 +240,7 @@ const toManageProduct = () =>{
                     />
                 </Box>
                 
-                <Box>
+                {/* <Box>
                   <ImageUploading
                     multiple
                     value={images}
@@ -278,7 +280,7 @@ const toManageProduct = () =>{
                       </div>
                     )}
                   </ImageUploading>
-                </Box>
+                </Box> */}
             </Box>
             </Grid>
 

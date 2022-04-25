@@ -53,10 +53,15 @@ const FrontUserDashboard = () => {
   
   const getTotalPrice = (index) => {
     let totalPrice = 0;
-    orders[index].products?.map((orderData) => (totalPrice += orderData.productId['price']));
-    return totalPrice;
+    let finalPrice = 0;
+    let shipping = 0;
+    orders[index].products?.map((orderData) => (totalPrice += (orderData.productId['price'] * orderData.quantity)));
+    finalPrice =  totalPrice + shipping;
+
+    return finalPrice;
   };
  
+
   return (
     // <div className='wrapper'>
     
